@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     async function fetchUser() {
       try {
-        const response = await api.get("/auth/loggedInUser"); // change endpoint
+        const response = await api.get("/users/active"); // change endpoint
         setLoggedInUser(response.data);
       } catch (error: any) {
         if (error.response?.status === 401) {

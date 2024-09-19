@@ -1,3 +1,5 @@
+// MODIFY FORM TO HAVE THE NESSERY FIELDS
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,6 +40,8 @@ export type RegisterFormValues = z.infer<typeof formSchema>;
 // Define your form schema.
 const formSchema = z
   .object({
+    firstName: z.string().max(96),
+    lastName: z.string().max(96),
     email: z.string().email(),
     password: z.string().min(8).regex(REGEX_PASSWORD, {
       message: PASSWORD_MESSAGE,
@@ -64,6 +68,8 @@ function RegisterPage() {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -124,6 +130,41 @@ function RegisterPage() {
               disabled={isPending}
               className="flex flex-col gap-4"
             >
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="First name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Last name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <FormField
                 control={form.control}
                 name="email"
