@@ -5,8 +5,8 @@ import { RegisterFormValues } from "@/pages/register-page";
 import { LoginFormValues as LoginCredentials } from "@/pages/login-page";
 
 interface LoggedInUser {
-  _id: string;
-  username: string;
+  id: string;
+  email: string;
   imageUrl: string | null;
 }
 
@@ -25,17 +25,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loggedInUser, setLoggedInUser] = useState<
     LoggedInUser | null | undefined
   >(undefined);
-  const [token, setToken] = useLocalStorage("jwt-shopify", null);
+  const [accessToken, setAccessToken] = useLocalStorage(
+    "jwt-marketplace",
+    null
+  );
 
   useEffect(() => {
-    if (!token) {
+    if (!accessToken) {
       setLoggedInUser(null);
       return;
     }
 
     async function fetchUser() {
       try {
-        const response = await api.get("/auth/loggedInUser");
+        const response = await api.get("/auth/loggedInUser"); // change endpoint
         setLoggedInUser(response.data);
       } catch (error: any) {
         if (error.response?.status === 401) {
@@ -51,17 +54,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     fetchUser();
-  }, [token]);
+  }, [accessToken]);
 
   function logout() {
-    setToken(null);
+    setAccessToken(null);
     setLoggedInUser(null);
   }
 
   async function login(cred: LoginCredentials) {
     try {
-      const response = await api.post("/auth/login", cred);
-      setToken(response.data.token);
+      const response = await api.post("/auth/sign-in", cred);
+      setAccessToken(response.data.accessToken);
     } catch (error) {
       console.error("Error logging in:", error);
       throw error;
@@ -70,7 +73,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   async function register(cred: RegisterCredentials) {
     try {
-      await api.post("/auth/register", cred);
+      await api.post("/users", cred);
     } catch (error) {
       console.error("Error registering:", error);
       throw error;

@@ -96,7 +96,10 @@ function LoginPage() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <fieldset disabled={isPending} className="flex flex-col gap-4">
+            <fieldset
+              disabled={isPending}
+              className="flex flex-col gap-4"
+            >
               <FormField
                 control={form.control}
                 name="email"
@@ -104,7 +107,11 @@ function LoginPage() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="Email" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="Email"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -150,7 +157,11 @@ function LoginPage() {
             </fieldset>
 
             <Separator className="my-8" />
-            <Button disabled={isPending} type="submit" className="w-full">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-full"
+            >
               {isPending ? <LoaderCircle className="animate-spin" /> : "Login"}
             </Button>
           </form>
@@ -159,7 +170,10 @@ function LoginPage() {
       <CardFooter>
         <p className="text-xs">
           Don't have an account?{" "}
-          <Link className="underline font-bold" to="/auth/register">
+          <Link
+            className="underline font-bold"
+            to="/auth/register"
+          >
             Register
           </Link>
         </p>

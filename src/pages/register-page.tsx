@@ -38,7 +38,6 @@ export type RegisterFormValues = z.infer<typeof formSchema>;
 // Define your form schema.
 const formSchema = z
   .object({
-    username: z.string().min(1).max(50),
     email: z.string().email(),
     password: z.string().min(8).regex(REGEX_PASSWORD, {
       message: PASSWORD_MESSAGE,
@@ -65,7 +64,6 @@ function RegisterPage() {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -122,20 +120,10 @@ function RegisterPage() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <fieldset disabled={isPending} className="flex flex-col gap-4">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Username" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <fieldset
+              disabled={isPending}
+              className="flex flex-col gap-4"
+            >
               <FormField
                 control={form.control}
                 name="email"
@@ -143,7 +131,11 @@ function RegisterPage() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="Email" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="Email"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -214,7 +206,11 @@ function RegisterPage() {
               />
             </fieldset>
             <Separator className="my-8" />
-            <Button disabled={isPending} type="submit" className="w-full">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-full"
+            >
               {isPending ? (
                 <LoaderCircle className="animate-spin" />
               ) : (
@@ -227,7 +223,10 @@ function RegisterPage() {
       <CardFooter>
         <p className="text-xs">
           Already have an account?{" "}
-          <Link className="underline font-bold" to="/auth/login">
+          <Link
+            className="underline font-bold"
+            to="/auth/login"
+          >
             Login
           </Link>
         </p>

@@ -20,14 +20,18 @@ export function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-full"
+        >
           <Avatar>
             <AvatarImage
               src={loggedInUser?.imageUrl || ""}
-              alt={loggedInUser?.username}
+              alt={loggedInUser?.email}
             />
             <AvatarFallback>
-              {loggedInUser?.username[0].toUpperCase()}
+              {loggedInUser?.email[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -42,7 +46,10 @@ export function UserButton() {
           <Link to="#">Setting</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logout} className="flex items-center gap-1">
+        <DropdownMenuItem
+          onClick={logout}
+          className="flex items-center gap-1"
+        >
           <LogOut className="h-4 w-4" /> Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
