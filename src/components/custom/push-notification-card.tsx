@@ -1,4 +1,4 @@
-import { BellRing, Check } from "lucide-react";
+import { BellRing, Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -42,12 +42,26 @@ export function PushNotificationCard({ className, ...props }: CardProps) {
         className={cn("", className)}
         {...props}
       >
-        <CollapsibleTrigger>
-          <CardHeader>
-            <CardTitle className="sm:text-start">Notifications</CardTitle>
+        <CardHeader>
+          <div className="flex justify-center gap-2 sm:justify-between">
+            <CardTitle className="sm:text-start text-2xl">
+              Notifications
+            </CardTitle>
+            <CollapsibleTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-9 p-0"
+              >
+                <ChevronsUpDown className="h-4 w-4" />
+                <span className="sr-only">Toggle</span>
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          {notifications?.length ? (
             <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-        </CollapsibleTrigger>
+          ) : null}
+        </CardHeader>
         <CollapsibleContent>
           <CardContent className="grid gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-4  p-4">
@@ -80,12 +94,14 @@ export function PushNotificationCard({ className, ...props }: CardProps) {
                 </div>
               ))}
             </div>
-            <Separator />
+            {notifications?.length ? <Separator /> : null}
           </CardContent>
           <CardFooter>
-            <Button className="w-full">
-              <Check className="mr-2 h-4 w-4" /> Mark all as read
-            </Button>
+            {notifications?.length ? (
+              <Button className="w-full">
+                <Check className="mr-2 h-4 w-4" /> Mark all as read
+              </Button>
+            ) : null}
           </CardFooter>
         </CollapsibleContent>
       </Card>
