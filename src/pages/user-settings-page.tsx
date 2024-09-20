@@ -9,12 +9,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/providers/auth-provider";
+import { useUserProfileData } from "@/layouts/user-profile-layout";
 
 function UserSettingsPage() {
-  const { loggedInUser: user } = useAuth();
+  const { userProfileData } = useUserProfileData();
 
-  if (!user) return null;
+  if (!userProfileData) return null;
 
   return (
     <Card>
@@ -30,7 +30,7 @@ function UserSettingsPage() {
           <Input
             id="email"
             type="email"
-            value={user.email}
+            value={userProfileData.email}
           />
         </div>
         <div className="space-y-2">
