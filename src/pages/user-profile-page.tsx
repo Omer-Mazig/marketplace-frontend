@@ -16,9 +16,9 @@ function UserProfilePage() {
   const fullName = `${loggedInUser?.firstName} ${loggedInUser?.lastName}`;
 
   return (
-    <Card className="relative flex flex-col items-center justify-center text-center sm:text-start">
+    <Card className="relative flex flex-col items-center justify-center text-center sm:text-start sm:justify-start sm:items-start">
       <div className="absolute bg-primary  w-full top-0 h-24 sm:h-28"></div>
-      <CardHeader className="items-center justify-center">
+      <CardHeader className="items-center justify-center sm:text-start sm:justify-start sm:items-start">
         <Avatar className="flex items-center justify-center w-36 h-36 sm:w-44 sm:h-44">
           <AvatarImage
             className="w-full h-full object-cover"
