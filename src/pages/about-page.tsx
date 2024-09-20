@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 function AboutPage() {
   return (
-    <main>
+    <>
       <div className="flex flex-col items-center">
         <h1 className="">About</h1>
         <p>
@@ -30,7 +30,7 @@ function AboutPage() {
         </div>
       </div>
       <Outlet />
-    </main>
+    </>
   );
 }
 

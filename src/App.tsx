@@ -14,6 +14,7 @@ import AboutPage from "./pages/about-page";
 import { useAuth } from "./providers/auth-provider";
 import TeamPage from "./pages/vision-page";
 import VisionPage from "./pages/team-page";
+import UserProfilePage from "./pages/user-profile-page";
 
 const router = createBrowserRouter([
   {
@@ -48,8 +49,12 @@ const router = createBrowserRouter([
         element: <div>Services</div>,
       },
       {
-        path: "protected",
-        element: <ProtectedRoute>Protected</ProtectedRoute>,
+        path: "user-profile",
+        element: (
+          <ProtectedRoute>
+            <UserProfilePage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -84,7 +89,12 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   // if the user is not logged in, redirect
   if (loggedInUser === null) {
-    return <Navigate to="/auth/login" replace />;
+    return (
+      <Navigate
+        to="/auth/login"
+        replace
+      />
+    );
   }
 
   // if the user is logged in, show the protected route
@@ -101,7 +111,12 @@ function AuthRoutes({ children }: { children: React.ReactNode }) {
 
   // if the user is logged in, redirect to home
   if (loggedInUser) {
-    return <Navigate to="/" replace />;
+    return (
+      <Navigate
+        to="/"
+        replace
+      />
+    );
   }
 
   // if the user is not logged in, show the auth routes

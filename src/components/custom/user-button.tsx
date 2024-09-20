@@ -40,7 +40,7 @@ export function UserButton() {
         <DropdownMenuLabel>Profile Menu</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link to="#">Profile</Link>
+          <Link to="user-profile">Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to="#">Setting</Link>

@@ -32,7 +32,11 @@ import {
 } from "@/components/ui/form";
 
 import { useAuth } from "@/providers/auth-provider";
-import { PASSWORD_MESSAGE, REGEX_PASSWORD } from "@/constants/auth.constant";
+import {
+  PASSWORD_MESSAGE,
+  REGEX_PASSWORD,
+  USER_TIERS_OPTIONS,
+} from "@/constants/auth.constant";
 
 // Infer the type of the form values from the schema. we are using it also on AuthProvider.
 export type RegisterFormValues = z.infer<typeof formSchema>;
@@ -47,6 +51,7 @@ const formSchema = z
       message: PASSWORD_MESSAGE,
     }),
     confirmPassword: z.string().min(8),
+    userTier: z.enum(USER_TIERS_OPTIONS),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -73,12 +78,14 @@ function RegisterPage() {
       email: "",
       password: "",
       confirmPassword: "",
+      userTier: USER_TIERS_OPTIONS[0],
     },
   });
 
   // Define a submit handler.
   async function onSubmit(values: RegisterFormValues) {
     const { confirmPassword, ...valuesToSubmit } = values; // no need to confirmPassword for the api call
+    console.log("values", values);
 
     try {
       setIsPending(true);
@@ -240,6 +247,32 @@ function RegisterPage() {
                           )}
                         </span>
                       </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="userTier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tier</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full border rounded-md px-3 py-2"
+                      >
+                        {USER_TIERS_OPTIONS.map((tier) => (
+                          <option
+                            key={tier}
+                            value={tier}
+                          >
+                            {tier.charAt(0).toUpperCase() + tier.slice(1)}
+                          </option>
+                        ))}
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

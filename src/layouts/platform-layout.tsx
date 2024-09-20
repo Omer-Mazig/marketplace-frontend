@@ -6,9 +6,9 @@ export default function PlatformLayout() {
   return (
     <>
       <MainNav />
-      <div className="container max-w-screen-2xl">
+      <main className="container max-w-screen-2xl">
         <Outlet />
-      </div>
+      </main>
     </>
   );
 }

@@ -4,10 +4,17 @@ import api from "@/lib/api";
 import { RegisterFormValues } from "@/pages/register-page";
 import { LoginFormValues as LoginCredentials } from "@/pages/login-page";
 
+import { USER_TIERS_OPTIONS } from "@/constants/auth.constant";
+
 interface LoggedInUser {
   id: string;
   email: string;
-  imageUrl: string | null;
+  firstName: string;
+  lastName: string;
+  userTier: (typeof USER_TIERS_OPTIONS)[number];
+  imageUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface AuthContextType {
@@ -38,7 +45,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     async function fetchUser() {
       try {
-        const response = await api.get("/users/active"); // change endpoint
+        const response = await api.get("/users/active");
+        console.log(response.data);
+
         setLoggedInUser(response.data);
       } catch (error: any) {
         if (error.response?.status === 401) {

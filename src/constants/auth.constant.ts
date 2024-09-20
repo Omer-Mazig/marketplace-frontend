@@ -3,3 +3,5 @@ export const REGEX_PASSWORD =
 
 export const PASSWORD_MESSAGE =
   "Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character.";
+
+export const USER_TIERS_OPTIONS = ["standard", "gold", "platinum"] as const;

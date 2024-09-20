@@ -15,7 +15,7 @@ export function MainNav() {
             to="/"
             className="uppercase mr-4 flex items-center space-x-2 lg:mr-6"
           >
-            Logo
+            MarketPlace
           </Link>
           <nav className="flex items-center gap-4 text-sm lg:gap-6">
             <Link to="/about">About</Link>
