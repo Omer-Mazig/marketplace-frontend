@@ -14,7 +14,11 @@ import AboutPage from "./pages/about-page";
 import { useAuth } from "./providers/auth-provider";
 import TeamPage from "./pages/vision-page";
 import VisionPage from "./pages/team-page";
-import UserProfilePage from "./pages/user-profile-page";
+import UserProfileLayout from "./layouts/user-profile-layout";
+import UserInfoPage from "./pages/user-info-page";
+import UserSettingsPage from "./pages/user-settings-page";
+import UserProductsPage from "./pages/user-products-page";
+import UserWishlistPage from "./pages/user-wishlist-page";
 
 const router = createBrowserRouter([
   {
@@ -50,11 +54,25 @@ const router = createBrowserRouter([
       },
       {
         path: "user-profile",
-        element: (
-          <ProtectedRoute>
-            <UserProfilePage />
-          </ProtectedRoute>
-        ),
+        element: <UserProfileLayout />,
+        children: [
+          {
+            index: true,
+            element: <UserInfoPage />,
+          },
+          {
+            path: "settings", // changed to relative path
+            element: <UserSettingsPage />,
+          },
+          {
+            path: "products", // changed to relative path
+            element: <UserProductsPage />,
+          },
+          {
+            path: "wishlist", // changed to relative path
+            element: <UserWishlistPage />,
+          },
+        ],
       },
     ],
   },
