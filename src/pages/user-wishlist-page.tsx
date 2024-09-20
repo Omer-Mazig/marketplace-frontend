@@ -7,12 +7,17 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useUserProfileData } from "@/layouts/user-profile-layout";
 
 function UserWishlistPage() {
   const wishlist = [
     { id: 4, name: "Wishlist Item 1", price: 49.99 },
     { id: 5, name: "Wishlist Item 2", price: 59.99 },
   ];
+
+  const { userProfileData } = useUserProfileData();
+
+  if (!userProfileData) return null;
 
   return (
     <Card>
