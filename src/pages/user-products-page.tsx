@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useUserProfileData } from "@/layouts/user-profile-layout";
 
 function UserProductsPage() {
   const products = [
@@ -15,6 +16,10 @@ function UserProductsPage() {
     { id: 2, name: "Product 2", price: 29.99 },
     { id: 3, name: "Product 3", price: 39.99 },
   ];
+
+  const { userProfileData } = useUserProfileData();
+
+  if (!userProfileData) return null;
 
   return (
     <Card>
