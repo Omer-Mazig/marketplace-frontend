@@ -4,12 +4,15 @@ import { User, Settings, Package, Heart } from "lucide-react";
 
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
 
-type ContextType = { loggedInUser: LoggedInUser | null };
+type ContextType = { userProfileData: LoggedInUser | null };
 
 function UserProfileLaoyout() {
-  const { loggedInUser } = useAuth();
+  const { loggedInUser: userProfileData } = useAuth();
 
-  if (!loggedInUser) return null;
+  // TODO:
+  // create and point to fetch the user with the product and wishlist
+
+  if (!userProfileData) return null;
 
   return (
     <div className="container mx-auto p-4">
@@ -93,12 +96,12 @@ function UserProfileLaoyout() {
           </TabsTrigger>
         </TabsList>
       </Tabs>
-      <Outlet context={{ loggedInUser } satisfies ContextType} />
+      <Outlet context={{ userProfileData } satisfies ContextType} />
     </div>
   );
 }
 
-export function useLoggedInUser() {
+export function useUserProfileData() {
   return useOutletContext<ContextType>();
 }
 

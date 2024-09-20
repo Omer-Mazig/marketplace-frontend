@@ -10,12 +10,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useLoggedInUser } from "@/layouts/user-profile-layout";
+import { useUserProfileData } from "@/layouts/user-profile-layout";
 
 function UserInfoPage() {
-  const { loggedInUser } = useLoggedInUser();
+  const { userProfileData } = useUserProfileData();
 
-  if (!loggedInUser) return null;
+  if (!userProfileData) return null;
 
   return (
     <Card>
@@ -29,14 +29,18 @@ function UserInfoPage() {
         <div className="flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-4">
           <Avatar className="w-20 h-20">
             <AvatarImage
-              src={loggedInUser.imageUrl}
-              alt={loggedInUser.firstName}
+              src={userProfileData.imageUrl}
+              alt={userProfileData.firstName}
             />
-            <AvatarFallback>{loggedInUser.firstName.charAt(0)}</AvatarFallback>
+            <AvatarFallback>
+              {userProfileData.firstName.charAt(0)}
+            </AvatarFallback>
           </Avatar>
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-semibold">{loggedInUser.firstName}</h2>
-            <p className="text-gray-500">{loggedInUser.email}</p>
+            <h2 className="text-2xl font-semibold">
+              {userProfileData.firstName}
+            </h2>
+            <p className="text-gray-500">{userProfileData.email}</p>
           </div>
         </div>
         <div className="space-y-2">
