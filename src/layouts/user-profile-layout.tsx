@@ -3,14 +3,24 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { User, Settings, Package, Heart } from "lucide-react";
 
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
+import api from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 
 type ContextType = { userProfileData: LoggedInUser | null };
 
-function UserProfileLaoyout() {
-  const { loggedInUser: userProfileData } = useAuth();
+async function getUserProfileData(userId: number) {
+  const { data } = await api.get(`/users/user-data/${userId}`);
+  return data;
+}
 
-  // TODO:
-  // create and point to fetch the user with the product and wishlist
+function UserProfileLaoyout() {
+  const { loggedInUser } = useAuth();
+
+  const { data: userProfileData } = useQuery({
+    queryKey: ["user-profile-data", loggedInUser?.id],
+    queryFn: () => getUserProfileData(loggedInUser?.id as number),
+    enabled: !!loggedInUser?.id, // Ensure the query runs only if loggedInUser is available
+  });
 
   if (!userProfileData) return null;
 

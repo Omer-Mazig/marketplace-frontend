@@ -7,7 +7,7 @@ import { LoginFormValues as LoginCredentials } from "@/pages/login-page";
 import { USER_TIERS_OPTIONS } from "@/constants/auth.constant";
 
 export interface LoggedInUser {
-  id: string;
+  id: number;
   email: string;
   firstName: string;
   lastName: string;
