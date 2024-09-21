@@ -28,7 +28,6 @@ type Product = {
   categories: ProductCategory[];
   imageUrl?: string;
   stock: number;
-  brand: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -40,7 +39,6 @@ const products: Product[] = [
     price: 29.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.OFFICE_SUPPLIES],
     stock: 150,
-    brand: "TechBrand",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -51,7 +49,6 @@ const products: Product[] = [
     price: 89.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.GAMING],
     stock: 75,
-    brand: "GameTech",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -61,7 +58,6 @@ const products: Product[] = [
     price: 14.99,
     categories: [],
     stock: 500,
-    brand: "HydroPro",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -72,7 +68,6 @@ const products: Product[] = [
     price: 59.99,
     categories: [ProductCategory.SHOES, ProductCategory.FITNESS],
     stock: 120,
-    brand: "FitGear",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -82,7 +77,6 @@ const products: Product[] = [
     price: 49.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.AUDIO],
     stock: 300,
-    brand: "SoundWave",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -92,7 +86,6 @@ const products: Product[] = [
     price: 3000,
     categories: [ProductCategory.ELECTRONICS],
     stock: 1,
-    brand: "Apple",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -102,7 +95,6 @@ const products: Product[] = [
     price: 24.99,
     categories: [ProductCategory.FITNESS],
     stock: 250,
-    brand: "ZenFit",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -112,7 +104,6 @@ const products: Product[] = [
     price: 15.99,
     categories: [],
     stock: 400,
-    brand: "SafeGuard",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -123,7 +114,6 @@ const products: Product[] = [
     price: 9.99,
     categories: [ProductCategory.KITCHEN],
     stock: 600,
-    brand: "BrewMaster",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -133,7 +123,6 @@ const products: Product[] = [
     price: 69.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.AUDIO],
     stock: 180,
-    brand: "SoundWave",
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -259,7 +248,6 @@ export default function ProductListPage() {
                       ${product.price.toFixed(2)}
                     </span>
                   </div>
-                  <p className="text-sm">Brand: {product.brand}</p>
                   <p className="text-sm">Stock: {product.stock}</p>
                 </CardContent>
                 <CardFooter className="flex justify-between items-center">
