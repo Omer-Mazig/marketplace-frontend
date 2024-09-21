@@ -148,14 +148,14 @@ export function Footer() {
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200">
           <div className="flex flex-col items-center 3xs:flex-row 3xs:justify-between">
-            <p>&copy; 2023 Your Marketplace. All rights reserved.</p>
+            <p>&copy; 2024 Marketplace. All rights reserved.</p>
             <p className="mt-4 3xs:mt-0">
               Made with{" "}
               <Heart
                 className="inline-block text-primary"
                 size={16}
               />{" "}
-              by Your Team
+              by Omer Mazig
             </p>
           </div>
         </div>
