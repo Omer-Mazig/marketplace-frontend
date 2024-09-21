@@ -31,6 +31,7 @@ function UserSettingsPage() {
             id="email"
             type="email"
             value={userProfileData.email}
+            readOnly // remove when implementing onChange
           />
         </div>
         <div className="space-y-2">

@@ -1,25 +1,57 @@
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Settings, Package, Heart } from "lucide-react";
+import { User, Settings, Package, Heart, LucideIcon } from "lucide-react";
 
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
 import api from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 
-type ContextType = { userProfileData: LoggedInUser | null };
+type UserProfileData = LoggedInUser & {
+  products: any[];
+  wishlist: any[];
+};
+type ContextType = { userProfileData: UserProfileData | null };
 
-async function getUserProfileData(userId: number) {
-  const { data } = await api.get(`/users/user-data/${userId}`);
+async function getUserProfileData(): Promise<UserProfileData> {
+  const { data } = await api.get(`/users/user-data`);
   return data;
 }
 
-function UserProfileLaoyout() {
-  const { loggedInUser } = useAuth();
+// Reusable component for profile tab links
+type ProfileTabLinkProps = {
+  to: string;
+  value: string;
+  Icon: LucideIcon;
+  label: string;
+};
 
+function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
+  return (
+    <TabsTrigger
+      value={value}
+      asChild
+    >
+      <NavLink
+        to={to}
+        className="flex flex-col items-center"
+      >
+        {({ isActive }) => (
+          <>
+            <Icon className={`h-5 w-5 md:hidden ${isActive ? "" : ""}`} />
+            <span className="sr-only md:not-sr-only md:mt-1 text-xs">
+              {label}
+            </span>
+          </>
+        )}
+      </NavLink>
+    </TabsTrigger>
+  );
+}
+
+function UserProfileLayout() {
   const { data: userProfileData } = useQuery({
-    queryKey: ["user-profile-data", loggedInUser?.id],
-    queryFn: () => getUserProfileData(loggedInUser?.id as number),
-    enabled: !!loggedInUser?.id, // Ensure the query runs only if loggedInUser is available
+    queryKey: ["user-profile-data"],
+    queryFn: () => getUserProfileData(),
   });
 
   if (!userProfileData) return null;
@@ -32,78 +64,30 @@ function UserProfileLaoyout() {
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-4 mb-4">
-          <TabsTrigger
+          <ProfileTabLink
+            to=""
             value="info"
-            asChild
-          >
-            <NavLink
-              to="" // relative path
-              className="flex flex-col items-center"
-            >
-              {({ isActive }) => (
-                <>
-                  <User className={`h-5 w-5 ${isActive ? "" : ""}`} />
-                  <span className="sr-only md:not-sr-only md:mt-1 text-xs">
-                    Info
-                  </span>
-                </>
-              )}
-            </NavLink>
-          </TabsTrigger>
-          <TabsTrigger
+            Icon={User}
+            label="Info"
+          />
+          <ProfileTabLink
+            to="settings"
             value="settings"
-            asChild
-          >
-            <NavLink
-              to="settings"
-              className="flex flex-col items-center"
-            >
-              {({ isActive }) => (
-                <>
-                  <Settings className={`h-5 w-5 ${isActive ? "" : ""}`} />
-                  <span className="sr-only md:not-sr-only md:mt-1 text-xs">
-                    Settings
-                  </span>
-                </>
-              )}
-            </NavLink>
-          </TabsTrigger>
-          <TabsTrigger
+            Icon={Settings}
+            label="Settings"
+          />
+          <ProfileTabLink
+            to="products"
             value="products"
-            asChild
-          >
-            <NavLink
-              to="products"
-              className="flex flex-col items-center"
-            >
-              {({ isActive }) => (
-                <>
-                  <Package className={`h-5 w-5 ${isActive ? "" : ""}`} />
-                  <span className="sr-only md:not-sr-only md:mt-1 text-xs">
-                    Products
-                  </span>
-                </>
-              )}
-            </NavLink>
-          </TabsTrigger>
-          <TabsTrigger
+            Icon={Package}
+            label="Products"
+          />
+          <ProfileTabLink
+            to="wishlist"
             value="wishlist"
-            asChild
-          >
-            <NavLink
-              to="wishlist"
-              className="flex flex-col items-center"
-            >
-              {({ isActive }) => (
-                <>
-                  <Heart className={`h-5 w-5 ${isActive ? "" : ""}`} />
-                  <span className="sr-only md:not-sr-only md:mt-1 text-xs">
-                    Wishlist
-                  </span>
-                </>
-              )}
-            </NavLink>
-          </TabsTrigger>
+            Icon={Heart}
+            label="Wishlist"
+          />
         </TabsList>
       </Tabs>
       <Outlet context={{ userProfileData } satisfies ContextType} />
@@ -115,4 +99,4 @@ export function useUserProfileData() {
   return useOutletContext<ContextType>();
 }
 
-export default UserProfileLaoyout;
+export default UserProfileLayout;
