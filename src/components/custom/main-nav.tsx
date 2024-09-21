@@ -21,7 +21,7 @@ export function MainNav() {
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/services">Services</Link>
-            <Link to="/protected">Protected</Link>
+            <Link to="/products">Market Place</Link>
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
