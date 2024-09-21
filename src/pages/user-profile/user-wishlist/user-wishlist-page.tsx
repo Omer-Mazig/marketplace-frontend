@@ -10,12 +10,15 @@ import { Badge } from "@/components/ui/badge";
 
 import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
+import Error from "@/components/custom/error";
 
 function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserWishlistSkeleton />;
-  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
+  if (error || !userProfileData) {
+    return <Error />;
+  }
 
   return (
     <Card>

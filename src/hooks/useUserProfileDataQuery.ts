@@ -5,5 +5,6 @@ export function useUserProfileDataQuery() {
   return useQuery({
     queryKey: ["user-profile-data"],
     queryFn: getUserProfileData,
+    // staleTime: 5 * 1000, 👈 consider added staleTime to reduce api calls
   });
 }

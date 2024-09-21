@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { User, Settings, Package, Heart, LucideIcon } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Error from "@/components/custom/error";
 
 type ProfileTabLinkProps = {
   to: string;
@@ -34,8 +35,6 @@ function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
 
 function UserProfileLayout() {
   const location = useLocation();
-
-  // const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   return (
     <div className="container mx-auto p-4">

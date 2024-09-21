@@ -11,12 +11,15 @@ import { Badge } from "@/components/ui/badge";
 
 import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
+import Error from "@/components/custom/error";
 
 function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserProductsSkeleton />;
-  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
+  if (error || !userProfileData) {
+    return <Error />;
+  }
 
   return (
     <Card>

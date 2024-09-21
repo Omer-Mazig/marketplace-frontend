@@ -12,12 +12,15 @@ import { Button } from "@/components/ui/button";
 
 import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
+import Error from "@/components/custom/error";
 
 function UserSettingsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserSettingsSkeleton />;
-  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
+  if (error || !userProfileData) {
+    return <Error />;
+  }
 
   return (
     <Card>
