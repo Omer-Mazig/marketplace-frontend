@@ -42,9 +42,7 @@ function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
       >
         {({ isActive }) => (
           <>
-            <Icon
-              className={`h-5 w-5 md:hidden ${isActive ? "text-primary" : ""}`}
-            />
+            <Icon className={`h-5 w-5 md:hidden ${isActive ? "" : ""}`} />
             <span className="sr-only md:not-sr-only md:mt-1 text-xs">
               {label}
             </span>
@@ -70,7 +68,7 @@ function UserProfileLayout() {
       <h1 className="text-3xl font-bold mb-6">User Profile</h1>
 
       <Tabs
-        defaultValue={location.pathname}
+        value={location.pathname}
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-4 mb-4">

@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN_STORAGE_KEY } from "@/constants/auth.constant";
 import axios from "axios";
 
-const excludedRoutes = [
+const EXCLUDED_ROUTES = [
   "/auth/sign-in",
   "/auth/register",
   "/auth/refresh-token",
@@ -18,7 +18,7 @@ api.interceptors.request.use(
     // Exclude auth-related routes from attaching the access token
 
     // Only attach token to non-auth routes
-    if (!excludedRoutes.includes(config.url)) {
+    if (!EXCLUDED_ROUTES.includes(config.url!)) {
       const storedToken = localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
       const token = storedToken ? storedToken.replace(/['"]+/g, "") : null;
 
@@ -46,7 +46,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       // Prevent refreshing the token for authentication-related routes
-      if (excludedRoutes.includes(originalRequest.url)) {
+      if (EXCLUDED_ROUTES.includes(originalRequest.url)) {
         return Promise.reject(error);
       }
 
