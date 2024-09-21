@@ -1,12 +1,6 @@
 import { ACCESS_TOKEN_STORAGE_KEY } from "@/constants/auth.constant";
 import axios from "axios";
 
-const excludedRoutes = [
-  "/auth/sign-in",
-  "/auth/register",
-  "/auth/refresh-token",
-];
-
 const api = axios.create({
   withCredentials: true,
   baseURL:
@@ -15,17 +9,12 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    // Exclude auth-related routes from attaching the access token
+    let token = localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY) || null;
 
-    // Only attach token to non-auth routes
-    if (!excludedRoutes.includes(config.url)) {
-      const storedToken = localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
-      const token = storedToken ? storedToken.replace(/['"]+/g, "") : null;
-
-      // removing the first and last character of the token, which are quotes
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+    // removing the first and last character of the token, which are quotes
+    if (token) {
+      token = token?.slice(1, -1);
+      config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;
@@ -41,19 +30,16 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Check if it's a 401 error (access token expired) and ensure it's not for auth routes
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Check if it's a 401 error (access token expired)
+    if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      // Prevent refreshing the token for authentication-related routes
-      if (excludedRoutes.includes(originalRequest.url)) {
-        return Promise.reject(error);
-      }
+      alert("retring...");
 
       try {
         // Send a request to refresh the access token
         const response = await api.post(
-          "/auth/refresh-token",
+          "/refresh-token",
           {},
           { withCredentials: true } // Send cookies with the refresh token
         );
@@ -61,6 +47,8 @@ api.interceptors.response.use(
         // Store the new access token
         const newAccessToken = response.data.accessToken;
         localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, newAccessToken);
+
+        alert(newAccessToken);
 
         // Retry the original request with the new token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;

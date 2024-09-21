@@ -1,10 +1,11 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import api from "@/lib/api";
 import { RegisterFormValues } from "@/pages/register-page";
 import { LoginFormValues as LoginCredentials } from "@/pages/login-page";
-
-import { USER_TIERS_OPTIONS } from "@/constants/auth.constant";
+import {
+  ACCESS_TOKEN_STORAGE_KEY,
+  USER_TIERS_OPTIONS,
+} from "@/constants/auth.constant";
 
 export interface LoggedInUser {
   id: number;
@@ -32,66 +33,62 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loggedInUser, setLoggedInUser] = useState<
     LoggedInUser | null | undefined
   >(undefined);
-  const [accessToken, setAccessToken] = useLocalStorage(
-    "accessToken_marketplace",
-    null
-  );
+  const [accessToken, setAccessToken] = useState<string | null>(() => {
+    const storedToken = localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
+    return storedToken ? storedToken.replace(/['"]+/g, "") : null;
+  });
 
   useEffect(() => {
-    if (!accessToken) {
+    if (accessToken) {
+      localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, accessToken);
+      fetchUser();
+    } else {
       setLoggedInUser(null);
-      return;
     }
-
-    async function fetchUser() {
-      try {
-        console.log("fetchUser");
-        const response = await api.get("/users/active");
-        console.log(response.data);
-        setLoggedInUser(response.data);
-      } catch (error: any) {
-        if (error.response?.status === 401) {
-          console.error("Invalid token, logging out");
-          // logout();
-        } else if (error.response?.status === 404) {
-          console.error("User not found, logging out");
-          logout();
-        } else {
-          console.error("Error fetching user data:", error);
-        }
-        throw error;
-      }
-    }
-
-    fetchUser();
   }, [accessToken]);
 
-  function logout() {
+  const fetchUser = async () => {
+    try {
+      const response = await api.get("/users/active");
+      setLoggedInUser(response.data);
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        console.error("Invalid token, logging out");
+        logout();
+      } else if (error.response?.status === 404) {
+        console.error("User not found, logging out");
+        logout();
+      } else {
+        console.error("Error fetching user data:", error);
+      }
+    }
+  };
+
+  const logout = () => {
     setAccessToken(null);
     setLoggedInUser(null);
-  }
+    localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
+  };
 
-  async function login(cred: LoginCredentials) {
-    console.log("login");
-
+  const login = async (cred: LoginCredentials) => {
     try {
       const response = await api.post("/auth/sign-in", cred);
-      console.log("response.data.accessToken", response.data.accessToken);
-      setAccessToken(response.data.accessToken);
+      const accessToken = response.data.accessToken;
+      setAccessToken(accessToken); // Store token directly
     } catch (error) {
       console.error("Error logging in:", error);
       throw error;
     }
-  }
+  };
 
-  async function register(cred: RegisterCredentials) {
+  const register = async (cred: RegisterCredentials) => {
     try {
       await api.post("/users", cred);
     } catch (error) {
       console.error("Error registering:", error);
       throw error;
     }
-  }
+  };
 
   return (
     <AuthContext.Provider value={{ loggedInUser, login, register, logout }}>
@@ -103,7 +100,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within a UserProvider");
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
