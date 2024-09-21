@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import api from "@/lib/api";
 import { RegisterFormValues } from "@/pages/register-page";
 import { LoginFormValues as LoginCredentials } from "@/pages/login-page";
 import {
   ACCESS_TOKEN_STORAGE_KEY,
   USER_TIERS_OPTIONS,
 } from "@/constants/auth.constant";
+import api from "@/lib/api";
 
 export interface LoggedInUser {
   id: number;

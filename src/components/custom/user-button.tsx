@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,16 +40,16 @@ export function UserButton() {
         <DropdownMenuLabel>Profile Menu</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link to="user-profile/info">Profile</Link>
+          <NavLink to="user-profile/info">Profile</NavLink>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link to="user-profile/settings">Setting</Link>
+          <NavLink to="user-profile/settings">Setting</NavLink>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link to="user-profile/products">Products</Link>
+          <NavLink to="user-profile/products">Products</NavLink>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link to="user-profile/wishlist">Wishlist</Link>
+          <NavLink to="user-profile/wishlist">Wishlist</NavLink>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

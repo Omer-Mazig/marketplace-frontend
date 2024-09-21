@@ -5,24 +5,12 @@ import {
   useOutletContext,
 } from "react-router-dom";
 import { User, Settings, Package, Heart, LucideIcon } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserProfileData } from "@/services/user.service";
+import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 
-import { LoggedInUser } from "@/providers/auth-provider";
-import api from "@/lib/api";
-
-type UserProfileData = LoggedInUser & {
-  products: any[];
-  wishlist: any[];
-};
 type ContextType = { userProfileData: UserProfileData | null };
 
-async function getUserProfileData(): Promise<UserProfileData> {
-  const { data } = await api.get(`/users/user-data`);
-  return data;
-}
-
-// Reusable component for profile tab links
 type ProfileTabLinkProps = {
   to: string;
   value: string;
@@ -56,12 +44,10 @@ function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
 function UserProfileLayout() {
   const location = useLocation();
 
-  const { data: userProfileData } = useQuery({
-    queryKey: ["user-profile-data"],
-    queryFn: () => getUserProfileData(),
-  });
+  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
-  if (!userProfileData) return null;
+  if (isLoading) return <p>Loading...</p>;
+  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
 
   return (
     <div className="container mx-auto p-4">
