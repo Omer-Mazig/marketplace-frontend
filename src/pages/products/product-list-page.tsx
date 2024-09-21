@@ -24,10 +24,13 @@ type Product = {
   id: number;
   name: string;
   description?: string;
-  price: number;
-  categories: ProductCategory[];
   imageUrl?: string;
+  price: number;
   stock: number;
+  categories: ProductCategory[];
+  location?: string;
+  isNegotiable: boolean;
+  viewCount: number;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -39,6 +42,8 @@ const products: Product[] = [
     price: 29.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.OFFICE_SUPPLIES],
     stock: 150,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -49,6 +54,8 @@ const products: Product[] = [
     price: 89.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.GAMING],
     stock: 75,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -58,6 +65,8 @@ const products: Product[] = [
     price: 14.99,
     categories: [],
     stock: 500,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -68,6 +77,8 @@ const products: Product[] = [
     price: 59.99,
     categories: [ProductCategory.SHOES, ProductCategory.FITNESS],
     stock: 120,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -77,6 +88,8 @@ const products: Product[] = [
     price: 49.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.AUDIO],
     stock: 300,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -86,6 +99,8 @@ const products: Product[] = [
     price: 3000,
     categories: [ProductCategory.ELECTRONICS],
     stock: 1,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -95,6 +110,8 @@ const products: Product[] = [
     price: 24.99,
     categories: [ProductCategory.FITNESS],
     stock: 250,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -104,6 +121,8 @@ const products: Product[] = [
     price: 15.99,
     categories: [],
     stock: 400,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -114,6 +133,8 @@ const products: Product[] = [
     price: 9.99,
     categories: [ProductCategory.KITCHEN],
     stock: 600,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -123,6 +144,8 @@ const products: Product[] = [
     price: 69.99,
     categories: [ProductCategory.ELECTRONICS, ProductCategory.AUDIO],
     stock: 180,
+    isNegotiable: false,
+    viewCount: 0,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -243,14 +266,7 @@ export default function ProductListPage() {
                       ? product.description
                       : "Nothing to say about this product"}
                   </p>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-bold">
-                      ${product.price.toFixed(2)}
-                    </span>
-                  </div>
-                  <p className="text-sm">Stock: {product.stock}</p>
-                </CardContent>
-                <CardFooter className="flex justify-between items-center">
+
                   <div className="flex flex-wrap gap-1">
                     {product.categories.map((category) => (
                       <Badge
@@ -261,6 +277,15 @@ export default function ProductListPage() {
                         {category}
                       </Badge>
                     ))}
+                  </div>
+
+                  {/* <p className="text-sm">Stock: {product.stock}</p> */}
+                </CardContent>
+                <CardFooter className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-bold">
+                      ${product.price.toFixed(2)}
+                    </span>
                   </div>
                   <Heart className="w-5 h-5 text-gray-400 cursor-pointer hover:text-red-500 transition-colors" />
                 </CardFooter>
