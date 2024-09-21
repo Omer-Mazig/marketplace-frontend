@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     LoggedInUser | null | undefined
   >(undefined);
   const [accessToken, setAccessToken] = useLocalStorage(
-    "jwt-marketplace",
+    "accessToken_marketplace",
     null
   );
 
@@ -45,18 +45,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     async function fetchUser() {
       try {
+        console.log("fetchUser");
         const response = await api.get("/users/active");
+        console.log(response.data);
         setLoggedInUser(response.data);
       } catch (error: any) {
         if (error.response?.status === 401) {
           console.error("Invalid token, logging out");
-          logout();
+          // logout();
         } else if (error.response?.status === 404) {
           console.error("User not found, logging out");
           logout();
         } else {
           console.error("Error fetching user data:", error);
         }
+        throw error;
       }
     }
 
@@ -69,8 +72,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   async function login(cred: LoginCredentials) {
+    console.log("login");
+
     try {
       const response = await api.post("/auth/sign-in", cred);
+      console.log("response.data.accessToken", response.data.accessToken);
       setAccessToken(response.data.accessToken);
     } catch (error) {
       console.error("Error logging in:", error);
