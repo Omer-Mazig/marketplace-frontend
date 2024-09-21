@@ -1,10 +1,16 @@
-import { NavLink, Outlet, useOutletContext } from "react-router-dom";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useOutletContext,
+} from "react-router-dom";
 import { User, Settings, Package, Heart, LucideIcon } from "lucide-react";
-
-import { LoggedInUser, useAuth } from "@/providers/auth-provider";
-import api from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { LoggedInUser } from "@/providers/auth-provider";
+import api from "@/lib/api";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type UserProfileData = LoggedInUser & {
   products: any[];
@@ -37,7 +43,9 @@ function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
       >
         {({ isActive }) => (
           <>
-            <Icon className={`h-5 w-5 md:hidden ${isActive ? "" : ""}`} />
+            <Icon
+              className={`h-5 w-5 md:hidden ${isActive ? "text-primary" : ""}`}
+            />
             <span className="sr-only md:not-sr-only md:mt-1 text-xs">
               {label}
             </span>
@@ -49,6 +57,8 @@ function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
 }
 
 function UserProfileLayout() {
+  const location = useLocation();
+
   const { data: userProfileData } = useQuery({
     queryKey: ["user-profile-data"],
     queryFn: () => getUserProfileData(),
@@ -59,32 +69,33 @@ function UserProfileLayout() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">User Profile</h1>
+
       <Tabs
-        defaultValue="info"
+        defaultValue={location.pathname}
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-4 mb-4">
           <ProfileTabLink
-            to=""
-            value="info"
+            to="info"
+            value="/user-profile/info"
             Icon={User}
             label="Info"
           />
           <ProfileTabLink
             to="settings"
-            value="settings"
+            value="/user-profile/settings"
             Icon={Settings}
             label="Settings"
           />
           <ProfileTabLink
             to="products"
-            value="products"
+            value="/user-profile/products"
             Icon={Package}
             label="Products"
           />
           <ProfileTabLink
             to="wishlist"
-            value="wishlist"
+            value="/user-profile/wishlist"
             Icon={Heart}
             label="Wishlist"
           />

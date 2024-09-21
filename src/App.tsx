@@ -61,7 +61,11 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            index: true,
+            index: true, // for /user-profile - navigate to info
+            element: <Navigate to="info" />,
+          },
+          {
+            path: "info", // changed to relative path
             element: <UserInfoPage />,
           },
           {

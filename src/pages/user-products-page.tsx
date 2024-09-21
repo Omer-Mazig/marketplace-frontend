@@ -29,11 +29,14 @@ function UserProductsPage() {
             return (
               <li
                 key={product.id}
-                className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-2"
+                className="text-center 3xs:text-start flex flex-col md:flex-row justify-between 3xs:items-start md:items-center border-b pb-2"
               >
                 <span className="mb-2 md:mb-0">{product.name}</span>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">
+                <div className="flex flex-col 3xs:flex-row justify-center flex-wrap gap-2">
+                  <Badge
+                    variant="outline"
+                    className="justify-center"
+                  >
                     ${product.price?.toFixed(2)}
                   </Badge>
                   <Button
