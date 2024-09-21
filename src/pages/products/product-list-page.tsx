@@ -250,7 +250,9 @@ export default function ProductListPage() {
                 <CardContent className="flex-grow">
                   <CardTitle className="mb-2">{product.name}</CardTitle>
                   <p className="text-sm text-gray-600 mb-2">
-                    {product.description}
+                    {product.description
+                      ? product.description
+                      : "Nothing to say about this product"}
                   </p>
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold">
