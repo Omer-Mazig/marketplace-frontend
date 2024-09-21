@@ -24,8 +24,6 @@ function UserProductsPage() {
       <CardContent>
         <ul className="space-y-4">
           {userProfileData.products.map((product) => {
-            console.log(product);
-
             return (
               <li
                 key={product.id}

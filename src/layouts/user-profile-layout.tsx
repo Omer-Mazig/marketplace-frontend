@@ -10,7 +10,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { LoggedInUser } from "@/providers/auth-provider";
 import api from "@/lib/api";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type UserProfileData = LoggedInUser & {
   products: any[];
