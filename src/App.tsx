@@ -14,11 +14,11 @@ import AboutPage from "./pages/about-page";
 import { useAuth } from "./providers/auth-provider";
 import TeamPage from "./pages/vision-page";
 import VisionPage from "./pages/team-page";
-import UserProfileLayout from "./layouts/user-profile-layout";
-import UserInfoPage from "./pages/user-info-page";
-import UserSettingsPage from "./pages/user-settings-page";
-import UserProductsPage from "./pages/user-products-page";
-import UserWishlistPage from "./pages/user-wishlist-page";
+import UserProfileLayout from "./pages/user-profile/user-profile-layout";
+import UserInfoPage from "./pages/user-profile/user-info/user-info-page";
+import UserSettingsPage from "./pages/user-profile/user-settings/user-settings-page";
+import UserProductsPage from "./pages/user-profile/user-products/user-products-page";
+import UserWishlistPage from "./pages/user-profile/user-wishlist/user-wishlist-page";
 
 const router = createBrowserRouter([
   {

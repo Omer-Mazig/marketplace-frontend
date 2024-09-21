@@ -7,6 +7,7 @@ export type UserProfileData = LoggedInUser & {
 };
 
 export async function getUserProfileData(): Promise<UserProfileData> {
+  await new Promise((res) => setTimeout(res, 2000)); // just for development
   const { data } = await api.get(`/users/user-data`);
   return data;
 }

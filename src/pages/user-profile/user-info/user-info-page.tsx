@@ -10,12 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useUserProfileData } from "@/layouts/user-profile-layout";
+
+import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
+import { UserInfoSkeleton } from "./user-info-page-skeleton";
 
 function UserInfoPage() {
-  const { userProfileData } = useUserProfileData();
+  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
-  if (!userProfileData) return null;
+  if (isLoading) return <UserInfoSkeleton />;
+  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
 
   return (
     <Card>

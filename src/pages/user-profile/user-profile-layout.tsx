@@ -1,15 +1,6 @@
-import {
-  NavLink,
-  Outlet,
-  useLocation,
-  useOutletContext,
-} from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { User, Settings, Package, Heart, LucideIcon } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserProfileData } from "@/services/user.service";
-import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
-
-type ContextType = { userProfileData: UserProfileData | null };
 
 type ProfileTabLinkProps = {
   to: string;
@@ -44,10 +35,7 @@ function ProfileTabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
 function UserProfileLayout() {
   const location = useLocation();
 
-  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
+  // const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   return (
     <div className="container mx-auto p-4">
@@ -84,13 +72,9 @@ function UserProfileLayout() {
           />
         </TabsList>
       </Tabs>
-      <Outlet context={{ userProfileData } satisfies ContextType} />
+      <Outlet />
     </div>
   );
-}
-
-export function useUserProfileData() {
-  return useOutletContext<ContextType>();
 }
 
 export default UserProfileLayout;

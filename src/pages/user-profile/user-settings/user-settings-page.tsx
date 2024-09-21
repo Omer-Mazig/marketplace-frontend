@@ -9,12 +9,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useUserProfileData } from "@/layouts/user-profile-layout";
+
+import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
+import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
 
 function UserSettingsPage() {
-  const { userProfileData } = useUserProfileData();
+  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
-  if (!userProfileData) return null;
+  if (isLoading) return <UserSettingsSkeleton />;
+  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
 
   return (
     <Card>

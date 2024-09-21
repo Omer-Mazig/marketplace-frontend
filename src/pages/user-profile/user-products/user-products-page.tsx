@@ -8,12 +8,15 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useUserProfileData } from "@/layouts/user-profile-layout";
+
+import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
+import { UserProductsSkeleton } from "./user-products-page-skeleton";
 
 function UserProductsPage() {
-  const { userProfileData } = useUserProfileData();
+  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
-  if (!userProfileData) return null;
+  if (isLoading) return <UserProductsSkeleton />;
+  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
 
   return (
     <Card>

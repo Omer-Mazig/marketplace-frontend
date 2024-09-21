@@ -7,12 +7,15 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useUserProfileData } from "@/layouts/user-profile-layout";
+
+import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
+import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 
 function UserWishlistPage() {
-  const { userProfileData } = useUserProfileData();
+  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
-  if (!userProfileData) return null;
+  if (isLoading) return <UserWishlistSkeleton />;
+  if (error || !userProfileData) return <p>Error loading user profile data.</p>;
 
   return (
     <Card>
