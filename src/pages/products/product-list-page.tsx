@@ -46,7 +46,10 @@ export default function ProductListPage() {
         <div className="md:col-span-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
-              <ProductPreview product={product} />
+              <ProductPreview
+                key={product.id}
+                product={product}
+              />
             ))}
           </div>
         </div>

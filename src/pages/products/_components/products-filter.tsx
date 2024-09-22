@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,28 +10,54 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-
 import { ProductCategory } from "@/enums/product-category.enum";
+import { Button } from "@/components/ui/button";
 
 export function ProductsFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+
+  useEffect(() => {
+    // Initialize state from search params
+    const search = searchParams.get("search") || "";
+    const category = searchParams.get("category") || "All";
+    const minPrice = Number(searchParams.get("minPrice")) || 0;
+    const maxPrice = Number(searchParams.get("maxPrice")) || 1000;
+
+    setSearchTerm(search);
+    setSelectedCategory(category);
+    setPriceRange([minPrice, maxPrice]);
+  }, [searchParams]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set("search", event.target.value);
-    setSearchParams(newSearchParams);
+    setSearchTerm(event.target.value);
   };
 
   const handleCategoryChange = (value: string) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set("category", value);
-    setSearchParams(newSearchParams);
+    setSelectedCategory(value);
   };
 
   const handlePriceRangeChange = (value: number[]) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set("minPrice", value[0].toString());
-    newSearchParams.set("maxPrice", value[1].toString());
+    setPriceRange(value);
+  };
+
+  const reset = () => {
+    setSearchTerm("");
+    setSelectedCategory("All");
+    setPriceRange([0, 1000]);
+
+    const newSearchParams = new URLSearchParams();
+    setSearchParams(newSearchParams);
+  };
+
+  const handleFilterSubmit = () => {
+    const newSearchParams = new URLSearchParams();
+    newSearchParams.set("search", searchTerm);
+    newSearchParams.set("category", selectedCategory);
+    newSearchParams.set("minPrice", priceRange[0].toString());
+    newSearchParams.set("maxPrice", priceRange[1].toString());
     setSearchParams(newSearchParams);
   };
 
@@ -42,13 +68,17 @@ export function ProductsFilter() {
         <Input
           id="search"
           placeholder="Search products..."
+          value={searchTerm}
           onChange={handleSearchChange}
         />
       </div>
 
       <div>
         <Label htmlFor="category">Category</Label>
-        <Select onValueChange={handleCategoryChange}>
+        <Select
+          onValueChange={handleCategoryChange}
+          value={selectedCategory}
+        >
           <SelectTrigger id="category">
             <SelectValue placeholder="Select category" />
           </SelectTrigger>
@@ -72,14 +102,24 @@ export function ProductsFilter() {
           min={0}
           max={1000}
           step={10}
-          defaultValue={[0, 1000]}
+          value={priceRange} // Use value instead of defaultValue for controlled component
           onValueChange={handlePriceRangeChange}
           className="mt-2"
         />
         <div className="flex justify-between mt-2">
-          <span>${searchParams.get("minPrice") || 0}</span>
-          <span>${searchParams.get("maxPrice") || 1000}</span>
+          <span>${priceRange[0]}</span>
+          <span>${priceRange[1]}</span>
         </div>
+      </div>
+
+      <div className="flex justify-between gap-2">
+        <Button onClick={handleFilterSubmit}>Apply Filters</Button>
+        <Button
+          onClick={reset}
+          variant="outline"
+        >
+          Clear all
+        </Button>
       </div>
     </div>
   );
