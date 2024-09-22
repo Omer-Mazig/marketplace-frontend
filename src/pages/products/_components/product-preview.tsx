@@ -22,7 +22,7 @@ function ProductPreview({ product }: ProductPreviewProps) {
       <CardHeader>
         <img
           src={
-            product.imageUrl ||
+            product.imageURL ||
             `https://via.placeholder.com/300x200?text=${encodeURIComponent(
               product.name
             )}`

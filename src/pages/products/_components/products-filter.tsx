@@ -17,18 +17,19 @@ export function ProductsFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState([0, 9999]);
 
   useEffect(() => {
     // Initialize state from search params
     const search = searchParams.get("search") || "";
     const category = searchParams.get("category") || "All";
     const minPrice = Number(searchParams.get("minPrice")) || 0;
-    const maxPrice = Number(searchParams.get("maxPrice")) || 1000;
+    const maxPrice = Number(searchParams.get("maxPrice")) || 9999;
 
     setSearchTerm(search);
     setSelectedCategory(category);
     setPriceRange([minPrice, maxPrice]);
+    handleFilterSubmit();
   }, [searchParams]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +47,7 @@ export function ProductsFilter() {
   const reset = () => {
     setSearchTerm("");
     setSelectedCategory("All");
-    setPriceRange([0, 1000]);
+    setPriceRange([0, 9999]);
 
     const newSearchParams = new URLSearchParams();
     setSearchParams(newSearchParams);
@@ -100,7 +101,7 @@ export function ProductsFilter() {
         <Label>Price Range</Label>
         <Slider
           min={0}
-          max={1000}
+          max={9999}
           step={10}
           value={priceRange} // Use value instead of defaultValue for controlled component
           onValueChange={handlePriceRangeChange}
