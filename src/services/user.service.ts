@@ -1,8 +1,24 @@
+import { ProductCategory } from "@/enums/product-category.enum";
 import api from "@/lib/api";
 import { LoggedInUser } from "@/providers/auth-provider";
 
+export type Product = {
+  id: number;
+  name: string;
+  description?: string;
+  imageUrl?: string;
+  price: number;
+  stock: number;
+  categories: ProductCategory[];
+  location?: string;
+  isNegotiable: boolean;
+  viewCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type UserProfileData = LoggedInUser & {
-  products: any[];
+  products: Product[];
   wishlist: any[];
 };
 

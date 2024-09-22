@@ -19,21 +19,7 @@ import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Heart } from "lucide-react";
 import { ProductCategory } from "@/enums/product-category.enum";
-
-type Product = {
-  id: number;
-  name: string;
-  description?: string;
-  imageUrl?: string;
-  price: number;
-  stock: number;
-  categories: ProductCategory[];
-  location?: string;
-  isNegotiable: boolean;
-  viewCount: number;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import { Product } from "@/services/user.service";
 
 const products: Product[] = [
   {
