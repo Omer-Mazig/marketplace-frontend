@@ -1,4 +1,4 @@
-import { Product } from "@/services/user.service";
+import { Product } from "@/types/products.types";
 import {
   BarChart,
   Bar,

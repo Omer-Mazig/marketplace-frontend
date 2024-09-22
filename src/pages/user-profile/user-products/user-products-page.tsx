@@ -12,9 +12,9 @@ import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
 
-import { Product } from "@/services/user.service";
 import { ProductCategory } from "@/enums/product-category.enum";
 import ProfileProductCharts from "../_components/profile-product-charts";
+import { Product } from "@/types/products.types";
 
 function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();

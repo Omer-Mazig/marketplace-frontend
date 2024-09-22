@@ -19,7 +19,7 @@ import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Heart } from "lucide-react";
 import { ProductCategory } from "@/enums/product-category.enum";
-import { Product } from "@/services/user.service";
+import { Product } from "@/types/products.types";
 
 const products: Product[] = [
   {
