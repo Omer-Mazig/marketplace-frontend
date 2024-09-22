@@ -23,6 +23,8 @@ function UserInfoPage() {
     return <Error />;
   }
 
+  console.log(userProfileData);
+
   return (
     <Card>
       <CardHeader>

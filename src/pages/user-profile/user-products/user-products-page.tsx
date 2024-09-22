@@ -24,124 +24,7 @@ function UserProductsPage() {
     return <Error />;
   }
 
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Wireless Mouse",
-      price: 29.99,
-      categories: [
-        ProductCategory.ELECTRONICS,
-        ProductCategory.OFFICE_SUPPLIES,
-      ],
-      stock: 150,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 2,
-      name: "Gaming Keyboard",
-      description: "Mechanical keyboard with RGB lighting",
-      price: 89.99,
-      categories: [ProductCategory.ELECTRONICS, ProductCategory.GAMING],
-      stock: 75,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 3,
-      name: "Water Bottle",
-      price: 14.99,
-      categories: [],
-      stock: 500,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 4,
-      name: "Running Shoes",
-      description: "Lightweight shoes for running",
-      price: 59.99,
-      categories: [ProductCategory.SHOES, ProductCategory.FITNESS],
-      stock: 120,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 5,
-      name: "Bluetooth Speaker",
-      price: 49.99,
-      categories: [ProductCategory.ELECTRONICS, ProductCategory.AUDIO],
-      stock: 300,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 6,
-      name: "Mac M2",
-      price: 3000,
-      categories: [ProductCategory.ELECTRONICS],
-      stock: 1,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 7,
-      name: "Yoga Mat",
-      price: 24.99,
-      categories: [ProductCategory.FITNESS],
-      stock: 250,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 8,
-      name: "Laptop Sleeve",
-      price: 15.99,
-      categories: [],
-      stock: 400,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 9,
-      name: "Coffee Mug",
-      description: "Ceramic mug for hot beverages",
-      price: 9.99,
-      categories: [ProductCategory.KITCHEN],
-      stock: 600,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: 10,
-      name: "Wireless Earbuds",
-      price: 69.99,
-      categories: [ProductCategory.ELECTRONICS, ProductCategory.AUDIO],
-      stock: 180,
-      isNegotiable: false,
-      viewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ];
+  const { products } = userProfileData;
 
   return (
     <Card>
@@ -192,7 +75,7 @@ function UserProductsPage() {
 
         <Separator className="my-8" />
 
-        <ProfileProductCharts products={products} />
+        {/* <ProfileProductCharts products={products} /> */}
       </CardContent>
     </Card>
   );
