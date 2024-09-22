@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function UserSettingsSkeleton() {
   return (
-    <Card className="w-full max-w-3xl mx-auto">
+    <Card className="w-full mx-auto">
       <CardHeader className="space-y-2">
         <Skeleton className="h-8 w-3/4" />
         <Skeleton className="h-4 w-1/2" />
