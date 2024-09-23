@@ -12,7 +12,7 @@ import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 import Error from "@/components/custom/error";
 
-function UserWishlistPage() {
+export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserWishlistSkeleton />;
@@ -54,5 +54,3 @@ function UserWishlistPage() {
     </Card>
   );
 }
-
-export default UserWishlistPage;

@@ -14,7 +14,7 @@ import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
 import Error from "@/components/custom/error";
 
-function UserSettingsPage() {
+export default function UserSettingsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserSettingsSkeleton />;
@@ -61,5 +61,3 @@ function UserSettingsPage() {
     </Card>
   );
 }
-
-export default UserSettingsPage;

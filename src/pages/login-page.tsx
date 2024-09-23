@@ -42,7 +42,7 @@ const formSchema = z.object({
   }),
 });
 
-function LoginPage() {
+export default function LoginPage() {
   const { login } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -181,5 +181,3 @@ function LoginPage() {
     </Card>
   );
 }
-
-export default LoginPage;

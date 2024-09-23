@@ -1,5 +1,3 @@
-function VisionPage() {
+export default function VisionPage() {
   return <div>VisionPage</div>;
 }
-
-export default VisionPage;

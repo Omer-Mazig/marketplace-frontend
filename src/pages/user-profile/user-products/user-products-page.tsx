@@ -12,7 +12,7 @@ import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
 
-function UserProductsPage() {
+export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserProductsSkeleton />;
@@ -76,5 +76,3 @@ function UserProductsPage() {
     </Card>
   );
 }
-
-export default UserProductsPage;

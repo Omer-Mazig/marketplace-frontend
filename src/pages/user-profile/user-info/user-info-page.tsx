@@ -15,7 +15,7 @@ import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserInfoSkeleton } from "./user-info-page-skeleton";
 import Error from "@/components/custom/error";
 
-function UserInfoPage() {
+export default function UserInfoPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
 
   if (isLoading) return <UserInfoSkeleton />;
@@ -65,5 +65,3 @@ function UserInfoPage() {
     </Card>
   );
 }
-
-export default UserInfoPage;

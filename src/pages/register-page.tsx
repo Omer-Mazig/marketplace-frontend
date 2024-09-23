@@ -56,7 +56,7 @@ const formSchema = z
     path: ["confirmPassword"], // Error path
   });
 
-function RegisterPage() {
+export default function RegisterPage() {
   const { register } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -306,5 +306,3 @@ function RegisterPage() {
     </Card>
   );
 }
-
-export default RegisterPage;

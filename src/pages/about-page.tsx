@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 
-function AboutPage() {
+export default function AboutPage() {
   return (
     <>
       <div className="flex flex-col items-center">
@@ -33,5 +33,3 @@ function AboutPage() {
     </>
   );
 }
-
-export default AboutPage;
