@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -48,6 +49,20 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
                 {category}
               </Badge>
             ))}
+          </div>
+          <div className="flex items-center gap-3 mt-4">
+            <Avatar>
+              <AvatarImage
+                src={product.owner?.imageUrl || ""}
+                alt={product.owner?.email}
+              />
+              <AvatarFallback>
+                {product.owner?.email[0].toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <span>
+              {product.owner.firstName} {product.owner.lastName}
+            </span>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center">
