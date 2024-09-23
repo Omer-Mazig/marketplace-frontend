@@ -5,3 +5,11 @@ export type UserProfileData = LoggedInUser & {
   products: Product[];
   wishlist: any[];
 };
+
+export type MiniUser = {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  imageUrl?: string;
+};

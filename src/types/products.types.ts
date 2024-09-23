@@ -1,4 +1,5 @@
 import { ProductCategory } from "@/enums/product-category.enum";
+import { MiniUser } from "./users.types";
 
 export type Product = {
   id: number;
@@ -13,4 +14,5 @@ export type Product = {
   viewCount: number;
   createdAt: Date;
   updatedAt: Date;
+  owner: MiniUser;
 };
