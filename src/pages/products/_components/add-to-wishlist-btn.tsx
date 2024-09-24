@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
+import {
+  useAddToWishlistMutation,
+  useDeleteFromWishlistMutation,
+} from "@/hooks/useWishlistMutation";
 import api from "@/lib/api";
 import { LoggedInUser } from "@/providers/auth-provider";
 import { Product } from "@/types/products.types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Heart } from "lucide-react";
 
 interface AddToWishlistBtnProps {
@@ -13,35 +18,33 @@ export function AddToWishlistBtn({
   product,
   loggedInUser,
 }: AddToWishlistBtnProps) {
-  const isProductOnUSerWishlist = product.wishlistUsers.some(
+  const queryClient = useQueryClient();
+
+  const isProductOnUserWishlist = product.wishlistUsers.some(
     (u) => u.id === loggedInUser?.id
   );
 
   // TODO: Check if a user is logged in or not. if not, show a model to let the user to loggin
   // NOTE: The endpoint is alreay secure and require a active user on the server
-  function onClick() {
+  function onClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    ev.stopPropagation();
+
     if (!loggedInUser) {
       // Add logic to show modal and break the function (return)
-
       return;
     }
 
-    if (isProductOnUSerWishlist) {
-      handleDeleteToWishlist(product.id);
+    if (isProductOnUserWishlist) {
+      deleteFromWishlistMutation.mutate();
     } else {
-      handleAddToWishlist(product.id);
+      addToWishlistMutation.mutate();
     }
+
+    queryClient.invalidateQueries({ queryKey: ["products"] });
   }
 
-  function handleAddToWishlist(productId: number) {
-    api.post("wishlist/" + productId);
-    console.log("handleAddToWishlist");
-  }
-
-  function handleDeleteToWishlist(productId: number) {
-    api.delete("wishlist/" + productId);
-    console.log("handleDeleteToWishlist");
-  }
+  const addToWishlistMutation = useAddToWishlistMutation(product.id);
+  const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product.id);
 
   return (
     <>
@@ -50,7 +53,7 @@ export function AddToWishlistBtn({
         size="icon"
         onClick={onClick}
       >
-        {isProductOnUSerWishlist ? (
+        {isProductOnUserWishlist ? (
           <Heart
             fill="#000"
             className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-500 transition-colors"

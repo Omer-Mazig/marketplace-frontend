@@ -8,8 +8,6 @@ import ProductPreview from "./_components/product-preview";
 export default function ProductListPage() {
   const { data: products, error, isLoading } = useProductsQuery();
 
-  console.log(products);
-
   const [searchParams] = useSearchParams();
 
   // Only filter products after checking loading/error
