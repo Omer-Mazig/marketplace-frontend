@@ -22,7 +22,7 @@ interface AuthContextType {
   loggedInUser: LoggedInUser | null | undefined;
   login: (user: LoginCredentials) => Promise<void>;
   register: (user: RegisterCredentials) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 type RegisterCredentials = Omit<RegisterFormValues, "confirmPassword">;
@@ -54,17 +54,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } catch (error: any) {
       if (error.response?.status === 401) {
         console.error("Invalid token, logging out");
-        logout();
+        await logout();
       } else if (error.response?.status === 404) {
         console.error("User not found, logging out");
-        logout();
+        await logout();
       } else {
         console.error("Error fetching user data:", error);
       }
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    // await api.post("/auth/sign-out");
     setAccessToken(null);
     setLoggedInUser(null);
     localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);

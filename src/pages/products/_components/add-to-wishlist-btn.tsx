@@ -13,9 +13,26 @@ export function AddToWishlistBtn({
   product,
   loggedInUser,
 }: AddToWishlistBtnProps) {
+  const isProductOnUSerWishlist = product.wishlistUsers.some(
+    (u) => u.id === loggedInUser?.id
+  );
+
+  function onClick() {
+    if (isProductOnUSerWishlist) {
+      handleDeleteToWishlist(product.id);
+    } else {
+      handleAddToWishlist(product.id);
+    }
+  }
+
   function handleAddToWishlist(productId: number) {
     api.post("wishlist/" + productId);
     console.log("handleAddToWishlist");
+  }
+
+  function handleDeleteToWishlist(productId: number) {
+    api.delete("wishlist/" + productId);
+    console.log("handleDeleteToWishlist");
   }
 
   return (
@@ -23,9 +40,9 @@ export function AddToWishlistBtn({
       <Button
         variant="ghost"
         size="icon"
-        onClick={() => handleAddToWishlist(product.id)}
+        onClick={onClick}
       >
-        {product.wishlistUsers.some((u) => u.id === loggedInUser?.id) ? (
+        {isProductOnUSerWishlist ? (
           <Heart
             fill="#000"
             className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-500 transition-colors"
