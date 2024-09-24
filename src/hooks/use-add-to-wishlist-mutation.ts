@@ -27,7 +27,7 @@ export function useAddToWishlistMutation(product: Product) {
 
       return { previousProducts };
     },
-    onError: (err, p, context) => {
+    onError: (err, vars, context) => {
       queryClient.setQueryData(["products"], context?.previousProducts);
       toast({
         variant: "destructive",

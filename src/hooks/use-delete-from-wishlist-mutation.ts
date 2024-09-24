@@ -12,17 +12,18 @@ export function useDeleteFromWishlistMutation(
 
   return useMutation({
     mutationFn: () => deleteFromWishlist(product.id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-      toast({
-        description: `${product.name} was removed from your wishlist.`,
-      });
-    },
+
     onError: (err) => {
       toast({
         variant: "destructive",
         title: err?.message || "Somthing want wrong.",
         description: `There was a problem removing from your wishlist. Please try again later`,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      toast({
+        description: `${product.name} was removed from your wishlist.`,
       });
     },
   });
