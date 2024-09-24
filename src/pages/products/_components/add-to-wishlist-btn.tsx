@@ -1,13 +1,15 @@
+import { useQueryClient } from "@tanstack/react-query";
+
 import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
+
+import { LoggedInUser } from "@/providers/auth-provider";
+import { Product } from "@/types/products.types";
+
 import {
   useAddToWishlistMutation,
   useDeleteFromWishlistMutation,
 } from "@/hooks/useWishlistMutation";
-import api from "@/lib/api";
-import { LoggedInUser } from "@/providers/auth-provider";
-import { Product } from "@/types/products.types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Heart } from "lucide-react";
 
 interface AddToWishlistBtnProps {
   product: Product;
@@ -35,12 +37,18 @@ export function AddToWishlistBtn({
     }
 
     if (isProductOnUserWishlist) {
-      deleteFromWishlistMutation.mutate();
+      deleteFromWishlistMutation.mutate(undefined, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["products"] });
+        },
+      });
     } else {
-      addToWishlistMutation.mutate();
+      addToWishlistMutation.mutate(undefined, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["products"] });
+        },
+      });
     }
-
-    queryClient.invalidateQueries({ queryKey: ["products"] });
   }
 
   const addToWishlistMutation = useAddToWishlistMutation(product.id);
