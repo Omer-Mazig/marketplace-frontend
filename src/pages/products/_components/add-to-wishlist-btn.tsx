@@ -17,7 +17,15 @@ export function AddToWishlistBtn({
     (u) => u.id === loggedInUser?.id
   );
 
+  // TODO: Check if a user is logged in or not. if not, show a model to let the user to loggin
+  // NOTE: The endpoint is alreay secure and require a active user on the server
   function onClick() {
+    if (!loggedInUser) {
+      // Add logic to show modal and break the function (return)
+
+      return;
+    }
+
     if (isProductOnUSerWishlist) {
       handleDeleteToWishlist(product.id);
     } else {
