@@ -10,9 +10,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
 import Error from "@/components/custom/error";
+import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
 
 export default function UserSettingsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();

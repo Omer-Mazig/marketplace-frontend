@@ -5,26 +5,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
-import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 import Error from "@/components/custom/error";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteFromWishlist } from "@/services/wishlist.service";
+import { WishlistItem } from "../_components/wishlist-item";
+import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
-
-  const queryClient = useQueryClient();
-
-  const deleteFromWishlistMutation = useMutation({
-    mutationFn: (productId: number) => deleteFromWishlist(productId),
-    // add optemisic update
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["user-profile-data"] }),
-  });
 
   if (isLoading) return <UserWishlistSkeleton />;
   if (error || !userProfileData) {
@@ -40,23 +28,11 @@ export default function UserWishlistPage() {
       <CardContent>
         {userProfileData.wishlist.length ? (
           <ul className="space-y-4">
-            {userProfileData.wishlist.map((item) => (
-              <li
-                key={item.id}
-                className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-2"
-              >
-                <span className="mb-2 md:mb-0">{item.name}</span>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">${item.price.toFixed(2)}</Badge>
-                  <Button
-                    onClick={() => deleteFromWishlistMutation.mutate(item.id)}
-                    variant="ghost"
-                    size="sm"
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </li>
+            {userProfileData.wishlist.map((product) => (
+              <WishlistItem
+                key={product.id}
+                product={product}
+              />
             ))}
           </ul>
         ) : (

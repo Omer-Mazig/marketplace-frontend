@@ -27,12 +27,12 @@ export function useAddToWishlistMutation(product: Product) {
 
       return { previousProducts };
     },
-    onError: (err, product, context) => {
+    onError: (err, p, context) => {
       queryClient.setQueryData(["products"], context?.previousProducts);
       toast({
         variant: "destructive",
         title: err?.message || "Somthing want wrong.",
-        description: `There was a problem saving to your wishlist. Please try again later`,
+        description: `There was a problem saving ${product.name} to your wishlist. Please try again later`,
       });
     },
     onSuccess: () => {

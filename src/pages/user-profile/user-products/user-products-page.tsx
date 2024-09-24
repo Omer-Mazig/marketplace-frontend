@@ -8,9 +8,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
+import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();

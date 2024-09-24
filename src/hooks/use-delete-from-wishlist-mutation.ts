@@ -3,14 +3,17 @@ import { Product } from "@/types/products.types";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
 
-export function useDeleteFromWishlistMutation(product: Product) {
+export function useDeleteFromWishlistMutation(
+  product: Product,
+  queryKey: string[]
+) {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
   return useMutation({
     mutationFn: () => deleteFromWishlist(product.id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey });
       toast({
         description: `${product.name} was removed from your wishlist.`,
       });

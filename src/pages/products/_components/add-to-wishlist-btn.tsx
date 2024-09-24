@@ -2,8 +2,8 @@ import { LoggedInUser } from "@/providers/auth-provider";
 import { Product } from "@/types/products.types";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
-import { useAddToWishlistMutation } from "@/hooks/useAddToWishlistMutation";
-import { useDeleteFromWishlistMutation } from "@/hooks/useDeleteFromWishlistMutation";
+import { useAddToWishlistMutation } from "@/hooks/use-add-to-wishlist-mutation";
+import { useDeleteFromWishlistMutation } from "@/hooks/use-delete-from-wishlist-mutation";
 
 interface AddToWishlistBtnProps {
   product: Product;
@@ -19,47 +19,9 @@ export function AddToWishlistBtn({
   );
 
   const addToWishlistMutation = useAddToWishlistMutation(product);
-  const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product);
-
-  // const addToWishlistMutation = useMutation({
-  //   mutationFn: () => addToWishlist(product.id),
-  //   onMutate: async () => {
-  //     const previousProducts = queryClient.getQueryData<Product[]>([
-  //       "products",
-  //     ]);
-
-  //     queryClient.setQueryData(
-  //       ["products"],
-  //       previousProducts?.map((p) =>
-  //         p.id === product.id
-  //           ? { ...p, wishlistUsers: [...p.wishlistUsers, loggedInUser] }
-  //           : p
-  //       )
-  //     );
-
-  //     return { previousProducts };
-  //   },
-  //   onError: (err, product, context) => {
-  //     queryClient.setQueryData(["products"], context?.previousProducts);
-  //   },
-  //   onSuccess: () => {
-  //     toast({
-  //       title: "Great!",
-  //       description: `${product.name} was added to your wishlist.`,
-  //     });
-  //   },
-  // });
-  // const deleteFromWishlistMutation = useMutation({
-  //   mutationFn: () => deleteFromWishlist(product.id),
-  //   // TODO: implement optemistic update
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["products"] });
-  //     toast({
-  //       title: "Great!",
-  //       description: `${product.name} was removed from your wishlist.`,
-  //     });
-  //   },
-  // });
+  const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product, [
+    "products",
+  ]);
 
   // TODO: Check if a user is logged in or not. if not, show a model to let the user to login
   // NOTE: The endpoint is alreay secure and require a active user on the server

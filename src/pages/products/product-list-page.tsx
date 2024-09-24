@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import { ProductCategory } from "@/enums/product-category.enum";
-import { useProductsQuery } from "@/hooks/useProductsQuery";
 import Error from "@/components/custom/error";
 import { ProductsFilter } from "./_components/products-filter";
 import ProductPreview from "./_components/product-preview";
+import { useProductsQuery } from "@/hooks/use-products-query";
 
 export default function ProductListPage() {
   const { data: products, error, isLoading } = useProductsQuery();
