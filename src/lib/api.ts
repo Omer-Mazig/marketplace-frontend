@@ -69,6 +69,7 @@ api.interceptors.response.use(
         // If refresh token fails, log out the user or handle as needed
         console.log("Refresh token failed, logging out");
         localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
+        // TODO: here we are redirect to login page. not always we want it (add to wshilst)
         window.location.href = "/auth/login"; // Redirect to login page
         return Promise.reject(refreshError);
       }
