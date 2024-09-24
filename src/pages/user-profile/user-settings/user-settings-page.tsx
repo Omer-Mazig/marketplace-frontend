@@ -9,13 +9,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import Error from "@/components/custom/error";
 
 import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
-import Error from "@/components/custom/error";
-import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
+import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserSettingsPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
+  const { data: userProfileData, isLoading, error } = useUserProfileContext();
 
   if (isLoading) return <UserSettingsSkeleton />;
   if (error || !userProfileData) {

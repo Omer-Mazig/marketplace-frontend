@@ -9,10 +9,10 @@ import {
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 import Error from "@/components/custom/error";
 import { WishlistItem } from "../_components/wishlist-item";
-import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
+import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserWishlistPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
+  const { data: userProfileData, isLoading, error } = useUserProfileContext();
 
   if (isLoading) return <UserWishlistSkeleton />;
   if (error || !userProfileData) {

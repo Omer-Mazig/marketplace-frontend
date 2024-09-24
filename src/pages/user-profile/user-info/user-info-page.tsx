@@ -13,17 +13,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { UserInfoSkeleton } from "./user-info-page-skeleton";
 import Error from "@/components/custom/error";
-import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
+
+import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserInfoPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
+  const { data: userProfileData, isLoading, error } = useUserProfileContext();
 
   if (isLoading) return <UserInfoSkeleton />;
   if (error || !userProfileData) {
     return <Error />;
   }
-
-  console.log(userProfileData);
 
   return (
     <Card>

@@ -10,10 +10,11 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
-import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
+
+import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserProductsPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
+  const { data: userProfileData, isLoading, error } = useUserProfileContext();
 
   if (isLoading) return <UserProductsSkeleton />;
   if (error || !userProfileData) {
