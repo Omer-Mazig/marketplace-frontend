@@ -3,6 +3,7 @@ import { Product } from "@/types/products.types";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
 
+// TODO: try to implment optemistic update with strategy pattern
 export function useDeleteFromWishlistMutation(
   product: Product,
   queryKey: string[]

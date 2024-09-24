@@ -20,7 +20,7 @@ import UserSettingsPage from "./pages/user-profile/user-settings/user-settings-p
 import UserProductsPage from "./pages/user-profile/user-products/user-products-page";
 import UserWishlistPage from "./pages/user-profile/user-wishlist/user-wishlist-page";
 import ProductListPage from "./pages/products/product-list-page";
-import ProductDetails from "./pages/product-details/product-details";
+import ProductDetails from "./pages/product-details/product-details-page";
 
 const router = createBrowserRouter([
   {
