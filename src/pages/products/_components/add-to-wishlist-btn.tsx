@@ -53,11 +53,12 @@ export function AddToWishlistBtn({
       >
         {isProductOnUserWishlist ? (
           <Heart
-            fill="#000"
-            className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-500 transition-colors"
+            fill="rgb(249, 115, 22)"
+            stroke="rgb(249, 115, 22)"
+            className="w-5 h-5 cursor-pointer transition-colors"
           />
         ) : (
-          <Heart className="w-5 h-5 text-gray-400 cursor-pointer hover:text-red-500 transition-colors" />
+          <Heart className="w-5 h-5 text-gray-400 cursor-pointer transition-colors" />
         )}
       </Button>
     </>

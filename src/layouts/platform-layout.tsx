@@ -6,7 +6,7 @@ export default function PlatformLayout() {
   return (
     <div className="flex flex-col min-h-screen">
       <MainNav />
-      <main className="container max-w-screen-xl flex-grow">
+      <main className="container max-w-screen-2xl flex-grow">
         <Outlet />
       </main>
       <Footer />

@@ -62,8 +62,10 @@ export function ProductsFilter() {
     setSearchParams(newSearchParams);
   };
 
+  // TODO: make filter in drower in mobile
   return (
-    <div>
+    // top-[82px] for the heght + matgin of header
+    <div className="sticky top-[82px]">
       <div>
         <Label htmlFor="search">Search</Label>
         <Input
@@ -113,7 +115,7 @@ export function ProductsFilter() {
         </div>
       </div>
 
-      <div className="flex justify-between gap-2">
+      <div className="flex flex-col xs:flex-row md:flex-col gap-2">
         <Button onClick={handleFilterSubmit}>Apply Filters</Button>
         <Button
           onClick={reset}
