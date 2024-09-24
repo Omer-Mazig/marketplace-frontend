@@ -11,9 +11,15 @@ import { Badge } from "@/components/ui/badge";
 import { useUserProfileDataQuery } from "@/hooks/useUserProfileDataQuery";
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 import Error from "@/components/custom/error";
+import api from "@/lib/api";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
+
+  function handleDeleteFromWishlist(productId: number) {
+    api.delete("wishlist/" + productId);
+    console.log("handleDeleteFromWishlist");
+  }
 
   if (isLoading) return <UserWishlistSkeleton />;
   if (error || !userProfileData) {
@@ -38,6 +44,7 @@ export default function UserWishlistPage() {
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary">${item.price.toFixed(2)}</Badge>
                   <Button
+                    onClick={() => handleDeleteFromWishlist(item.id)}
                     variant="ghost"
                     size="sm"
                   >

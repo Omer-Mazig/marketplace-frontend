@@ -15,4 +15,5 @@ export type Product = {
   createdAt: Date;
   updatedAt: Date;
   owner: MiniUser;
+  wishlistUsers: MiniUser[];
 };

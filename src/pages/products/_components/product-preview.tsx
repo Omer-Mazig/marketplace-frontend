@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MiniUserRow } from "@/components/custom/mini-user-row";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -8,19 +8,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Product } from "@/types/products.types";
-import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AddToWishlistBtn } from "./add-to-wishlist-btn";
+import { useAuth } from "@/providers/auth-provider";
 
 interface ProductPreviewProps {
   product: Product;
 }
 
 export default function ProductPreview({ product }: ProductPreviewProps) {
+  const { loggedInUser } = useAuth();
+
   return (
     <Link to={`${product.id}`}>
       <Card
         key={product.id}
-        className="flex flex-col"
+        className="flex flex-col h-full"
       >
         <CardHeader>
           <img
@@ -50,24 +53,20 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
               </Badge>
             ))}
           </div>
-          <div className="flex items-center gap-3 mt-4">
-            <Avatar>
-              <AvatarImage
-                src={product.owner?.imageUrl || ""}
-                alt={product.owner?.email}
-              />
-              <AvatarFallback>
-                {product.owner?.email[0].toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <span>
-              {product.owner.firstName} {product.owner.lastName}
-            </span>
-          </div>
+          {loggedInUser?.id !== product.owner.id ? (
+            <MiniUserRow user={product.owner} />
+          ) : (
+            <p className="mt-4 italic text-muted-foreground">Your product</p>
+          )}
         </CardContent>
         <CardFooter className="flex justify-between items-center">
           <span className="font-bold">${product.price.toFixed(2)}</span>
-          <Heart className="w-5 h-5 text-gray-400 cursor-pointer hover:text-red-500 transition-colors" />
+          {loggedInUser?.id !== product.owner.id ? (
+            <AddToWishlistBtn
+              product={product}
+              loggedInUser={loggedInUser}
+            />
+          ) : null}
         </CardFooter>
       </Card>
     </Link>
