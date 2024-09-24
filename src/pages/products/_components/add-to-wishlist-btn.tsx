@@ -1,4 +1,4 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
@@ -6,10 +6,8 @@ import { Heart } from "lucide-react";
 import { LoggedInUser } from "@/providers/auth-provider";
 import { Product } from "@/types/products.types";
 
-import {
-  useAddToWishlistMutation,
-  useDeleteFromWishlistMutation,
-} from "@/hooks/useWishlistMutation";
+import { addToWishlist, deleteFromWishlist } from "@/services/wishlist.service";
+import { toast } from "@/hooks/use-toast";
 
 interface AddToWishlistBtnProps {
   product: Product;
@@ -26,6 +24,39 @@ export function AddToWishlistBtn({
     (u) => u.id === loggedInUser?.id
   );
 
+  const addToWishlistMutation = useMutation({
+    mutationFn: () => addToWishlist(product.id),
+    onMutate: async (product: Product) => {
+      const previousProducts = queryClient.getQueryData<Product[]>([
+        "products",
+      ]);
+
+      queryClient.setQueryData(
+        ["products"],
+        previousProducts?.map((p) =>
+          p.id === product.id
+            ? { ...p, wishlistUsers: [...p.wishlistUsers, loggedInUser] }
+            : p
+        )
+      );
+
+      return { previousProducts };
+    },
+    onError: (err, product, context) => {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+      queryClient.setQueryData(["products"], context?.previousProducts);
+    },
+  });
+  const deleteFromWishlistMutation = useMutation({
+    mutationFn: () => deleteFromWishlist(product.id),
+    // add optemisic update
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["products"] }),
+  });
+
   // TODO: Check if a user is logged in or not. if not, show a model to let the user to loggin
   // NOTE: The endpoint is alreay secure and require a active user on the server
   function onClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -37,22 +68,11 @@ export function AddToWishlistBtn({
     }
 
     if (isProductOnUserWishlist) {
-      deleteFromWishlistMutation.mutate(undefined, {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["products"] });
-        },
-      });
+      deleteFromWishlistMutation.mutate();
     } else {
-      addToWishlistMutation.mutate(undefined, {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["products"] });
-        },
-      });
+      addToWishlistMutation.mutate(product);
     }
   }
-
-  const addToWishlistMutation = useAddToWishlistMutation(product.id);
-  const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product.id);
 
   return (
     <>
