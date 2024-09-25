@@ -70,7 +70,7 @@ api.interceptors.response.use(
         console.log("Refresh token failed, logging out");
         localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
         // TODO: here we are redirect to login page. not always we want it (add to wshilst)
-        window.location.href = "/auth/login"; // Redirect to login page
+        // window.location.href = "/auth/login"; // Redirect to login page
         return Promise.reject(refreshError);
       }
     }
