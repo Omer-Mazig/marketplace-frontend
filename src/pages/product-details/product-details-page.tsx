@@ -8,6 +8,7 @@ import { Product } from "@/types/products.types";
 import { ProductCategory } from "@/enums/product-category.enum";
 import { useParams } from "react-router-dom";
 import Error from "@/components/custom/error";
+import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
 
 // Mock function to fetch product data
 const fetchProduct = async (id: string): Promise<Product> => {
@@ -129,6 +130,7 @@ export default function ProductDetails() {
                 </span>
               </div>
             </div>
+            {/* <AddToWishlistBtn /> */}
           </div>
         </CardContent>
       </Card>

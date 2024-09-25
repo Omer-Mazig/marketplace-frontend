@@ -1,4 +1,4 @@
-import { LoggedInUser } from "@/providers/auth-provider";
+import { LoggedInUser, useAuth } from "@/providers/auth-provider";
 import { Product } from "@/types/products.types";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
@@ -7,13 +7,10 @@ import { useDeleteFromWishlistMutation } from "@/hooks/use-delete-from-wishlist-
 
 interface AddToWishlistBtnProps {
   product: Product;
-  loggedInUser: LoggedInUser | null | undefined;
 }
 
-export function AddToWishlistBtn({
-  product,
-  loggedInUser,
-}: AddToWishlistBtnProps) {
+export function AddToWishlistBtn({ product }: AddToWishlistBtnProps) {
+  const { loggedInUser } = useAuth();
   const isProductOnUserWishlist = product.wishlistUsers.some(
     (u) => u.id === loggedInUser?.id
   );
