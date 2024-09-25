@@ -10,7 +10,7 @@ interface AddToWishlistBtnProps {
 }
 
 export function AddToWishlistBtn({ product }: AddToWishlistBtnProps) {
-  const { loggedInUser } = useAuth();
+  const { loggedInUser, setShouldShowLoginAlertDialog } = useAuth();
   const isProductOnUserWishlist = product.wishlistUsers.some(
     (u) => u.id === loggedInUser?.id
   );
@@ -24,6 +24,7 @@ export function AddToWishlistBtn({ product }: AddToWishlistBtnProps) {
     ev.stopPropagation();
 
     if (!loggedInUser) {
+      setShouldShowLoginAlertDialog(true);
       return;
     }
 

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { MainNav } from "@/components/custom/main-nav";
 import { Footer } from "@/components/custom/footer";
+import { LoginAlertDialog } from "@/components/custom/login-alert-dialog";
 
 export default function PlatformLayout() {
   return (
@@ -10,6 +11,7 @@ export default function PlatformLayout() {
         <Outlet />
       </main>
       <Footer />
+      <LoginAlertDialog />
     </div>
   );
 }

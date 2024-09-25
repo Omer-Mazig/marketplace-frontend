@@ -8,6 +8,7 @@ import {
   USER_TIERS_OPTIONS,
 } from "@/constants/auth.constant";
 import api from "@/lib/api";
+import { wait } from "@/lib/utils";
 
 export interface LoggedInUser {
   id: number;
@@ -25,6 +26,8 @@ interface AuthContextType {
   login: (user: LoginCredentials) => Promise<void>;
   register: (user: RegisterCredentials) => Promise<void>;
   logout: () => Promise<void>;
+  shouldShowLoginAlertDialog: boolean;
+  setShouldShowLoginAlertDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type RegisterCredentials = Omit<RegisterFormValues, "confirmPassword">;
@@ -39,6 +42,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const storedToken = localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
     return storedToken ? storedToken.replace(/['"]+/g, "") : null;
   });
+
+  const [shouldShowLoginAlertDialog, setShouldShowLoginAlertDialog] =
+    useState(false);
 
   useEffect(() => {
     if (accessToken) {
@@ -70,11 +76,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await api.post("/auth/sign-out");
     setAccessToken(null);
     setLoggedInUser(null);
+    setShouldShowLoginAlertDialog(false); // wierd behivior with login dialog
     localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
   };
 
   const login = async (cred: LoginCredentials) => {
     try {
+      await wait();
       const response = await api.post("/auth/sign-in", cred);
       const accessToken = response.data.accessToken;
       setAccessToken(accessToken); // Store token directly
@@ -94,7 +102,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loggedInUser, login, register, logout }}>
+    <AuthContext.Provider
+      value={{
+        loggedInUser,
+        login,
+        register,
+        logout,
+        shouldShowLoginAlertDialog,
+        setShouldShowLoginAlertDialog,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

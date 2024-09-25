@@ -44,7 +44,7 @@ export function LoginForm() {
     try {
       setIsPending(true);
       await login(values);
-      navigate("/");
+      // navigate("/");
     } catch (error: any) {
       if (error.response?.status === 401) {
         form.setError("root", {
