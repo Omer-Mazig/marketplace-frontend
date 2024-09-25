@@ -20,7 +20,7 @@ export function ProductsFilter() {
   const [priceRange, setPriceRange] = useState([0, 9999]);
 
   useEffect(() => {
-    // Initialize state from search params
+    // Initialize state from search params (only on mount)
     const search = searchParams.get("search") || "";
     const category = searchParams.get("category") || "All";
     const minPrice = Number(searchParams.get("minPrice")) || 0;
@@ -29,8 +29,9 @@ export function ProductsFilter() {
     setSearchTerm(search);
     setSelectedCategory(category);
     setPriceRange([minPrice, maxPrice]);
-    handleFilterSubmit();
-  }, [searchParams]);
+
+    // We no longer trigger handleFilterSubmit here to avoid redundant param updates
+  }, []);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -59,12 +60,19 @@ export function ProductsFilter() {
     newSearchParams.set("category", selectedCategory);
     newSearchParams.set("minPrice", priceRange[0].toString());
     newSearchParams.set("maxPrice", priceRange[1].toString());
-    setSearchParams(newSearchParams);
+
+    // Only update the search params if there's a change
+    if (
+      searchTerm !== searchParams.get("search") ||
+      selectedCategory !== searchParams.get("category") ||
+      priceRange[0].toString() !== searchParams.get("minPrice") ||
+      priceRange[1].toString() !== searchParams.get("maxPrice")
+    ) {
+      setSearchParams(newSearchParams);
+    }
   };
 
-  // TODO: make filter in drower in mobile
   return (
-    // top-[82px] for the heght + matgin of header
     <div className="sticky top-[82px]">
       <div>
         <Label htmlFor="search">Search</Label>
@@ -105,7 +113,7 @@ export function ProductsFilter() {
           min={0}
           max={9999}
           step={10}
-          value={priceRange} // Use value instead of defaultValue for controlled component
+          value={priceRange}
           onValueChange={handlePriceRangeChange}
           className="mt-2"
         />
