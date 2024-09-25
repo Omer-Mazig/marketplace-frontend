@@ -23,22 +23,15 @@ import { useAuth } from "@/providers/auth-provider";
 import { LoginFormValues } from "@/types/auth.typs";
 import { loginFormSchema } from "@/validations/auth.validations";
 
-// Infer the type of the form values from the schema. we are using it also on AuthProvider.
-
-// Define your form schema.
-
 export function LoginForm() {
   const { login } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // State for password visibility
   const [showPassword, setShowPassword] = useState(false);
 
-  // State for pending UI
   const [isPending, setIsPending] = useState(false);
 
-  // Define your form.
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -47,7 +40,6 @@ export function LoginForm() {
     },
   });
 
-  // Define a submit handler.
   async function onSubmit(values: LoginFormValues) {
     try {
       setIsPending(true);
@@ -126,7 +118,6 @@ export function LoginForm() {
             )}
           />
 
-          {/* Display the error message */}
           {form.formState.errors.root && (
             <div className="text-red-600">
               {form.formState.errors.root.message}

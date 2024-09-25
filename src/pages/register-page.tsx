@@ -33,22 +33,15 @@ import { USER_TIERS_OPTIONS } from "@/constants/auth.constant";
 import { RegisterFormValues } from "@/types/auth.typs";
 import { registerFormSchema } from "@/validations/auth.validations";
 
-// Infer the type of the form values from the schema. we are using it also on AuthProvider.
-
-// Define your form schema.
-
 export default function RegisterPage() {
   const { register } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // State for password visibility
   const [showPassword, setShowPassword] = useState(false);
 
-  // State for pending UI
   const [isPending, setIsPending] = useState(false);
 
-  // Define your form.
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -61,9 +54,8 @@ export default function RegisterPage() {
     },
   });
 
-  // Define a submit handler.
   async function onSubmit(values: RegisterFormValues) {
-    const { confirmPassword, ...valuesToSubmit } = values; // no need to confirmPassword for the api call
+    const { confirmPassword, ...valuesToSubmit } = values;
     console.log("values", values);
 
     try {
@@ -76,7 +68,6 @@ export default function RegisterPage() {
       navigate("/auth/login");
     } catch (error: any) {
       if (error?.response?.data?.error) {
-        // Check if the error is related to email already existing
         if (error.response.data.error === "Email already exists") {
           form.setError("email", {
             type: "manual",
