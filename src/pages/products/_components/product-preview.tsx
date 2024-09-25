@@ -45,7 +45,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
       </CardHeader>
       <CardContent className="flex-grow">
         <CardTitle className="mb-2">{product.name}</CardTitle>
-        <p className="text-sm text-gray-600 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           {product.description || "Nothing to say about this product"}
         </p>
         <div className="flex flex-wrap gap-1">
@@ -68,11 +68,10 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
       <CardFooter className="flex justify-between items-center">
         <span className="font-bold">${product.price.toFixed(2)}</span>
         {loggedInUser?.id !== product.owner.id ? (
-          <AddToWishlistBtn
-            product={product}
-            loggedInUser={loggedInUser}
-          />
-        ) : null}
+          <AddToWishlistBtn product={product} />
+        ) : (
+          "Edit"
+        )}
       </CardFooter>
     </Card>
   );

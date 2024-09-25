@@ -3,12 +3,12 @@ import { ProductCategory } from "@/enums/product-category.enum";
 import Error from "@/components/custom/error";
 import { ProductsFilter } from "./_components/products-filter";
 import ProductPreview from "./_components/product-preview";
-import { useProductsQuery } from "@/hooks/use-products-query";
+import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
 
 // TODO: Implement infinate scoll
 // TODO: add Skeleton (not urgent)
 export default function ProductListPage() {
-  const { data: products, error, isLoading } = useProductsQuery();
+  const { data: products, error, isLoading } = useGetAllProductsQuery();
 
   const [searchParams] = useSearchParams();
 

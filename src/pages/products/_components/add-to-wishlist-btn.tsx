@@ -1,4 +1,4 @@
-import { LoggedInUser, useAuth } from "@/providers/auth-provider";
+import { useAuth } from "@/providers/auth-provider";
 import { Product } from "@/types/products.types";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";

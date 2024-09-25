@@ -1,14 +1,18 @@
 import { Outlet, useOutletContext } from "react-router-dom";
 import ProfileTabLinks from "./_components/profile-tab-links";
-import { useUserProfileDataQuery } from "@/hooks/use-user-profile-data-query";
 import { UseQueryResult } from "@tanstack/react-query";
 import { UserProfileData } from "@/types/users.types";
+import { useGetUserProfileDataQuery } from "@/hooks/use-get-user-profile-data-query";
 
 // Define a type for the context
 type UserProfileContext = UseQueryResult<UserProfileData, Error>;
 
 export default function UserProfileLayout() {
-  const { data: userProfileData, isLoading, error } = useUserProfileDataQuery();
+  const {
+    data: userProfileData,
+    isLoading,
+    error,
+  } = useGetUserProfileDataQuery();
 
   return (
     <div className="text-center 3xs:text-start">

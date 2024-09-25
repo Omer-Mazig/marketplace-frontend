@@ -9,3 +9,11 @@ export async function getAllProducts(): Promise<Product[]> {
   const { data } = await api.get(`/products`);
   return data;
 }
+
+export async function getProductById(productId: number): Promise<Product> {
+  console.log("getting product..."); // just for development
+  await wait(); // just for development
+
+  const { data } = await api.get(`/products/${productId}`);
+  return data;
+}

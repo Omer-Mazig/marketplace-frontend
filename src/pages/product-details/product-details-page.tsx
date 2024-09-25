@@ -1,82 +1,27 @@
-import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { MiniUser } from "@/types/users.types";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Product } from "@/types/products.types";
-import { ProductCategory } from "@/enums/product-category.enum";
 import { useParams } from "react-router-dom";
 import Error from "@/components/custom/error";
-import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
-
-// Mock function to fetch product data
-const fetchProduct = async (id: string): Promise<Product> => {
-  // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  const mockOwner: MiniUser = {
-    id: 1,
-    email: "j@gmail.com",
-    firstName: "john_doe",
-    lastName: "john_doe",
-    imageUrl: "/placeholder.svg?height=50&width=50",
-  };
-
-  return {
-    id: parseInt(id),
-    name: "Sample Product",
-    description: "This is a sample product description.",
-    imageURL: "",
-    price: 99.99,
-    stock: 10,
-    categories: [ProductCategory.ELECTRONICS],
-    location: "New York, NY",
-    isNegotiable: true,
-    viewCount: 150,
-    createdAt: new Date("2023-01-01"),
-    updatedAt: new Date("2023-06-15"),
-    owner: mockOwner,
-    wishlistUsers: [],
-  };
-};
+import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
+import { MiniUserRow } from "@/components/custom/mini-user-row";
 
 export default function ProductDetails() {
   const { productId } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        if (!productId) return;
-        const data = await fetchProduct(productId);
-        setProduct(data);
-      } catch (err) {
-        setError("Failed to load product details");
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const {
+    data: product,
+    error,
+    isLoading,
+  } = useGetProductById(parseInt(productId || ""));
 
-    loadProduct();
-  }, [productId]);
-
-  if (isLoading) {
-    return <ProductSkeleton />;
-  }
-
-  if (error) {
-    return <Error />;
-  }
-
-  if (!product) {
-    return <div className="text-center">Product not found</div>;
-  }
+  if (isLoading) return <ProductSkeleton />;
+  if (error || !product) return <Error />;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div>
+      <h1 className="text-3xl font-bold mb-6">Product Details</h1>
       <Card>
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
@@ -119,15 +64,7 @@ export default function ProductDetails() {
               <p>Created: {format(product.createdAt, "PPP")}</p>
               <p>Last updated: {format(product.updatedAt, "PPP")}</p>
               <div className="flex items-center space-x-2">
-                <img
-                  src={product.owner.imageUrl}
-                  alt={product.owner.email}
-                  className="rounded-full"
-                />
-                <span>
-                  Sold by:{" "}
-                  {product.owner.firstName + " " + product.owner.lastName}
-                </span>
+                <MiniUserRow user={product.owner} />
               </div>
             </div>
             {/* <AddToWishlistBtn /> */}

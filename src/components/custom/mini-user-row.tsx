@@ -15,9 +15,14 @@ export function MiniUserRow({ user }: MiniUserRowProps) {
         />
         <AvatarFallback>{user.email[0].toUpperCase()}</AvatarFallback>
       </Avatar>
-      <span>
-        {user.firstName} {user.lastName}
-      </span>
+      <div>
+        <div className="text-sm font-semibold">
+          {user.firstName} {user.lastName}
+        </div>
+        <div className="text-xs italic text-muted-foreground">
+          enter user rate here
+        </div>
+      </div>
     </div>
   );
 }
