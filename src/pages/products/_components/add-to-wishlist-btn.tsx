@@ -23,13 +23,10 @@ export function AddToWishlistBtn({
     "products",
   ]);
 
-  // TODO: Check if a user is logged in or not. if not, show a model to let the user to login
-  // NOTE: The endpoint is alreay secure and require a active user on the server
   async function onClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     ev.stopPropagation();
 
     if (!loggedInUser) {
-      // Add logic to show modal and break the function (return)
       return;
     }
 
