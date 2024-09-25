@@ -115,7 +115,7 @@ export function ProductsFilter() {
         </div>
       </div>
 
-      <div className="flex flex-col xs:flex-row md:flex-col gap-2">
+      <div className="flex flex-col xs:flex-row lg:flex-col gap-2">
         <Button onClick={handleFilterSubmit}>Apply Filters</Button>
         <Button
           onClick={reset}

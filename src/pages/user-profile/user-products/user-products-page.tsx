@@ -70,7 +70,7 @@ export default function UserProductsPage() {
           <Button className="w-full md:w-auto">Add New Product</Button>
         </div>
 
-        <Separator className="my-8" />
+        {/* <Separator className="my-8" /> */}
 
         {/* <ProfileProductCharts products={products} /> */}
       </CardContent>
