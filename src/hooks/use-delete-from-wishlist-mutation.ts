@@ -1,8 +1,67 @@
-import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryKey,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { Product } from "@/types/products.types";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from "@/providers/auth-provider";
+import { LoggedInUser, useAuth } from "@/providers/auth-provider";
+
+// Define the strategy type
+type UpdateStrategy = (
+  queryKey: QueryKey,
+  product: Product,
+  queryClient: QueryClient, // or any?
+  loggedInUser?: LoggedInUser | null | undefined
+) => void;
+
+// Strategy for 'user-profile-data'
+const userProfileStrategy: UpdateStrategy = (
+  queryKey,
+  product,
+  queryClient
+) => {
+  queryClient.setQueryData(queryKey, (data: any) => {
+    if (!data) return data;
+
+    return {
+      ...data,
+      wishlist: data.wishlist.filter((item: Product) => item.id !== product.id),
+    };
+  });
+};
+
+// Strategy for 'products'
+const productsStrategy: UpdateStrategy = (
+  queryKey,
+  product,
+  queryClient,
+  loggedInUser
+) => {
+  queryClient.setQueryData(queryKey, (data: Product[] | undefined) => {
+    if (!data) return data;
+
+    return data.map((p) =>
+      p.id === product.id
+        ? {
+            ...p,
+            wishlistUsers: p.wishlistUsers.filter(
+              (user) => user.id !== loggedInUser?.id
+            ),
+          }
+        : p
+    );
+  });
+};
+
+// Strategy map
+const updateStrategies: { [key: string]: UpdateStrategy } = {
+  "user-profile-data": userProfileStrategy,
+  products: productsStrategy,
+  // Add more strategies as needed
+};
 
 export function useDeleteFromWishlistMutation(
   product: Product,
@@ -22,37 +81,13 @@ export function useDeleteFromWishlistMutation(
       // Snapshot of previous data for rollback
       const previousData = queryClient.getQueryData(queryKey);
 
-      // Optimistically update for 'user-profile-data' (WishlistItem)
-      if (queryKey[0] === "user-profile-data") {
-        queryClient.setQueryData(queryKey, (oldData: any) => {
-          if (!oldData) return oldData;
+      // Get the base query key to match the strategy (e.g., "user-profile-data" or "products")
+      const baseQueryKey = Array.isArray(queryKey) ? queryKey[0] : queryKey;
 
-          // Remove product from wishlist
-          return {
-            ...oldData,
-            wishlist: oldData.wishlist.filter(
-              (item: Product) => item.id !== product.id
-            ),
-          };
-        });
-      }
-
-      // Optimistically update for 'products' (AddToWishlistBtn)
-      if (queryKey[0] === "products" && loggedInUser) {
-        queryClient.setQueryData(queryKey, (oldData: Product[] | undefined) => {
-          if (!oldData) return oldData;
-
-          return oldData.map((p) =>
-            p.id === product.id
-              ? {
-                  ...p,
-                  wishlistUsers: p.wishlistUsers.filter(
-                    (user) => user.id !== loggedInUser.id
-                  ),
-                }
-              : p
-          );
-        });
+      // Run the appropriate strategy based on the queryKey
+      const strategy = updateStrategies[baseQueryKey];
+      if (strategy) {
+        strategy(queryKey, product, queryClient, loggedInUser);
       }
 
       return { previousData }; // Pass the snapshot for rollback
