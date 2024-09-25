@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
@@ -26,7 +25,6 @@ import { loginFormSchema } from "@/validations/auth.validations";
 export function LoginForm() {
   const { login } = useAuth();
   const { toast } = useToast();
-  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 

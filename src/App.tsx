@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
+  useLocation,
 } from "react-router-dom";
 
 import PlatformLayout from "./layouts/platform-layout";
@@ -117,45 +118,44 @@ const router = createBrowserRouter([
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { loggedInUser } = useAuth();
+  const location = useLocation();
 
-  // in case the user is still being fetched
   if (loggedInUser === undefined) {
     return null;
   }
 
-  // if the user is not logged in, redirect
-  if (loggedInUser === null) {
+  if (!loggedInUser) {
+    // Redirect to login page and save the current location as the "from" state
     return (
       <Navigate
         to="/auth/login"
+        state={{ from: location }}
         replace
       />
     );
   }
 
-  // if the user is logged in, show the protected route
   return children;
 }
 
 function AuthRoutes({ children }: { children: React.ReactNode }) {
   const { loggedInUser } = useAuth();
+  const location = useLocation();
 
-  // in case the user is still being fetched
   if (loggedInUser === undefined) {
     return null;
   }
 
-  // if the user is logged in, redirect to home
+  // if the user is logged in, redirect to the previous route or home ("/")
   if (loggedInUser) {
     return (
       <Navigate
-        to="/"
+        to={location.state?.from?.pathname || "/"}
         replace
       />
     );
   }
 
-  // if the user is not logged in, show the auth routes
   return children;
 }
 
