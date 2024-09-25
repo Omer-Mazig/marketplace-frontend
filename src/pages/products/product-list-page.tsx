@@ -12,7 +12,7 @@ export default function ProductListPage() {
 
   const [searchParams] = useSearchParams();
 
-  // Only filter products after checking loading/error
+  // TODO: Filter from the serverside
   const filteredProducts = products
     ? products.filter((product) => {
         const searchTerm = searchParams.get("search") || "";
