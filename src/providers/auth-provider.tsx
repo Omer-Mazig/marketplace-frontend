@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { RegisterFormValues } from "@/pages/register-page";
-import { LoginFormValues as LoginCredentials } from "@/components/custom/login-form";
+import {
+  RegisterFormValues,
+  LoginFormValues as LoginCredentials,
+} from "@/types/auth.typs";
 import {
   ACCESS_TOKEN_STORAGE_KEY,
   USER_TIERS_OPTIONS,

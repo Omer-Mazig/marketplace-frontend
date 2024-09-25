@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
@@ -30,31 +29,13 @@ import {
 } from "@/components/ui/form";
 
 import { useAuth } from "@/providers/auth-provider";
-import {
-  PASSWORD_MESSAGE,
-  REGEX_PASSWORD,
-  USER_TIERS_OPTIONS,
-} from "@/constants/auth.constant";
+import { USER_TIERS_OPTIONS } from "@/constants/auth.constant";
+import { RegisterFormValues } from "@/types/auth.typs";
+import { registerFormSchema } from "@/validations/auth.validations";
 
 // Infer the type of the form values from the schema. we are using it also on AuthProvider.
-export type RegisterFormValues = z.infer<typeof formSchema>;
 
 // Define your form schema.
-const formSchema = z
-  .object({
-    firstName: z.string().max(96),
-    lastName: z.string().max(96),
-    email: z.string().email(),
-    password: z.string().min(8).regex(REGEX_PASSWORD, {
-      message: PASSWORD_MESSAGE,
-    }),
-    confirmPassword: z.string().min(8),
-    userTier: z.enum(USER_TIERS_OPTIONS),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"], // Error path
-  });
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -69,7 +50,7 @@ export default function RegisterPage() {
 
   // Define your form.
   const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -91,7 +72,6 @@ export default function RegisterPage() {
       toast({
         title: "Great!",
         description: "You have successfully registered.",
-        variant: "primary",
       });
       navigate("/auth/login");
     } catch (error: any) {

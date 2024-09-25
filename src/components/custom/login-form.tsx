@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
@@ -21,18 +20,12 @@ import {
 } from "@/components/ui/form";
 
 import { useAuth } from "@/providers/auth-provider";
-import { PASSWORD_MESSAGE, REGEX_PASSWORD } from "@/constants/auth.constant";
+import { LoginFormValues } from "@/types/auth.typs";
+import { loginFormSchema } from "@/validations/auth.validations";
 
 // Infer the type of the form values from the schema. we are using it also on AuthProvider.
-export type LoginFormValues = z.infer<typeof formSchema>;
 
 // Define your form schema.
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8).regex(REGEX_PASSWORD, {
-    message: PASSWORD_MESSAGE,
-  }),
-});
 
 export function LoginForm() {
   const { login } = useAuth();
@@ -47,7 +40,7 @@ export function LoginForm() {
 
   // Define your form.
   const form = useForm<LoginFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: "",
       password: "",
