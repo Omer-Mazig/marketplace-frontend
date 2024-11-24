@@ -11,6 +11,7 @@ import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
 
 import { useUserProfileContext } from "../user-profile-layout";
+import { Link } from "react-router-dom";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -37,7 +38,12 @@ export default function UserProductsPage() {
                   key={product.id}
                   className="text-center 3xs:text-start flex flex-col md:flex-row justify-between 3xs:items-start md:items-center border-b pb-2"
                 >
-                  <span className="mb-2 md:mb-0">{product.name}</span>
+                  <Link
+                    to={`/products/${product.id}`}
+                    className="mb-2 md:mb-0 hover:text-primary"
+                  >
+                    {product.name}
+                  </Link>
                   <div className="flex flex-col 3xs:flex-row justify-center flex-wrap gap-2">
                     <Badge
                       variant="outline"

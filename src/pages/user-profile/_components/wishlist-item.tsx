@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useDeleteFromWishlistMutation } from "@/hooks/use-delete-from-wishlist-mutation";
 import { Product } from "@/types/products.types";
+import { Link } from "react-router-dom";
 
 interface WishlistItemProps {
   product: Product;
@@ -17,7 +18,12 @@ export function WishlistItem({ product }: WishlistItemProps) {
       key={product.id}
       className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-2"
     >
-      <span className="mb-2 md:mb-0">{product.name}</span>
+      <Link
+        to={`/products/${product.id}`}
+        className="mb-2 md:mb-0 hover:text-primary"
+      >
+        {product.name}
+      </Link>
       <div className="flex flex-wrap gap-2">
         <Badge variant="secondary">${product.price.toFixed(2)}</Badge>
         <Button
