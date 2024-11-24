@@ -1,6 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Settings, Package, Heart, LucideIcon } from "lucide-react";
+import {
+  User,
+  Settings,
+  Package,
+  Heart,
+  LucideIcon,
+  Archive,
+} from "lucide-react";
 
 type ProfileTabLinkProps = {
   to: string;
@@ -40,7 +47,7 @@ function ProfileTabLinks() {
       value={location.pathname}
       className="w-full"
     >
-      <TabsList className="grid w-full grid-cols-4 mb-4">
+      <TabsList className="grid w-full grid-cols-5 mb-4">
         <TabLink
           to="info"
           value="/user-profile/info"
@@ -64,6 +71,12 @@ function ProfileTabLinks() {
           value="/user-profile/wishlist"
           Icon={Heart}
           label="Wishlist"
+        />
+        <TabLink
+          to="archive"
+          value="/user-profile/archive"
+          Icon={Archive}
+          label="archive"
         />
       </TabsList>
     </Tabs>
