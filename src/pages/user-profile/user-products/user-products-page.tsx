@@ -6,12 +6,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
-
 import { useUserProfileContext } from "../user-profile-layout";
-import { Link } from "react-router-dom";
+import { GenericItemRow } from "../_components/generic-item-row";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -32,41 +30,16 @@ export default function UserProductsPage() {
       <CardContent>
         {products.length ? (
           <ul className="space-y-4">
-            {products.map((product) => {
-              return (
-                <li
-                  key={product.id}
-                  className="text-center 3xs:text-start flex flex-col md:flex-row justify-between 3xs:items-start md:items-center border-b pb-2"
-                >
-                  <Link
-                    to={`/products/${product.id}`}
-                    className="mb-2 md:mb-0 hover:text-primary"
-                  >
-                    {product.name}
-                  </Link>
-                  <div className="flex flex-col 3xs:flex-row justify-center flex-wrap gap-2">
-                    <Badge
-                      variant="outline"
-                      className="justify-center"
-                    >
-                      ${product.price?.toFixed(2)}
-                    </Badge>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </li>
-              );
-            })}
+            {products.map((product) => (
+              <GenericItemRow
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+              >
+                <ProductItemActions product={product} />
+              </GenericItemRow>
+            ))}
           </ul>
         ) : (
           <p>You have no products</p>
@@ -74,11 +47,37 @@ export default function UserProductsPage() {
         <div className="flex items-center mt-4">
           <Button className="w-full md:w-auto">Add New Product</Button>
         </div>
-
-        {/* <Separator className="my-8" /> */}
-
-        {/* <ProfileProductCharts products={products} /> */}
       </CardContent>
     </Card>
+  );
+}
+
+function ProductItemActions({ product }: any) {
+  const handleEdit = (productId: number) => {
+    // Implement edit functionality
+    console.log(`Editing product ${productId}`);
+  };
+
+  const handleDelete = (productId: number) => {
+    // Implement delete functionality
+    console.log(`Deleting product ${productId}`);
+  };
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => handleEdit(product.id)}
+      >
+        Edit
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => handleDelete(product.id)}
+      >
+        Delete
+      </Button>
+    </>
   );
 }

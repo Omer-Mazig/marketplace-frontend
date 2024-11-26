@@ -76,7 +76,7 @@ function ProfileTabLinks() {
           to="archive"
           value="/user-profile/archive"
           Icon={Archive}
-          label="archive"
+          label="Archive"
         />
       </TabsList>
     </Tabs>
