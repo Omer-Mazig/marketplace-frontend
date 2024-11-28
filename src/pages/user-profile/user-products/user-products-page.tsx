@@ -10,6 +10,8 @@ import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
 import { useUserProfileContext } from "../user-profile-layout";
 import { GenericItemRow } from "../_components/generic-item-row";
+import { useDeleteProductMutation } from "@/hooks/use-delete-product-mutation";
+import { Product } from "@/types/products.types";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -52,29 +54,21 @@ export default function UserProductsPage() {
   );
 }
 
-function ProductItemActions({ product }: any) {
-  const handleEdit = (productId: number) => {
-    // Implement edit functionality
-    console.log(`Editing product ${productId}`);
-  };
+function ProductItemActions({ product }: { product: Product }) {
+  const deleteMutation = useDeleteProductMutation(product);
 
-  const handleDelete = (productId: number) => {
-    // Implement delete functionality
-    console.log(`Deleting product ${productId}`);
-  };
   return (
     <>
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => handleEdit(product.id)}
       >
         Edit
       </Button>
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => handleDelete(product.id)}
+        onClick={() => deleteMutation.mutate()}
       >
         Delete
       </Button>

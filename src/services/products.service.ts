@@ -17,3 +17,11 @@ export async function getProductById(productId: number): Promise<Product> {
   const { data } = await api.get(`/products/${productId}`);
   return data;
 }
+
+export async function deleteProduct(productId: number): Promise<void> {
+  console.log("deleting product..."); // just for development
+  await wait(); // just for development
+
+  const { data } = await api.delete(`/products/${productId}`);
+  return data;
+}

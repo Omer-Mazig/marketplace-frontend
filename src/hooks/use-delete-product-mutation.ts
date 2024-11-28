@@ -1,0 +1,31 @@
+import { useToast } from "@/components/ui/use-toast";
+import { deleteProduct } from "@/services/products.service";
+import { Product } from "@/types/products.types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+export function useDeleteProductMutation(product: Product) {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: () => deleteProduct(product.id),
+    onError: (err) => {
+      toast({
+        variant: "destructive",
+        title: err?.message || "Something went wrong.",
+        description: `There was a problem removing from your wishlist. Please try again later.`,
+      });
+    },
+
+    onSuccess: () => {
+      console.log("baba");
+
+      toast({
+        description: `${product.name} was removed from your products.`,
+      });
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-profile-data"] });
+    },
+  });
+}
