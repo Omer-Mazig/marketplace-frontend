@@ -22,6 +22,7 @@ import UserProductsPage from "./pages/user-profile/user-products/user-products-p
 import UserWishlistPage from "./pages/user-profile/user-wishlist/user-wishlist-page";
 import ProductListPage from "./pages/products/product-list-page";
 import ProductDetails from "./pages/product-details/product-details-page";
+import NewProductPage from "./pages/new-product-page";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/products/:productId",
         element: <ProductDetails />,
+      },
+      {
+        path: "new-product",
+        element: <NewProductPage />,
       },
       {
         path: "user-profile",

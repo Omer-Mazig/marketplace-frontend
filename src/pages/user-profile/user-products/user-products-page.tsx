@@ -13,6 +13,7 @@ import { GenericItemRow } from "../_components/generic-item-row";
 import { useDeleteProductMutation } from "@/hooks/use-delete-product-mutation";
 import { Product } from "@/types/products.types";
 import { Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -48,7 +49,12 @@ export default function UserProductsPage() {
           <p>You have no products</p>
         )}
         <div className="flex items-center mt-4">
-          <Button className="w-full md:w-auto">Add New Product</Button>
+          <Button
+            asChild
+            className="w-full md:w-auto"
+          >
+            <Link to="/new-product">Add New Product </Link>
+          </Button>
         </div>
       </CardContent>
     </Card>

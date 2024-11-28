@@ -16,10 +16,10 @@ export function GenericItemRow({
   children,
 }: GenericItemRowProps) {
   return (
-    <li className="text-center 3xs:text-start flex flex-col md:flex-row justify-between 3xs:items-start md:items-center border-b pb-2 group">
+    <li className="text-center 3xs:text-start flex flex-col sm:flex-row justify-between 3xs:items-start sm:items-center border-b pb-2 group">
       <Link
         to={`/products/${id}`}
-        className="mb-2 md:mb-0 hover:text-primary"
+        className="mb-2 sm:mb-0 hover:text-primary"
       >
         {name}
       </Link>
