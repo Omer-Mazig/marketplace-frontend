@@ -1,9 +1,6 @@
-"use client";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { ProductCategory } from "@/enums/product-category.enum";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +17,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { formSchema } from "@/validations/product.validations";
+
+import { AddProductFormValues } from "@/types/products.types";
+import { addProductFormSchema } from "@/validations/product.validations";
+import { createProduct } from "@/services/products.service";
 
 const categories = Object.entries(ProductCategory).map(([key, value]) => ({
   //   value: key.toLowerCase().replace(/_/g, "-"), // Converts the key to a kebab-case format
@@ -32,8 +32,8 @@ export function NewProductForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<AddProductFormValues>({
+    resolver: zodResolver(addProductFormSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -45,14 +45,19 @@ export function NewProductForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: AddProductFormValues) {
     setIsSubmitting(true);
     // Here you would typically send the data to your API
     console.log(values);
     console.log(selectedCategories);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const newProduct = await createProduct({
+      ...values,
+      categories: selectedCategories as unknown as ProductCategory,
+    });
+
+    console.log(newProduct);
+
     setIsSubmitting(false);
     // Reset form after successful submission
     form.reset();

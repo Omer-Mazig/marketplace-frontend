@@ -1,5 +1,7 @@
 import { ProductCategory } from "@/enums/product-category.enum";
 import { MiniUser } from "./users.types";
+import { addProductFormSchema } from "@/validations/product.validations";
+import { z } from "zod";
 
 export type Product = {
   id: number;
@@ -16,4 +18,9 @@ export type Product = {
   updatedAt: Date;
   owner: MiniUser;
   wishlistUsers: MiniUser[];
+};
+
+export type AddProductFormValues = z.infer<typeof addProductFormSchema>;
+export type AddProductInput = AddProductFormValues & {
+  categories: ProductCategory;
 };
