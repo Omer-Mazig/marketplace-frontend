@@ -12,6 +12,7 @@ import { useUserProfileContext } from "../user-profile-layout";
 import { GenericItemRow } from "../_components/generic-item-row";
 import { useDeleteProductMutation } from "@/hooks/use-delete-product-mutation";
 import { Product } from "@/types/products.types";
+import { Trash2 } from "lucide-react";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -55,22 +56,18 @@ export default function UserProductsPage() {
 }
 
 function ProductItemActions({ product }: { product: Product }) {
-  const deleteMutation = useDeleteProductMutation(product);
+  const deleteProductMutation = useDeleteProductMutation(product);
 
   return (
     <>
       <Button
         variant="ghost"
         size="sm"
+        onClick={() => deleteProductMutation.mutate()}
+        disabled={deleteProductMutation.isPending}
+        className="sm:opacity-0 group-hover:opacity-100"
       >
-        Edit
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => deleteMutation.mutate()}
-      >
-        Delete
+        <Trash2 className="w-5 h-5" />
       </Button>
     </>
   );

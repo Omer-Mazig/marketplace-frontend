@@ -11,6 +11,8 @@ import Error from "@/components/custom/error";
 import { useUserProfileContext } from "../user-profile-layout";
 import { useDeleteFromWishlistMutation } from "@/hooks/use-delete-from-wishlist-mutation";
 import { GenericItemRow } from "../_components/generic-item-row";
+import { Trash2 } from "lucide-react";
+import { Product } from "@/types/products.types";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -48,18 +50,19 @@ export default function UserWishlistPage() {
   );
 }
 
-function WishlistItemActions({ product }: any) {
+function WishlistItemActions({ product }: { product: Product }) {
   const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product, [
     "user-profile-data",
   ]);
 
   return (
     <Button
-      onClick={() => deleteFromWishlistMutation.mutate()}
       variant="ghost"
       size="sm"
+      onClick={() => deleteFromWishlistMutation.mutate()}
+      className="sm:opacity-0 group-hover:opacity-100"
     >
-      Remove
+      <Trash2 className="w-5 h-5" />
     </Button>
   );
 }

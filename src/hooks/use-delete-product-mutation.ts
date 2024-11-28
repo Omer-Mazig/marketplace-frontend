@@ -9,6 +9,7 @@ export function useDeleteProductMutation(product: Product) {
 
   return useMutation({
     mutationFn: () => deleteProduct(product.id),
+
     onError: (err) => {
       toast({
         variant: "destructive",
@@ -18,12 +19,11 @@ export function useDeleteProductMutation(product: Product) {
     },
 
     onSuccess: () => {
-      console.log("baba");
-
       toast({
         description: `${product.name} was removed from your products.`,
       });
     },
+
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["user-profile-data"] });
     },
