@@ -28,7 +28,13 @@ const categories = Object.entries(ProductCategory).map(([key, value]) => ({
   value: value,
 }));
 
-export function NewProductForm() {
+interface NewProductFormProps {
+  setAfterCreateProductDialog?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function NewProductForm({
+  setAfterCreateProductDialog,
+}: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
@@ -47,18 +53,15 @@ export function NewProductForm() {
 
   async function onSubmit(values: AddProductFormValues) {
     setIsSubmitting(true);
-    // Here you would typically send the data to your API
-    console.log(values);
-    console.log(selectedCategories);
 
     const newProduct = await createProduct({
       ...values,
       categories: selectedCategories as unknown as ProductCategory,
     });
 
-    console.log(newProduct);
-
     setIsSubmitting(false);
+    setAfterCreateProductDialog && setAfterCreateProductDialog(true);
+
     // Reset form after successful submission
     form.reset();
   }

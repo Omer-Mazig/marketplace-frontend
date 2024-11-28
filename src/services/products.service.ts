@@ -28,7 +28,7 @@ export async function deleteProduct(productId: number): Promise<void> {
 
 export async function createProduct(input: AddProductInput): Promise<Product> {
   console.log("creating product..."); // just for development
-  await wait(); // just for development
+  await wait(1500); // just for development
 
   const { data } = await api.post(`/products`, input);
   return data;
