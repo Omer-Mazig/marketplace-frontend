@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { MultiSelect } from "@/components/ui/multi-select";
+
 import {
   Form,
   FormControl,
@@ -18,29 +20,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { formSchema } from "@/validations/product.validations";
 
-import { MultiSelect } from "../ui/multi-select";
-
-const categories = [
-  { value: "react", label: "React" },
-  { value: "angular", label: "Angular" },
-  { value: "vue", label: "Vue" },
-  { value: "svelte", label: "Svelte" },
-  { value: "ember", label: "Ember" },
-];
-
-const formSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  description: z.string().optional(),
-  price: z.number().positive({ message: "Price must be positive" }),
-  stock: z
-    .number()
-    .int()
-    .positive({ message: "Stock must be a positive integer" }),
-  imageURL: z.string().url({ message: "Invalid URL" }).optional(),
-  location: z.string().optional(),
-  isNegotiable: z.boolean(),
-});
+const categories = Object.entries(ProductCategory).map(([key, value]) => ({
+  //   value: key.toLowerCase().replace(/_/g, "-"), // Converts the key to a kebab-case format
+  label: value, // The enum value is used directly as the label
+  value: value,
+}));
 
 export function NewProductForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,6 +49,8 @@ export function NewProductForm() {
     setIsSubmitting(true);
     // Here you would typically send the data to your API
     console.log(values);
+    console.log(selectedCategories);
+
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsSubmitting(false);
