@@ -22,7 +22,7 @@ export function AfterCreateProductDialog({
         <DialogHeader>
           <DialogTitle>Great!</DialogTitle>
           <DialogDescription>
-            You seccesfuly added a product to your list.
+            You successfully added a product to your list.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2">
