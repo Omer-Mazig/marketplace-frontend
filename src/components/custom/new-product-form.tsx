@@ -23,6 +23,7 @@ import { addProductFormSchema } from "@/validations/product.validations";
 import { createProduct } from "@/services/products.service";
 
 const categories = Object.entries(ProductCategory).map(([key, value]) => ({
+  // TODO: Remove this and make some better solution
   //   value: key.toLowerCase().replace(/_/g, "-"), // Converts the key to a kebab-case format
   label: value, // The enum value is used directly as the label
   value: value,
