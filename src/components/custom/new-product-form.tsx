@@ -63,7 +63,6 @@ export function NewProductForm({
     setIsSubmitting(false);
     setAfterCreateProductDialog && setAfterCreateProductDialog(true);
 
-    // Reset form after successful submission
     form.reset();
   }
 
@@ -73,58 +72,20 @@ export function NewProductForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Product name"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Product description"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <div className="grid grid-cols-4 gap-6">
           <FormField
             control={form.control}
-            name="isNegotiable"
+            name="name"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 col-span-2">
+              <FormItem className="col-span-2">
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
+                  <Input
+                    placeholder="Product name"
+                    {...field}
                   />
                 </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>Negotiable</FormLabel>
-                  <FormDescription>
-                    Check this if the price is negotiable
-                  </FormDescription>
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -171,6 +132,56 @@ export function NewProductForm({
 
         <FormField
           control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Product description"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="grid grid-cols-4 gap-6">
+          <FormField
+            control={form.control}
+            name="isNegotiable"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>Negotiable</FormLabel>
+                  <FormDescription>
+                    Check this if the price is negotiable
+                  </FormDescription>
+                </div>
+              </FormItem>
+            )}
+          />
+
+          <MultiSelect
+            options={categories}
+            onValueChange={setSelectedCategories}
+            defaultValue={selectedCategories}
+            placeholder="Select categories"
+            variant="inverted"
+            maxCount={3}
+          />
+        </div>
+
+        {/* TODO: replace to an image uplaod component */}
+        <FormField
+          control={form.control}
           name="imageURL"
           render={({ field }) => (
             <FormItem>
@@ -184,15 +195,6 @@ export function NewProductForm({
               <FormMessage />
             </FormItem>
           )}
-        />
-
-        <MultiSelect
-          options={categories}
-          onValueChange={setSelectedCategories}
-          defaultValue={selectedCategories}
-          placeholder="Select frameworks"
-          variant="inverted"
-          maxCount={3}
         />
 
         <FormField
