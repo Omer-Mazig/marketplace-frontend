@@ -4,21 +4,24 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useAddToWishlistMutation } from "@/hooks/use-add-to-wishlist-mutation";
 import { useDeleteFromWishlistMutation } from "@/hooks/use-delete-from-wishlist-mutation";
+import { QueryKey } from "@tanstack/react-query";
 
 interface AddToWishlistBtnProps {
   product: Product;
+  queryKey: QueryKey;
 }
 
-export function AddToWishlistBtn({ product }: AddToWishlistBtnProps) {
+export function AddToWishlistBtn({ product, queryKey }: AddToWishlistBtnProps) {
   const { loggedInUser, setShouldShowLoginAlertDialog } = useAuth();
   const isProductOnUserWishlist = product.wishlistUsers.some(
     (u) => u.id === loggedInUser?.id
   );
 
   const addToWishlistMutation = useAddToWishlistMutation(product);
-  const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product, [
-    "products",
-  ]);
+  const deleteFromWishlistMutation = useDeleteFromWishlistMutation(
+    product,
+    queryKey
+  );
 
   async function onClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     ev.stopPropagation();

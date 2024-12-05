@@ -8,7 +8,6 @@ import { Product } from "@/types/products.types";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
-import { ToastAction } from "@/components/ui/toast";
 
 // Define the strategy type
 type UpdateStrategy = (
@@ -56,11 +55,29 @@ const productsStrategy: UpdateStrategy = (
     );
   });
 };
+// Strategy for 'product'
+const productStrategy: UpdateStrategy = (
+  queryKey,
+  product,
+  queryClient,
+  loggedInUser
+) => {
+  queryClient.setQueryData(queryKey, (data: Product | undefined) => {
+    if (!data) return data;
+    return {
+      ...data,
+      wishlistUsers: data.wishlistUsers.filter(
+        (user) => user.id !== loggedInUser?.id
+      ),
+    };
+  });
+};
 
 // Strategy map
 const updateStrategies: { [key: string]: UpdateStrategy } = {
   "user-profile-data": userProfileStrategy,
   products: productsStrategy,
+  product: productStrategy,
   // Add more strategies as needed
 };
 
@@ -111,8 +128,9 @@ export function useDeleteFromWishlistMutation(
       });
     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey });
-    },
+    // TODO: decide if invalidateQueries needed or not
+    // onSettled: () => {
+    //   queryClient.invalidateQueries({ queryKey });
+    // },
   });
 }

@@ -9,13 +9,10 @@ import { MiniUserRow } from "@/components/custom/mini-user-row";
 import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
 
 export default function ProductDetails() {
-  const { productId } = useParams();
+  const { productId: _productId } = useParams();
+  const productId = parseInt(_productId || "");
 
-  const {
-    data: product,
-    error,
-    isLoading,
-  } = useGetProductById(parseInt(productId || ""));
+  const { data: product, error, isLoading } = useGetProductById(productId);
 
   if (isLoading) return <ProductSkeleton />;
   if (error || !product) return <Error />;
@@ -66,7 +63,10 @@ export default function ProductDetails() {
               <p>Last updated: {format(product.updatedAt, "PPP")}</p>
               <div className="flex items-center justify-between space-x-2">
                 <MiniUserRow user={product.owner} />
-                <AddToWishlistBtn product={product} />
+                <AddToWishlistBtn
+                  product={product}
+                  queryKey={["product", { productId }]}
+                />
               </div>
             </div>
             {/* <AddToWishlistBtn /> */}

@@ -68,7 +68,10 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
       <CardFooter className="flex justify-between items-center">
         <span className="font-bold">${product.price.toFixed(2)}</span>
         {loggedInUser?.id !== product.owner.id ? (
-          <AddToWishlistBtn product={product} />
+          <AddToWishlistBtn
+            product={product}
+            queryKey={["products"]}
+          />
         ) : (
           "Edit"
         )}
