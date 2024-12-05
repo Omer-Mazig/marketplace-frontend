@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Error from "@/components/custom/error";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { MiniUserRow } from "@/components/custom/mini-user-row";
+import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -65,6 +66,8 @@ export default function ProductDetails() {
               <p>Last updated: {format(product.updatedAt, "PPP")}</p>
               <div className="flex items-center space-x-2">
                 <MiniUserRow user={product.owner} />
+                {/* TODO: implment functionly */}
+                {/* <AddToWishlistBtn product={product} /> */}
               </div>
             </div>
             {/* <AddToWishlistBtn /> */}
