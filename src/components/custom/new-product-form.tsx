@@ -1,3 +1,5 @@
+// TODO: fix bug when categories not clearing after product added
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,13 +23,10 @@ import {
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
 import { createProduct } from "@/services/products.service";
-import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 
 const categories = Object.entries(ProductCategory).map(([key, value]) => ({
-  // TODO: Remove this and make some better solution
-  //   value: key.toLowerCase().replace(/_/g, "-"), // Converts the key to a kebab-case format
-  label: value, // The enum value is used directly as the label
+  label: value,
   value: value,
 }));
 
@@ -44,7 +43,6 @@ export function NewProductForm({
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const { toast } = useToast();
-  const navigate = useNavigate();
 
   const form = useForm<AddProductFormValues>({
     resolver: zodResolver(addProductFormSchema),
@@ -63,7 +61,7 @@ export function NewProductForm({
     setIsSubmitting(true);
 
     try {
-      const newProduct = await createProduct({
+      await createProduct({
         ...values,
         categories: selectedCategories as unknown as ProductCategory,
       });
@@ -79,11 +77,13 @@ export function NewProductForm({
         description: "Please try again later.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
 
-    setIsSubmitting(false);
     setAfterCreateProductDialog && setAfterCreateProductDialog(true);
 
+    setSelectedCategories([]);
     form.reset();
   }
 

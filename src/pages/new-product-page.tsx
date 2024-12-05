@@ -9,6 +9,10 @@ export default function NewProductPage() {
   const [shouldShowUpgradePlanDialog, setShouldShowUpgradePlanDialog] =
     useState(false);
 
+  function handleCloseUpgradePlanDialog() {
+    setShouldShowUpgradePlanDialog(false);
+  }
+
   return (
     <div className="text-center 3xs:text-start">
       <h1 className="text-3xl font-bold mb-6">Add New Product</h1>
@@ -24,7 +28,10 @@ export default function NewProductPage() {
       ) : null}
 
       {shouldShowUpgradePlanDialog ? (
-        <UpgradePlanDialog isOpen={shouldShowUpgradePlanDialog} />
+        <UpgradePlanDialog
+          isOpen={shouldShowUpgradePlanDialog}
+          onClose={handleCloseUpgradePlanDialog}
+        />
       ) : null}
     </div>
   );
