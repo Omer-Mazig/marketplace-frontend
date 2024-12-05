@@ -21,6 +21,8 @@ import {
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
 import { createProduct } from "@/services/products.service";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 const categories = Object.entries(ProductCategory).map(([key, value]) => ({
   // TODO: Remove this and make some better solution
@@ -39,6 +41,9 @@ export function NewProductForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
   const form = useForm<AddProductFormValues>({
     resolver: zodResolver(addProductFormSchema),
     defaultValues: {
@@ -55,10 +60,24 @@ export function NewProductForm({
   async function onSubmit(values: AddProductFormValues) {
     setIsSubmitting(true);
 
-    const newProduct = await createProduct({
-      ...values,
-      categories: selectedCategories as unknown as ProductCategory,
-    });
+    try {
+      const newProduct = await createProduct({
+        ...values,
+        categories: selectedCategories as unknown as ProductCategory,
+      });
+    } catch (error: any) {
+      console.log(error);
+
+      if (error.response.data.redirectToUpgradePlan) {
+        return navigate("/");
+      }
+
+      toast({
+        title: "An error occurred",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    }
 
     setIsSubmitting(false);
     setAfterCreateProductDialog && setAfterCreateProductDialog(true);
