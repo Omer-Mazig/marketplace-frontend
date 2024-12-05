@@ -4,6 +4,7 @@ import { addToWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/providers/auth-provider";
 
+// TODO: handle strategy for ProductDetails
 export function useAddToWishlistMutation(product: Product) {
   const queryClient = useQueryClient();
   const { loggedInUser } = useAuth();
