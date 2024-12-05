@@ -64,10 +64,9 @@ export default function ProductDetails() {
               <p>Views: {product.viewCount}</p>
               <p>Created: {format(product.createdAt, "PPP")}</p>
               <p>Last updated: {format(product.updatedAt, "PPP")}</p>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-between space-x-2">
                 <MiniUserRow user={product.owner} />
-                {/* TODO: implment functionly */}
-                {/* <AddToWishlistBtn product={product} /> */}
+                <AddToWishlistBtn product={product} />
               </div>
             </div>
             {/* <AddToWishlistBtn /> */}
