@@ -19,15 +19,15 @@ export function UpgradePlanDialog({ isOpen, onClose }: UpgradePlanDialogProps) {
       open={isOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="sm:max-w-[425px] md:max-w-2xl lg:max-w-4xl max-h-[80vh] p-0">
-        <ScrollArea className="max-h-[80vh] overflow-y-auto">
-          <DialogHeader className="p-6 pb-0">
-            <DialogTitle>Upgrade Plan</DialogTitle>
-            <DialogDescription>
-              Upgrade your plan to get full access
-            </DialogDescription>
-          </DialogHeader>
-          <div className="p-6">
+      <DialogContent className="sm:max-w-[425px] md:max-w-2xl lg:max-w-4xl h-[80vh] p-0 flex flex-col overflow-hidden">
+        <DialogHeader className="p-6 pb-4 flex-shrink-0">
+          <DialogTitle>Upgrade Plan</DialogTitle>
+          <DialogDescription>
+            Upgrade your plan to get full access
+          </DialogDescription>
+        </DialogHeader>
+        <ScrollArea className="flex-grow">
+          <div className="p-6 pt-2">
             <UpgradePlanList />
           </div>
         </ScrollArea>

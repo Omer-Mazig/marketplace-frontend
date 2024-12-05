@@ -1,5 +1,3 @@
-// TODO: fix bug when categories not clearing after product added
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -91,14 +89,14 @@ export function NewProductForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
+        className="space-y-6 md:space-y-8"
       >
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem className="col-span-2">
+              <FormItem className="col-span-1 md:col-span-2">
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
@@ -168,7 +166,7 @@ export function NewProductForm({
           )}
         />
 
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           <FormField
             control={form.control}
             name="isNegotiable"
@@ -190,17 +188,19 @@ export function NewProductForm({
             )}
           />
 
-          <MultiSelect
-            options={categories}
-            onValueChange={setSelectedCategories}
-            defaultValue={selectedCategories}
-            placeholder="Select categories"
-            variant="inverted"
-            maxCount={3}
-          />
+          <div className="col-span-1 md:col-span-3">
+            <MultiSelect
+              options={categories}
+              onValueChange={setSelectedCategories}
+              defaultValue={selectedCategories}
+              placeholder="Select categories"
+              variant="inverted"
+              maxCount={3}
+            />
+          </div>
         </div>
 
-        {/* TODO: replace to an image uplaod component */}
+        {/* TODO: replace to an image upload component */}
         <FormField
           control={form.control}
           name="imageURL"
@@ -238,6 +238,7 @@ export function NewProductForm({
         <Button
           type="submit"
           disabled={isSubmitting}
+          className="w-full md:w-auto"
         >
           {isSubmitting ? "Submitting..." : "Submit"}
         </Button>
