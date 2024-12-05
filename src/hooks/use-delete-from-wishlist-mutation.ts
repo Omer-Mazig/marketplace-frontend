@@ -8,6 +8,7 @@ import { Product } from "@/types/products.types";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
+import { ToastAction } from "@/components/ui/toast";
 
 // Define the strategy type
 type UpdateStrategy = (
