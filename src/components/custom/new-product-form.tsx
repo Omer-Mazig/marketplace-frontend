@@ -33,10 +33,12 @@ const categories = Object.entries(ProductCategory).map(([key, value]) => ({
 
 interface NewProductFormProps {
   setAfterCreateProductDialog?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShouldShowUpgradePlanDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function NewProductForm({
   setAfterCreateProductDialog,
+  setShouldShowUpgradePlanDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -69,7 +71,7 @@ export function NewProductForm({
       console.log(error);
 
       if (error.response.data.redirectToUpgradePlan) {
-        return navigate("/");
+        return setShouldShowUpgradePlanDialog(true);
       }
 
       toast({
