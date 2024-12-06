@@ -1,7 +1,11 @@
+// React Router
 import { Link } from "react-router-dom";
 
+// Third-party libraries
 import { User } from "lucide-react";
-import { Button } from "../ui/button";
+
+// Custom components
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +19,11 @@ export function AuthButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className=" rounded-full">
+        <Button
+          variant="ghost"
+          size="icon"
+          className=" rounded-full"
+        >
           <User className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">Auth Dropdown</span>
         </Button>
