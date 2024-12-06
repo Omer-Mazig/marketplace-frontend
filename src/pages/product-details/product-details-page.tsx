@@ -7,6 +7,7 @@ import Error from "@/components/custom/error";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { MiniUserRow } from "@/components/custom/mini-user-row";
 import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
@@ -65,7 +66,7 @@ export default function ProductDetails() {
                 <MiniUserRow user={product.owner} />
                 <AddToWishlistBtn
                   product={product}
-                  queryKey={["product", { productId }]}
+                  queryKey={[QUERY_KEY_DICT.PRODUCT, { productId }]}
                 />
               </div>
             </div>
