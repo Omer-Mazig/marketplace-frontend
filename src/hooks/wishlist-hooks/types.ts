@@ -1,6 +1,11 @@
+// Constants
 import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
+
+// Types
 import { LoggedInUser } from "@/providers/auth-provider";
 import { Product } from "@/types/products.types";
+
+// Third-party libraries
 import { QueryClient, QueryKey } from "@tanstack/react-query";
 
 /**

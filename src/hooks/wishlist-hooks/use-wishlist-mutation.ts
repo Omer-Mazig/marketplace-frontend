@@ -1,6 +1,11 @@
+// Third-party libraries
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+// Custom hooks
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/providers/auth-provider";
+
+// Types
 import { UseWishlistMutationOptions } from "./interfaces";
 
 export function useWishlistMutation({

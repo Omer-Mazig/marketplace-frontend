@@ -1,5 +1,8 @@
+// Types
 import { Product } from "@/types/products.types";
 import { AllowedUpdateStrategies } from "./types";
+
+// Third-party libraries
 import { QueryKey } from "@tanstack/react-query";
 
 /**

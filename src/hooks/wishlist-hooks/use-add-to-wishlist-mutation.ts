@@ -1,7 +1,14 @@
-import { addToWishlist } from "@/services/wishlist.service";
-import { useWishlistMutation } from "./use-wishlist-mutation";
-import { Product } from "@/types/products.types";
+// Third-party libraries
 import { QueryKey } from "@tanstack/react-query";
+
+// Services
+import { addToWishlist } from "@/services/wishlist.service";
+
+// Hooks
+import { useWishlistMutation } from "./use-wishlist-mutation";
+
+// Types
+import { Product } from "@/types/products.types";
 import { AllowedUpdateStrategies, UpdateStrategy } from "./types";
 
 export const productsStrategy: UpdateStrategy = (

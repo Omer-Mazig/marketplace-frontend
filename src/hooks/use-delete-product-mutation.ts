@@ -1,8 +1,17 @@
-import { useToast } from "@/components/ui/use-toast";
-import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
-import { deleteProduct } from "@/services/products.service";
-import { Product } from "@/types/products.types";
+// Third-party libraries
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+// Services
+import { deleteProduct } from "@/services/products.service";
+
+// Custom hooks
+import { useToast } from "@/components/ui/use-toast";
+
+// Constants
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
+
+// Types
+import { Product } from "@/types/products.types";
 
 export function useDeleteProductMutation(product: Product) {
   const queryClient = useQueryClient();

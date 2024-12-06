@@ -1,7 +1,14 @@
-import { Product } from "@/types/products.types";
-import { useWishlistMutation } from "./use-wishlist-mutation";
-import { deleteFromWishlist } from "@/services/wishlist.service";
+// Third-party libraries
 import { QueryKey } from "@tanstack/react-query";
+
+// Services
+import { deleteFromWishlist } from "@/services/wishlist.service";
+
+// Hooks
+import { useWishlistMutation } from "./use-wishlist-mutation";
+
+// Types
+import { Product } from "@/types/products.types";
 import { UserProfileData } from "@/types/users.types";
 import { AllowedUpdateStrategies, UpdateStrategy } from "./types";
 

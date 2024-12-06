@@ -1,6 +1,11 @@
-import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
-import { getProductById } from "@/services/products.service";
+// Third-party libraries
 import { useQuery } from "@tanstack/react-query";
+
+// Services
+import { getProductById } from "@/services/products.service";
+
+// Constants
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 export function useGetProductById(productId: number) {
   return useQuery({
