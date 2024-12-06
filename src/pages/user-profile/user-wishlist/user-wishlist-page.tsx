@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button";
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 import Error from "@/components/custom/error";
 import { useUserProfileContext } from "../user-profile-layout";
-import { useDeleteFromWishlistMutation } from "@/hooks/use-delete-from-wishlist-mutation";
 import { GenericItemRow } from "../_components/generic-item-row";
 import { Trash2 } from "lucide-react";
 import { Product } from "@/types/products.types";
+import { useDeleteFromWishlistMutation } from "@/hooks/wishlist-hooks/use-delete-from-wishlist-mutation";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
