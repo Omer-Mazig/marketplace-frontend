@@ -1,4 +1,4 @@
-// Custom components
+// UI components
 import {
   Dialog,
   DialogContent,

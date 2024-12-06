@@ -1,7 +1,7 @@
-// Third-party libraries
+// Icons
 import { AlertCircle } from "lucide-react";
 
-// Custom components
+// UI components
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ErrorProps {

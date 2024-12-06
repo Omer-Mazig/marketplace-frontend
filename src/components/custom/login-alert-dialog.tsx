@@ -1,4 +1,4 @@
-// Custom components
+// UI components
 import {
   Dialog,
   DialogContent,
@@ -6,9 +6,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+// Custom components
 import { LoginForm } from "./login-form";
 
-// Custom providers
+// Custom hooks
 import { useAuth } from "@/providers/auth-provider";
 
 export function LoginAlertDialog() {

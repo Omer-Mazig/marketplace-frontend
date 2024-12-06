@@ -2,7 +2,7 @@
 import { NavLink } from "react-router-dom";
 import { LogOut } from "lucide-react";
 
-// Custom components
+// UI components
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

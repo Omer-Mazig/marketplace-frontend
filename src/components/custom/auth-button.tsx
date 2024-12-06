@@ -1,10 +1,10 @@
 // React Router
 import { Link } from "react-router-dom";
 
-// Third-party libraries
+// Icons
 import { User } from "lucide-react";
 
-// Custom components
+// UI components
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

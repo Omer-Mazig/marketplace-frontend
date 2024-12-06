@@ -3,18 +3,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+// Hooks:
+import { useToast } from "@/components/ui/use-toast";
+
 // Custom enums
 import { ProductCategory } from "@/enums/product-category.enum";
 
-// Custom components
+// UI components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { MultiSelect } from "@/components/ui/multi-select";
-import { useToast } from "@/components/ui/use-toast";
 
-// Custom form components
+// UI form components
 import {
   Form,
   FormControl,

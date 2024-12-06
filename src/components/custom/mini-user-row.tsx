@@ -1,4 +1,4 @@
-// Custom components
+// UI components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Custom types

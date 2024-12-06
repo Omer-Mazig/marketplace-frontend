@@ -1,10 +1,10 @@
 // React Router
 import { Link } from "react-router-dom";
 
-// Third-party libraries
+// Icons
 import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
 
-// Custom components
+// UI components
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 

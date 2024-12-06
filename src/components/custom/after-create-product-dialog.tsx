@@ -1,4 +1,7 @@
-// Custom components
+// React Router
+import { Link } from "react-router-dom";
+
+// UI components
 import {
   Dialog,
   DialogContent,
@@ -8,9 +11,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-
-// React Router
-import { Link } from "react-router-dom";
 
 interface AfterCreateProductDialogProps {
   setAfterCreateProductDialog: React.Dispatch<React.SetStateAction<boolean>>;

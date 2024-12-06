@@ -1,10 +1,10 @@
 // React
 import { useState } from "react";
 
-// Third-party libraries
+// Icons
 import { Check, X } from "lucide-react";
 
-// Custom components
+// UI components
 import { Button } from "@/components/ui/button";
 import {
   Card,
