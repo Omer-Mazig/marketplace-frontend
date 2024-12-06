@@ -7,6 +7,7 @@ import {
 import { Product } from "@/types/products.types";
 import { useToast } from "@/components/ui/use-toast";
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 // Define the strategy type
 export type UpdateStrategy = (
@@ -18,7 +19,9 @@ export type UpdateStrategy = (
 
 interface UseWishlistMutationOptions {
   mutationFn: (productId: number) => Promise<void>;
-  updateStrategies: { [key: string]: UpdateStrategy };
+  updateStrategies: {
+    [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT]]: UpdateStrategy;
+  };
   product: Product;
   queryKey: QueryKey;
   successMessage: string;
@@ -50,10 +53,16 @@ export function useWishlistMutation({
       // Get the base query key to match the strategy
       const baseQueryKey = Array.isArray(queryKey) ? queryKey[0] : queryKey;
 
-      // Run the appropriate strategy based on the queryKey
-      const strategy = updateStrategies[baseQueryKey];
-      if (strategy) {
+      // Ensure baseQueryKey is a valid key in updateStrategies
+      if (baseQueryKey in updateStrategies) {
+        const strategy =
+          updateStrategies[baseQueryKey as keyof typeof updateStrategies];
         strategy(queryKey, product, queryClient, loggedInUser);
+      } else {
+        console.warn(`No update strategy found for query key: ${baseQueryKey}`);
+        throw new Error(
+          `No update strategy found for query key: ${baseQueryKey}`
+        );
       }
 
       // Pass the snapshot for rollback
