@@ -3,7 +3,7 @@ import { Product } from "./products.types";
 
 export type UserProfileData = LoggedInUser & {
   products: Product[];
-  wishlist: any[];
+  wishlist: Product[];
 };
 
 export type MiniUser = {

@@ -12,12 +12,13 @@ import { LoggedInUser, useAuth } from "@/providers/auth-provider";
 // Define the strategy type
 type UpdateStrategy = (
   queryKey: QueryKey,
-  product: Product,
+  currentProduct: Product,
   queryClient: QueryClient, // or any?
-  loggedInUser?: LoggedInUser | null | undefined
+  loggedInUser: LoggedInUser | null | undefined
 ) => void;
 
 // Strategy for 'products'
+//TODO: figure out return type (baba is allowed) type for data
 const productsStrategy: UpdateStrategy = (
   queryKey,
   currentProduct,
@@ -26,16 +27,25 @@ const productsStrategy: UpdateStrategy = (
 ) => {
   queryClient.setQueryData(queryKey, (products: Product[] | undefined) => {
     if (!products) return;
+    if (!loggedInUser) return;
 
-    return products.map((p) =>
-      p.id === currentProduct.id
+    return products.map((product) =>
+      product.id === currentProduct.id
         ? {
-            ...p,
-            wishlistUsers: p.wishlistUsers.filter(
-              (user) => user.id !== loggedInUser?.id
-            ),
+            ...product,
+            wishlistUsers: [
+              ...product.wishlistUsers,
+              {
+                id: loggedInUser.id,
+                email: loggedInUser?.email,
+                firstName: loggedInUser?.firstName,
+                lastName: loggedInUser?.lastName,
+                imageUrl: loggedInUser?.imageUrl,
+                // baba: 2,
+              },
+            ],
           }
-        : p
+        : product
     );
   });
 };
@@ -118,45 +128,3 @@ export function useAddToWishlistMutation(product: Product, queryKey: QueryKey) {
     },
   });
 }
-
-// // TODO: handle strategy for ProductDetails
-// export function useAddToWishlistMutation(product: Product, queryKey: QueryKey) {
-//   const queryClient = useQueryClient();
-//   const { loggedInUser } = useAuth();
-//   const { toast } = useToast();
-
-//   return useMutation({
-//     mutationFn: () => addToWishlist(product.id),
-
-//     // Optimistic update
-//     onMutate: async () => {
-//       const previousProducts = queryClient.getQueryData<Product[]>([
-//         "products",
-//       ]);
-
-//       queryClient.setQueryData(
-//         ["products"],
-//         previousProducts?.map((p) =>
-//           p.id === product.id
-//             ? { ...p, wishlistUsers: [...p.wishlistUsers, loggedInUser] }
-//             : p
-//         )
-//       );
-
-//       return { previousProducts };
-//     },
-//     onError: (err, vars, context) => {
-//       queryClient.setQueryData(["products"], context?.previousProducts);
-//       toast({
-//         variant: "destructive",
-//         title: err?.message || "Somthing want wrong.",
-//         description: `There was a problem saving ${product.name} to your wishlist. Please try again later`,
-//       });
-//     },
-//     onSuccess: () => {
-//       toast({
-//         description: `${product.name} was added to your wishlist.`,
-//       });
-//     },
-//   });
-// }

@@ -8,13 +8,14 @@ import { Product } from "@/types/products.types";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { useToast } from "@/components/ui/use-toast";
 import { LoggedInUser, useAuth } from "@/providers/auth-provider";
+import { UserProfileData } from "@/types/users.types";
 
 // Define the strategy type
 type UpdateStrategy = (
   queryKey: QueryKey,
-  product: Product,
+  currentProduct: Product,
   queryClient: QueryClient, // or any?
-  loggedInUser?: LoggedInUser | null | undefined
+  loggedInUser: LoggedInUser | null | undefined
 ) => void;
 
 // Strategy for 'user-profile-data'
@@ -23,13 +24,13 @@ const userProfileStrategy: UpdateStrategy = (
   currentProduct,
   queryClient
 ) => {
-  queryClient.setQueryData(queryKey, (data: any) => {
-    if (!data) return data;
+  queryClient.setQueryData(queryKey, (data: UserProfileData) => {
+    if (!data) return;
 
     return {
       ...data,
       wishlist: data.wishlist.filter(
-        (p: Product) => p.id !== currentProduct.id
+        (product) => product.id !== currentProduct.id
       ),
     };
   });
@@ -45,15 +46,15 @@ const productsStrategy: UpdateStrategy = (
   queryClient.setQueryData(queryKey, (products: Product[] | undefined) => {
     if (!products) return;
 
-    return products.map((p) =>
-      p.id === currentProduct.id
+    return products.map((product) =>
+      product.id === currentProduct.id
         ? {
-            ...p,
-            wishlistUsers: p.wishlistUsers.filter(
+            ...product,
+            wishlistUsers: product.wishlistUsers.filter(
               (user) => user.id !== loggedInUser?.id
             ),
           }
-        : p
+        : product
     );
   });
 };
