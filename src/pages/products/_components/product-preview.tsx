@@ -53,7 +53,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
             <Badge
               key={category}
               variant="secondary"
-              className="text-xs"
+              className="text-xs mb-4"
             >
               {category}
             </Badge>
