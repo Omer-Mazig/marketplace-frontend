@@ -1,3 +1,4 @@
+// React Router
 import {
   createBrowserRouter,
   Navigate,
@@ -5,24 +6,27 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import PlatformLayout from "./layouts/platform-layout";
-import AuthLayout from "./layouts/auth-layout";
+// Custom layouts
+import PlatformLayout from "@/layouts/platform-layout";
+import AuthLayout from "@/layouts/auth-layout";
+import UserProfileLayout from "@/pages/user-profile/user-profile-layout";
 
-import LoginPage from "./pages/login-page";
-import RegisterPage from "./pages/register-page";
-import AboutPage from "./pages/about-page";
+// Custom pages
+import LoginPage from "@/pages/login-page";
+import RegisterPage from "@/pages/register-page";
+import AboutPage from "@/pages/about-page";
+import TeamPage from "@/pages/vision-page";
+import VisionPage from "@/pages/team-page";
+import UserInfoPage from "@/pages/user-profile/user-info/user-info-page";
+import UserSettingsPage from "@/pages/user-profile/user-settings/user-settings-page";
+import UserProductsPage from "@/pages/user-profile/user-products/user-products-page";
+import UserWishlistPage from "@/pages/user-profile/user-wishlist/user-wishlist-page";
+import ProductListPage from "@/pages/products/product-list-page";
+import ProductDetails from "@/pages/product-details/product-details-page";
+import NewProductPage from "@/pages/new-product-page";
 
-import { useAuth } from "./providers/auth-provider";
-import TeamPage from "./pages/vision-page";
-import VisionPage from "./pages/team-page";
-import UserProfileLayout from "./pages/user-profile/user-profile-layout";
-import UserInfoPage from "./pages/user-profile/user-info/user-info-page";
-import UserSettingsPage from "./pages/user-profile/user-settings/user-settings-page";
-import UserProductsPage from "./pages/user-profile/user-products/user-products-page";
-import UserWishlistPage from "./pages/user-profile/user-wishlist/user-wishlist-page";
-import ProductListPage from "./pages/products/product-list-page";
-import ProductDetails from "./pages/product-details/product-details-page";
-import NewProductPage from "./pages/new-product-page";
+// Custom providers
+import { useAuth } from "@/providers/auth-provider";
 
 const router = createBrowserRouter([
   {
