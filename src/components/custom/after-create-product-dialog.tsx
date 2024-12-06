@@ -1,3 +1,4 @@
+// Custom components
 import {
   Dialog,
   DialogContent,
@@ -6,7 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+
+// React Router
 import { Link } from "react-router-dom";
 
 interface AfterCreateProductDialogProps {
