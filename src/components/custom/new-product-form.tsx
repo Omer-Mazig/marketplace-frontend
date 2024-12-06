@@ -40,12 +40,14 @@ const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
 }));
 
 interface NewProductFormProps {
-  setAfterCreateProductDialog?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShouldShowAfterCreateProductDialog?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   setShouldShowUpgradePlanDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function NewProductForm({
-  setAfterCreateProductDialog,
+  setShouldShowAfterCreateProductDialog,
   setShouldShowUpgradePlanDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,7 +92,8 @@ export function NewProductForm({
       setIsSubmitting(false);
     }
 
-    setAfterCreateProductDialog && setAfterCreateProductDialog(true);
+    setShouldShowAfterCreateProductDialog &&
+      setShouldShowAfterCreateProductDialog(true);
 
     setSelectedCategories([]);
     form.reset();

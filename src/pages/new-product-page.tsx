@@ -7,8 +7,10 @@ import { NewProductForm } from "@/components/custom/new-product-form";
 import { UpgradePlanDialog } from "@/components/custom/upgrade-plan-dialog";
 
 export default function NewProductPage() {
-  const [afterCreateProductDialog, setAfterCreateProductDialog] =
-    useState(false);
+  const [
+    shouldShowafterCreateProductDialog,
+    setShouldShowAfterCreateProductDialog,
+  ] = useState(false);
   const [shouldShowUpgradePlanDialog, setShouldShowUpgradePlanDialog] =
     useState(false);
 
@@ -20,13 +22,17 @@ export default function NewProductPage() {
     <div className="text-center 3xs:text-start">
       <h1 className="text-3xl font-bold mb-6">Add New Product</h1>
       <NewProductForm
-        setAfterCreateProductDialog={setAfterCreateProductDialog}
+        setShouldShowAfterCreateProductDialog={
+          setShouldShowAfterCreateProductDialog
+        }
         setShouldShowUpgradePlanDialog={setShouldShowUpgradePlanDialog}
       />
 
-      {afterCreateProductDialog ? (
+      {shouldShowafterCreateProductDialog ? (
         <AfterCreateProductDialog
-          setAfterCreateProductDialog={setAfterCreateProductDialog}
+          setShouldShowAfterCreateProductDialog={
+            setShouldShowAfterCreateProductDialog
+          }
         />
       ) : null}
 

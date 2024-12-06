@@ -13,11 +13,13 @@ import {
 import { Button } from "@/components/ui/button";
 
 interface AfterCreateProductDialogProps {
-  setAfterCreateProductDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  setShouldShowAfterCreateProductDialog: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 }
 
 export function AfterCreateProductDialog({
-  setAfterCreateProductDialog,
+  setShouldShowAfterCreateProductDialog,
 }: AfterCreateProductDialogProps) {
   return (
     <Dialog open>
@@ -35,7 +37,7 @@ export function AfterCreateProductDialog({
           >
             <Link to="/user-profile/products">Back to profile</Link>
           </Button>
-          <Button onClick={() => setAfterCreateProductDialog(false)}>
+          <Button onClick={() => setShouldShowAfterCreateProductDialog(false)}>
             Add another product
           </Button>
         </DialogFooter>
