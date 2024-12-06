@@ -1,11 +1,8 @@
 import { addToWishlist } from "@/services/wishlist.service";
-import {
-  AllowedUpdateStrategies,
-  UpdateStrategy,
-  useWishlistMutation,
-} from "./use-wishlist-mutation";
+import { useWishlistMutation } from "./use-wishlist-mutation";
 import { Product } from "@/types/products.types";
 import { QueryKey } from "@tanstack/react-query";
+import { AllowedUpdateStrategies, UpdateStrategy } from "./types";
 
 //TODO: figure out return type (baba is allowed) type for data
 export const productsStrategy: UpdateStrategy = (

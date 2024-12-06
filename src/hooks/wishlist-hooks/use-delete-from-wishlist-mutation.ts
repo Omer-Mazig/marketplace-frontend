@@ -1,12 +1,9 @@
 import { Product } from "@/types/products.types";
-import {
-  AllowedUpdateStrategies,
-  UpdateStrategy,
-  useWishlistMutation,
-} from "./use-wishlist-mutation";
+import { useWishlistMutation } from "./use-wishlist-mutation";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { QueryKey } from "@tanstack/react-query";
 import { UserProfileData } from "@/types/users.types";
+import { AllowedUpdateStrategies, UpdateStrategy } from "./types";
 
 // Strategy for 'user-profile-data'
 const userProfileStrategy: UpdateStrategy = (

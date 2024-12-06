@@ -1,42 +1,7 @@
-import {
-  QueryClient,
-  QueryKey,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { Product } from "@/types/products.types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
-import { LoggedInUser, useAuth } from "@/providers/auth-provider";
-import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
-
-// Define the strategy type
-export type UpdateStrategy = (
-  queryKey: QueryKey,
-  currentProduct: Product,
-  queryClient: QueryClient,
-  loggedInUser: LoggedInUser | null | undefined
-) => void;
-
-// Explicitly restrict AllowedUpdateStrategies to only these 3 keys
-// (not include 'test' for exmple)
-export type AllowedUpdateStrategies = Partial<{
-  [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT] as key extends
-    | "user-profile-data"
-    | "products"
-    | "product"
-    ? key
-    : never]: UpdateStrategy;
-}>;
-
-// TODO: fix: updateStrategies can handle key that are not included
-interface UseWishlistMutationOptions {
-  mutationFn: (productId: number) => Promise<void>;
-  updateStrategies: AllowedUpdateStrategies;
-  product: Product;
-  queryKey: QueryKey;
-  successMessage: string;
-  errorMessage: string;
-}
+import { useAuth } from "@/providers/auth-provider";
+import { UseWishlistMutationOptions } from "./types";
 
 export function useWishlistMutation({
   mutationFn,
