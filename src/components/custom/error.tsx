@@ -1,5 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// Third-party libraries
 import { AlertCircle } from "lucide-react";
+
+// Custom components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ErrorProps {
   message?: string;
