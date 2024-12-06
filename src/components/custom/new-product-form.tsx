@@ -34,7 +34,7 @@ import { createProduct } from "@/services/products.service";
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
 
-const categories = Object.entries(ProductCategory).map(([key, value]) => ({
+const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
   value: value,
 }));
