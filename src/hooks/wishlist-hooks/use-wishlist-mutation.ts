@@ -17,9 +17,14 @@ export type UpdateStrategy = (
   loggedInUser: LoggedInUser | null | undefined
 ) => void;
 
-// Use the values of QUERY_KEY_DICT as allowed keys
+// Explicitly restrict AllowedUpdateStrategies to only these 3 keys
 export type AllowedUpdateStrategies = Partial<{
-  [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT]]: UpdateStrategy;
+  [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT] as key extends
+    | "user-profile-data"
+    | "products"
+    | "product"
+    ? key
+    : never]: UpdateStrategy;
 }>;
 
 // TODO: fix: updateStrategies can handle key that are not included

@@ -75,6 +75,7 @@ export function useDeleteFromWishlistMutation(
     "user-profile-data": userProfileStrategy,
     products: productsStrategy,
     product: productStrategy,
+    baba: productStrategy,
   };
 
   return useWishlistMutation({
