@@ -70,7 +70,11 @@ const router = createBrowserRouter([
       },
       {
         path: "new-product",
-        element: <NewProductPage />,
+        element: (
+          <ProtectedRoute>
+            <NewProductPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "user-profile",
