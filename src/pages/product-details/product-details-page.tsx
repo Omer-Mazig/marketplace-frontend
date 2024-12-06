@@ -8,12 +8,14 @@ import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { MiniUserRow } from "@/components/custom/mini-user-row";
 import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
 import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
 
   const { data: product, error, isLoading } = useGetProductById(productId);
+  const { loggedInUser } = useAuth();
 
   if (isLoading) return <ProductSkeleton />;
   if (error || !product) return <Error />;
@@ -64,13 +66,16 @@ export default function ProductDetails() {
               <p>Last updated: {format(product.updatedAt, "PPP")}</p>
               <div className="flex items-center justify-between space-x-2">
                 <MiniUserRow user={product.owner} />
-                <AddToWishlistBtn
-                  product={product}
-                  queryKey={[QUERY_KEY_DICT.PRODUCT, { productId }]}
-                />
+                {loggedInUser?.id !== product.owner.id ? (
+                  <AddToWishlistBtn
+                    product={product}
+                    queryKey={[QUERY_KEY_DICT.PRODUCT, { productId }]}
+                  />
+                ) : (
+                  "Edit"
+                )}
               </div>
             </div>
-            {/* <AddToWishlistBtn /> */}
           </div>
         </CardContent>
       </Card>
