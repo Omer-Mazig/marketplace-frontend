@@ -126,5 +126,10 @@ export function useAddToWishlistMutation(product: Product, queryKey: QueryKey) {
         description: `${product.name} was added to your wishlist.`,
       });
     },
+
+    // TODO: decide if invalidateQueries needed or not
+    // onSettled: () => {
+    //   queryClient.invalidateQueries({ queryKey });
+    // },
   });
 }
