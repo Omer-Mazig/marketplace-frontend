@@ -1,7 +1,10 @@
-"use client";
-
+// React
 import { useState } from "react";
+
+// Third-party libraries
 import { Check, X } from "lucide-react";
+
+// Custom components
 import { Button } from "@/components/ui/button";
 import {
   Card,

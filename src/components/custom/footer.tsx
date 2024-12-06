@@ -1,7 +1,12 @@
+// React Router
 import { Link } from "react-router-dom";
+
+// Third-party libraries
 import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+
+// Custom components
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (

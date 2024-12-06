@@ -1,5 +1,8 @@
+// Custom components
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// Custom types
 import { MiniUser } from "@/types/users.types";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface MiniUserRowProps {
   user: MiniUser;

@@ -1,7 +1,12 @@
+// React Router
 import { Link } from "react-router-dom";
+
+// Custom components
 import { ModeToggle } from "./mode-toggle";
 import { AuthButton } from "./auth-button";
 import { UserButton } from "./user-button";
+
+// Custom providers
 import { useAuth } from "@/providers/auth-provider";
 
 export function MainNav() {

@@ -1,14 +1,18 @@
+// React and React Hook Form
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+// Third-party libraries
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 
+// Custom components
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 
+// Custom form components
 import {
   Form,
   FormControl,
@@ -18,7 +22,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+// Custom providers
 import { useAuth } from "@/providers/auth-provider";
+
+// Types and validations
 import { LoginFormValues } from "@/types/auth.typs";
 import { loginFormSchema } from "@/validations/auth.validations";
 

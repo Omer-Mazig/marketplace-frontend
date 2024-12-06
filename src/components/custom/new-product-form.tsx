@@ -1,13 +1,20 @@
+// React and React Hook Form
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+// Custom enums
 import { ProductCategory } from "@/enums/product-category.enum";
+
+// Custom components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { MultiSelect } from "@/components/ui/multi-select";
+import { useToast } from "@/components/ui/use-toast";
 
+// Custom form components
 import {
   Form,
   FormControl,
@@ -18,10 +25,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+// Custom services
+import { createProduct } from "@/services/products.service";
+
+// Types and validations
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
-import { createProduct } from "@/services/products.service";
-import { useToast } from "@/components/ui/use-toast";
 
 const categories = Object.entries(ProductCategory).map(([key, value]) => ({
   label: value,

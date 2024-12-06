@@ -1,6 +1,8 @@
+// Third-party libraries
 import { NavLink } from "react-router-dom";
-
 import { LogOut } from "lucide-react";
+
+// Custom components
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+// Custom providers
 import { useAuth } from "@/providers/auth-provider";
 
 export function UserButton() {
