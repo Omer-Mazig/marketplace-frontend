@@ -1,5 +1,9 @@
 import { addToWishlist } from "@/services/wishlist.service";
-import { UpdateStrategy, useWishlistMutation } from "./use-wishlist-mutation";
+import {
+  AllowedUpdateStrategies,
+  UpdateStrategy,
+  useWishlistMutation,
+} from "./use-wishlist-mutation";
 import { Product } from "@/types/products.types";
 import { QueryKey } from "@tanstack/react-query";
 
@@ -62,7 +66,7 @@ const productStrategy: UpdateStrategy = (
 };
 
 export function useAddToWishlistMutation(product: Product, queryKey: QueryKey) {
-  const updateStrategies = {
+  const updateStrategies: AllowedUpdateStrategies = {
     products: productsStrategy,
     product: productStrategy,
   };

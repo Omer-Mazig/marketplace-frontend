@@ -17,11 +17,15 @@ export type UpdateStrategy = (
   loggedInUser: LoggedInUser | null | undefined
 ) => void;
 
+// Use the values of QUERY_KEY_DICT as allowed keys
+export type AllowedUpdateStrategies = Partial<{
+  [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT]]: UpdateStrategy;
+}>;
+
+// TODO: fix: updateStrategies can handle key that are not included
 interface UseWishlistMutationOptions {
   mutationFn: (productId: number) => Promise<void>;
-  updateStrategies: {
-    [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT]]: UpdateStrategy;
-  };
+  updateStrategies: AllowedUpdateStrategies;
   product: Product;
   queryKey: QueryKey;
   successMessage: string;
@@ -57,7 +61,7 @@ export function useWishlistMutation({
       if (baseQueryKey in updateStrategies) {
         const strategy =
           updateStrategies[baseQueryKey as keyof typeof updateStrategies];
-        strategy(queryKey, product, queryClient, loggedInUser);
+        strategy?.(queryKey, product, queryClient, loggedInUser);
       } else {
         console.warn(`No update strategy found for query key: ${baseQueryKey}`);
         throw new Error(

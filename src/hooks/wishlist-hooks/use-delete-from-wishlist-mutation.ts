@@ -1,5 +1,9 @@
 import { Product } from "@/types/products.types";
-import { UpdateStrategy, useWishlistMutation } from "./use-wishlist-mutation";
+import {
+  AllowedUpdateStrategies,
+  UpdateStrategy,
+  useWishlistMutation,
+} from "./use-wishlist-mutation";
 import { deleteFromWishlist } from "@/services/wishlist.service";
 import { QueryKey } from "@tanstack/react-query";
 import { UserProfileData } from "@/types/users.types";
@@ -67,7 +71,7 @@ export function useDeleteFromWishlistMutation(
   product: Product,
   queryKey: QueryKey
 ) {
-  const updateStrategies = {
+  const updateStrategies: AllowedUpdateStrategies = {
     "user-profile-data": userProfileStrategy,
     products: productsStrategy,
     product: productStrategy,
