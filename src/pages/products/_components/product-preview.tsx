@@ -11,6 +11,7 @@ import { Product } from "@/types/products.types";
 import { useNavigate } from "react-router-dom";
 import { AddToWishlistBtn } from "./add-to-wishlist-btn";
 import { useAuth } from "@/providers/auth-provider";
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 interface ProductPreviewProps {
   product: Product;
@@ -70,7 +71,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
         {loggedInUser?.id !== product.owner.id ? (
           <AddToWishlistBtn
             product={product}
-            queryKey={["products"]}
+            queryKey={[QUERY_KEY_DICT.PRODUCTS]}
           />
         ) : (
           "Edit"

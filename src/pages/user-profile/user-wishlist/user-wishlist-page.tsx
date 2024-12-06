@@ -13,6 +13,7 @@ import { GenericItemRow } from "../_components/generic-item-row";
 import { Trash2 } from "lucide-react";
 import { Product } from "@/types/products.types";
 import { useDeleteFromWishlistMutation } from "@/hooks/wishlist-hooks/use-delete-from-wishlist-mutation";
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
@@ -52,7 +53,7 @@ export default function UserWishlistPage() {
 
 function WishlistItemActions({ product }: { product: Product }) {
   const deleteFromWishlistMutation = useDeleteFromWishlistMutation(product, [
-    "user-profile-data",
+    QUERY_KEY_DICT.USER_PROFILE_DATA,
   ]);
 
   return (

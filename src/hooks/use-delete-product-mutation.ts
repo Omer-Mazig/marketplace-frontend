@@ -1,4 +1,5 @@
 import { useToast } from "@/components/ui/use-toast";
+import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 import { deleteProduct } from "@/services/products.service";
 import { Product } from "@/types/products.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -25,7 +26,9 @@ export function useDeleteProductMutation(product: Product) {
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["user-profile-data"] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
+      });
     },
   });
 }
