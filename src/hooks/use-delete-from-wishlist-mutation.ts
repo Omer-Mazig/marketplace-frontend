@@ -20,7 +20,7 @@ type UpdateStrategy = (
 // Strategy for 'user-profile-data'
 const userProfileStrategy: UpdateStrategy = (
   queryKey,
-  product,
+  currentProduct,
   queryClient
 ) => {
   queryClient.setQueryData(queryKey, (data: any) => {
@@ -28,7 +28,9 @@ const userProfileStrategy: UpdateStrategy = (
 
     return {
       ...data,
-      wishlist: data.wishlist.filter((item: Product) => item.id !== product.id),
+      wishlist: data.wishlist.filter(
+        (p: Product) => p.id !== currentProduct.id
+      ),
     };
   });
 };
@@ -36,15 +38,15 @@ const userProfileStrategy: UpdateStrategy = (
 // Strategy for 'products'
 const productsStrategy: UpdateStrategy = (
   queryKey,
-  product,
+  currentProduct,
   queryClient,
   loggedInUser
 ) => {
-  queryClient.setQueryData(queryKey, (data: Product[] | undefined) => {
-    if (!data) return data;
+  queryClient.setQueryData(queryKey, (products: Product[] | undefined) => {
+    if (!products) return;
 
-    return data.map((p) =>
-      p.id === product.id
+    return products.map((p) =>
+      p.id === currentProduct.id
         ? {
             ...p,
             wishlistUsers: p.wishlistUsers.filter(
@@ -55,18 +57,19 @@ const productsStrategy: UpdateStrategy = (
     );
   });
 };
+
 // Strategy for 'product'
 const productStrategy: UpdateStrategy = (
   queryKey,
-  product,
+  _currentProduct,
   queryClient,
   loggedInUser
 ) => {
-  queryClient.setQueryData(queryKey, (data: Product | undefined) => {
-    if (!data) return data;
+  queryClient.setQueryData(queryKey, (product: Product | undefined) => {
+    if (!product) return;
     return {
-      ...data,
-      wishlistUsers: data.wishlistUsers.filter(
+      ...product,
+      wishlistUsers: product.wishlistUsers.filter(
         (user) => user.id !== loggedInUser?.id
       ),
     };
@@ -99,7 +102,7 @@ export function useDeleteFromWishlistMutation(
       // Snapshot of previous data for rollback
       const previousData = queryClient.getQueryData(queryKey);
 
-      // Get the base query key to match the strategy (e.g., "user-profile-data" or "products")
+      // Get the base query key to match the strategy
       const baseQueryKey = Array.isArray(queryKey) ? queryKey[0] : queryKey;
 
       // Run the appropriate strategy based on the queryKey
@@ -108,10 +111,11 @@ export function useDeleteFromWishlistMutation(
         strategy(queryKey, product, queryClient, loggedInUser);
       }
 
-      return { previousData }; // Pass the snapshot for rollback
+      // Pass the snapshot for rollback
+      return { previousData };
     },
 
-    onError: (err, variables, context) => {
+    onError: (err, _variables, context) => {
       // Rollback to the previous state
       queryClient.setQueryData(queryKey, context?.previousData);
 

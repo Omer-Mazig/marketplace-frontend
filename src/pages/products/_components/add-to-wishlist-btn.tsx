@@ -17,7 +17,7 @@ export function AddToWishlistBtn({ product, queryKey }: AddToWishlistBtnProps) {
     (u) => u.id === loggedInUser?.id
   );
 
-  const addToWishlistMutation = useAddToWishlistMutation(product);
+  const addToWishlistMutation = useAddToWishlistMutation(product, queryKey);
   const deleteFromWishlistMutation = useDeleteFromWishlistMutation(
     product,
     queryKey
