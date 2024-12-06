@@ -19,14 +19,39 @@ export type UpdateStrategy = (
 ) => void;
 
 /**
- * Restricts the keys in `QUERY_KEY_DICT` that can be used as update strategies.
+ * Restricts keys in `QUERY_KEY_DICT` that can be used as update strategies.
  *
- * Only allows the following keys:
- * - `"user-profile-data"`
- * - `"products"`
- * - `"product"`
+ * ### Overview:
+ * This type ensures type safety by allowing only specific keys from `QUERY_KEY_DICT`
+ * to be associated with an `UpdateStrategy` function. All keys are optional, offering
+ * flexibility while maintaining strict type control.
  *
- * Each key maps to an `UpdateStrategy` function, or the key can be omitted entirely (optional).
+ * ### Adding a New Strategy:
+ * To add support for a new query key:
+ * 1. **Add the key to `QUERY_KEY_DICT`**:
+ *    ```typescript
+ *    export const QUERY_KEY_DICT = {
+ *      USER_PROFILE_DATA: "user-profile-data",
+ *      PRODUCTS: "products",
+ *      PRODUCT: "product"
+ *      TEST: "test", // New query key
+ *    } as const;
+ *    ```
+ * 2. **Update the type definition**:
+ *    Ensure the new key is included in the allowed strategies:
+ *    ```typescript
+ *    export type AllowedUpdateStrategies = Partial<{
+ *      [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT] as key extends
+ *        | "user-profile-data"
+ *        | "products"
+ *        | "product"
+ *        | "test" // Include the new key
+ *        ? key
+ *        : never]: UpdateStrategy;
+ *    }>;
+ *    ```
+ *
+ * This keeps `QUERY_KEY_DICT` and allowed strategies in sync.
  */
 export type AllowedUpdateStrategies = Partial<{
   [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT] as key extends
