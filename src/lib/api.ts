@@ -1,5 +1,8 @@
-import { ACCESS_TOKEN_STORAGE_KEY } from "@/constants/auth.constant";
+// Third-party libraries
 import axios from "axios";
+
+// Constants
+import { ACCESS_TOKEN_STORAGE_KEY } from "@/constants/auth.constant";
 
 const EXCLUDED_ROUTES = [
   "/auth/sign-in",

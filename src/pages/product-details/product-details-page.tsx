@@ -1,13 +1,24 @@
+// Third-party libraries
 import { format } from "date-fns";
+import { useParams } from "react-router-dom";
+
+// Custom hooks
+import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
+
+// UI components
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useParams } from "react-router-dom";
+
+// Custom components
 import Error from "@/components/custom/error";
-import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { MiniUserRow } from "@/components/custom/mini-user-row";
 import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
+
+// Constants
 import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
+
+// Providers
 import { useAuth } from "@/providers/auth-provider";
 
 export default function ProductDetails() {

@@ -1,10 +1,19 @@
-import { useAuth } from "@/providers/auth-provider";
-import { Product } from "@/types/products.types";
-import { Button } from "@/components/ui/button";
+// Third-party libraries
 import { Heart } from "lucide-react";
 import { QueryKey } from "@tanstack/react-query";
+
+// Custom hooks
 import { useAddToWishlistMutation } from "@/hooks/wishlist-hooks/use-add-to-wishlist-mutation";
 import { useDeleteFromWishlistMutation } from "@/hooks/wishlist-hooks/use-delete-from-wishlist-mutation";
+
+// UI components
+import { Button } from "@/components/ui/button";
+
+// Custom providers
+import { useAuth } from "@/providers/auth-provider";
+
+// Types
+import { Product } from "@/types/products.types";
 
 interface AddToWishlistBtnProps {
   product: Product;

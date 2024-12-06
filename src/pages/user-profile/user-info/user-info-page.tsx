@@ -1,3 +1,4 @@
+// UI components
 import {
   Card,
   CardContent,
@@ -11,9 +12,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+// Custom components
 import { UserInfoSkeleton } from "./user-info-page-skeleton";
 import Error from "@/components/custom/error";
 
+// Hooks
 import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserInfoPage() {

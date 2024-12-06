@@ -1,7 +1,8 @@
+// Third-party libraries
 import { Link } from "react-router-dom";
-
 import { LogIn } from "lucide-react";
 
+// UI components
 import {
   Card,
   CardContent,
@@ -10,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+// Custom components
 import { LoginForm } from "@/components/custom/login-form";
 
 export default function LoginPage() {

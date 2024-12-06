@@ -1,15 +1,15 @@
+// Third-party libraries
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { LogIn, Eye, EyeOff, LoaderCircle } from "lucide-react";
 
+// Custom components
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
-
 import {
   Card,
   CardContent,
@@ -17,7 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import {
   Form,
   FormControl,
@@ -28,8 +27,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+// Custom providers and constants
 import { useAuth } from "@/providers/auth-provider";
 import { USER_TIERS_OPTIONS } from "@/constants/auth.constant";
+
+// Types and validation
 import { RegisterFormValues } from "@/types/auth.typs";
 import { registerFormSchema } from "@/validations/auth.validations";
 

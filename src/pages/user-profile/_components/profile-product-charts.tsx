@@ -1,4 +1,4 @@
-import { Product } from "@/types/products.types";
+// Third-party libraries
 import {
   BarChart,
   Bar,
@@ -11,6 +11,9 @@ import {
   Pie,
   Cell,
 } from "recharts";
+
+// Types
+import { Product } from "@/types/products.types";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
@@ -99,7 +102,7 @@ const ProfileProductCharts = ({ products }: ProfileProductChartsProps) => {
             fill="#8884d8"
             dataKey="value"
           >
-            {categoryChartData.map((entry, index) => (
+            {categoryChartData.map((_entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}

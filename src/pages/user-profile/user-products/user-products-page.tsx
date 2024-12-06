@@ -1,3 +1,10 @@
+// Icons
+import { Trash2 } from "lucide-react";
+
+// Router
+import { Link } from "react-router-dom";
+
+// UI components
 import {
   Card,
   CardContent,
@@ -6,14 +13,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+
+// Custom components
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/custom/error";
-import { useUserProfileContext } from "../user-profile-layout";
 import { GenericItemRow } from "../_components/generic-item-row";
+
+// Hooks
 import { useDeleteProductMutation } from "@/hooks/use-delete-product-mutation";
+
+// Types
 import { Product } from "@/types/products.types";
-import { Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+
+// Contexts
+import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();

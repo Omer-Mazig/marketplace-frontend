@@ -1,5 +1,8 @@
+// Third-party libraries
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+// UI components
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,8 +13,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { ProductCategory } from "@/enums/product-category.enum";
 import { Button } from "@/components/ui/button";
+
+// Enums
+import { ProductCategory } from "@/enums/product-category.enum";
 
 export function ProductsFilter() {
   const [searchParams, setSearchParams] = useSearchParams();

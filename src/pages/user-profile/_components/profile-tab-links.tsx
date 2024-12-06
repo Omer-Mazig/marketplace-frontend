@@ -1,5 +1,7 @@
+// Third-party libraries
 import { NavLink, useLocation } from "react-router-dom";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+// Icons
 import {
   User,
   Settings,
@@ -8,6 +10,9 @@ import {
   LucideIcon,
   Archive,
 } from "lucide-react";
+
+// UI components
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type ProfileTabLinkProps = {
   to: string;

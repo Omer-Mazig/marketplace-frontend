@@ -1,5 +1,7 @@
+// Third-party libraries
 import { Link, Outlet } from "react-router-dom";
 
+// UI components
 import { Button } from "@/components/ui/button";
 
 export default function AboutPage() {

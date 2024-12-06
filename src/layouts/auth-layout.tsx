@@ -1,3 +1,4 @@
+// Third-party libraries
 import { Outlet } from "react-router-dom";
 
 export default function AuthLayout() {

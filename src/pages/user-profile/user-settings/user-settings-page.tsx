@@ -1,3 +1,4 @@
+// UI components
 import {
   Card,
   CardContent,
@@ -9,9 +10,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import Error from "@/components/custom/error";
 
+// Custom components
+import Error from "@/components/custom/error";
 import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
+
+// Hooks
 import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserSettingsPage() {

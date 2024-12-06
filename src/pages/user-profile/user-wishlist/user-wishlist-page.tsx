@@ -1,3 +1,4 @@
+// UI components
 import {
   Card,
   CardContent,
@@ -6,14 +7,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+
+// Custom components
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
 import Error from "@/components/custom/error";
-import { useUserProfileContext } from "../user-profile-layout";
 import { GenericItemRow } from "../_components/generic-item-row";
+
+// Icons
 import { Trash2 } from "lucide-react";
+
+// Types
 import { Product } from "@/types/products.types";
+
+// Hooks
 import { useDeleteFromWishlistMutation } from "@/hooks/wishlist-hooks/use-delete-from-wishlist-mutation";
+
+// Constants
 import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
+
+// Providers
+import { useUserProfileContext } from "../user-profile-layout";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();

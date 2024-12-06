@@ -1,10 +1,19 @@
+// Third-party libraries
 import { useSearchParams } from "react-router-dom";
+
+// Enums
 import { ProductCategory } from "@/enums/product-category.enum";
+
+// UI components
+import { Skeleton } from "@/components/ui/skeleton";
 import Error from "@/components/custom/error";
+
+// Custom components
 import { ProductsFilter } from "./_components/products-filter";
 import ProductPreview from "./_components/product-preview";
+
+// Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
-import { Skeleton } from "@/components/ui/skeleton";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {

@@ -1,4 +1,11 @@
+// Third-party libraries
+import { useNavigate } from "react-router-dom";
+
+// Custom components
 import { MiniUserRow } from "@/components/custom/mini-user-row";
+import { AddToWishlistBtn } from "./add-to-wishlist-btn";
+
+// UI components
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -7,11 +14,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Product } from "@/types/products.types";
-import { useNavigate } from "react-router-dom";
-import { AddToWishlistBtn } from "./add-to-wishlist-btn";
+
+// Custom providers
 import { useAuth } from "@/providers/auth-provider";
+
+// Constants
 import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
+
+// Types
+import { Product } from "@/types/products.types";
 
 interface ProductPreviewProps {
   product: Product;

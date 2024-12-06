@@ -1,7 +1,14 @@
+// Third-party libraries
 import { Outlet, useOutletContext } from "react-router-dom";
-import ProfileTabLinks from "./_components/profile-tab-links";
 import { UseQueryResult } from "@tanstack/react-query";
+
+// Custom components
+import ProfileTabLinks from "./_components/profile-tab-links";
+
+// Types
 import { UserProfileData } from "@/types/users.types";
+
+// Hooks
 import { useGetUserProfileDataQuery } from "@/hooks/use-get-user-profile-data-query";
 
 // Define a type for the context

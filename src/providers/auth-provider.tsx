@@ -1,12 +1,19 @@
+// React hooks and context management
 import { createContext, useState, useEffect, useContext } from "react";
+
+// Types
 import {
   RegisterFormValues,
   LoginFormValues as LoginCredentials,
 } from "@/types/auth.typs";
+
+// Constants
 import {
   ACCESS_TOKEN_STORAGE_KEY,
   USER_TIERS_OPTIONS,
 } from "@/constants/auth.constant";
+
+// Utilities and API
 import api from "@/lib/api";
 import { wait } from "@/lib/utils";
 

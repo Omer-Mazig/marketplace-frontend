@@ -1,6 +1,9 @@
+// Third-party libraries
 import React from "react";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+
+// UI components
+import { Badge } from "@/components/ui/badge";
 
 interface GenericItemRowProps {
   id: number;

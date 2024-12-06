@@ -1,6 +1,9 @@
-import api from "@/lib/api";
-import { wait } from "@/lib/utils";
-import { AddProductInput, Product } from "@/types/products.types";
+// API utility and helper functions
+import api from "@/lib/api"; // Custom API utility to interact with your backend
+import { wait } from "@/lib/utils"; // Utility function, likely for adding delays or timeouts
+
+// Product types for type safety
+import { AddProductInput, Product } from "@/types/products.types"; // Type definitions for product data
 
 export async function getAllProducts(): Promise<Product[]> {
   console.log("getting products..."); // just for development
