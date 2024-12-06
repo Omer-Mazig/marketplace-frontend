@@ -4,7 +4,6 @@ import { Product } from "@/types/products.types";
 import { QueryKey } from "@tanstack/react-query";
 import { AllowedUpdateStrategies, UpdateStrategy } from "./types";
 
-//TODO: figure out return type (baba is allowed) type for data
 export const productsStrategy: UpdateStrategy = (
   queryKey,
   currentProduct,
@@ -27,7 +26,6 @@ export const productsStrategy: UpdateStrategy = (
                 firstName: loggedInUser?.firstName,
                 lastName: loggedInUser?.lastName,
                 imageUrl: loggedInUser?.imageUrl,
-                // baba: 2,
               },
             ],
           }
@@ -36,7 +34,6 @@ export const productsStrategy: UpdateStrategy = (
   });
 };
 
-// Strategy for 'product'
 const productStrategy: UpdateStrategy = (
   queryKey,
   _currentProduct,

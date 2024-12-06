@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/providers/auth-provider";
-import { UseWishlistMutationOptions } from "./types";
+import { UseWishlistMutationOptions } from "./interfaces";
 
 export function useWishlistMutation({
   mutationFn,

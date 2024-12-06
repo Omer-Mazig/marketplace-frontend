@@ -5,7 +5,6 @@ import { QueryKey } from "@tanstack/react-query";
 import { UserProfileData } from "@/types/users.types";
 import { AllowedUpdateStrategies, UpdateStrategy } from "./types";
 
-// Strategy for 'user-profile-data'
 const userProfileStrategy: UpdateStrategy = (
   queryKey,
   currentProduct,
@@ -23,7 +22,6 @@ const userProfileStrategy: UpdateStrategy = (
   });
 };
 
-// Strategy for 'products'
 const productsStrategy: UpdateStrategy = (
   queryKey,
   currentProduct,
