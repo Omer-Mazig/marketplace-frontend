@@ -18,6 +18,7 @@ export type UpdateStrategy = (
 ) => void;
 
 // Explicitly restrict AllowedUpdateStrategies to only these 3 keys
+// (not include 'test' for exmple)
 export type AllowedUpdateStrategies = Partial<{
   [key in (typeof QUERY_KEY_DICT)[keyof typeof QUERY_KEY_DICT] as key extends
     | "user-profile-data"
