@@ -8,7 +8,6 @@ export const addProductFormSchema = z.object({
     .number()
     .int()
     .positive({ message: "Stock must be a positive integer" }),
-  imageURL: z.string().url({ message: "Invalid URL" }).optional(),
   location: z.string().optional(),
   isNegotiable: z.boolean(),
 });

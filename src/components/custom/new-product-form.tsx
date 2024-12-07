@@ -62,7 +62,6 @@ export function NewProductForm({
       description: "",
       price: 0,
       stock: 0,
-      imageURL: "",
       location: "",
       isNegotiable: false,
     },
@@ -213,24 +212,6 @@ export function NewProductForm({
             />
           </div>
         </div>
-
-        {/* TODO: replace to an image upload component */}
-        <FormField
-          control={form.control}
-          name="imageURL"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Image URL</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://example.com/image.jpg"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={form.control}
