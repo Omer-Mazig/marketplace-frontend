@@ -28,6 +28,7 @@ import { Product } from "@/types/products.types";
 // Contexts
 import { useUserProfileContext } from "../user-profile-layout";
 
+// TODO: render more info about product: wishlist amount and more
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
 
