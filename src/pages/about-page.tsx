@@ -1,15 +1,17 @@
-import api from "@/lib/api";
+import { uploadFile, UploadResult } from "@/services/uploads.service";
 import { useState } from "react";
 
 export default function AboutPage() {
-  const [file, setFile] = useState(null);
-  const [uploadResult, setUploadResult] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [uploadResult, setUploadResult] = useState<UploadResult | null>(null);
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  function handleFileChange(ev: React.ChangeEvent<HTMLInputElement>) {
+    if (!ev.target.files) return;
+    console.log(ev.target.files[0]);
+    setFile(ev.target.files[0]);
+  }
 
-  const handleUpload = async () => {
+  async function handleUpload() {
     if (!file) {
       alert("Please select a file to upload.");
       return;
@@ -17,30 +19,15 @@ export default function AboutPage() {
 
     try {
       const result = await uploadFile(file);
+      console.log(result);
+
       setUploadResult(result); // URL or uploaded file details
       alert("File uploaded successfully!");
     } catch (error) {
       console.error("Upload failed:", error);
       alert("Failed to upload the file.");
     }
-  };
-
-  const uploadFile = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await api.post("/uploads/file", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      return response.data; // Cloudinary URL or file details
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      throw error;
-    }
-  };
+  }
 
   return (
     <div>
@@ -50,6 +37,7 @@ export default function AboutPage() {
         onChange={handleFileChange}
       />
       <button onClick={handleUpload}>Upload</button>
+
       {uploadResult && (
         <div>
           <h3>Upload Result:</h3>
