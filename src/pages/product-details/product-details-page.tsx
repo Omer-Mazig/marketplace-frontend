@@ -72,7 +72,7 @@ export default function ProductDetails() {
               <p>
                 {product.isNegotiable ? "Price is negotiable" : "Fixed price"}
               </p>
-              <p>Views: {product.viewCount}</p>
+              <p>Currently views: {product.viewCount}</p>
               <p>Created: {format(product.createdAt, "PPP")}</p>
               <p>Last updated: {format(product.updatedAt, "PPP")}</p>
               <div className="flex items-center justify-between space-x-2">
