@@ -8,8 +8,6 @@ import { ProductCategory } from "@/enums/product-category.enum";
 import { Skeleton } from "@/components/ui/skeleton";
 import Error from "@/components/custom/error";
 import { PageHeading } from "@/components/ui/page-heading";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { ProductListSidebar } from "./_components/product-list-sidebar";
 
 // Custom components
 import ProductPreview from "./_components/product-preview";
@@ -49,25 +47,21 @@ export default function ProductListPage() {
   if (error) return <Error />;
 
   return (
-    <SidebarProvider>
-      <ProductListSidebar />
-      {/* <SidebarTrigger /> */}
-      <div>
-        <PageHeading>Products</PageHeading>
-        <div className="auto-grid">
-          {isLoading
-            ? Array.from({ length: 6 }).map((_, index) => (
-                <ProductPreviewSkeleton key={index} />
-              ))
-            : filteredProducts.map((product) => (
-                <ProductPreview
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-        </div>
+    <div>
+      <PageHeading>Products</PageHeading>
+      <div className="auto-grid">
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, index) => (
+              <ProductPreviewSkeleton key={index} />
+            ))
+          : filteredProducts.map((product) => (
+              <ProductPreview
+                key={product.id}
+                product={product}
+              />
+            ))}
       </div>
-    </SidebarProvider>
+    </div>
   );
 }
 
