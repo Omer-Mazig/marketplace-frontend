@@ -8,14 +8,17 @@ import { UserButton } from "./user-button";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export function MainNav() {
   const { loggedInUser } = useAuth();
 
   return (
-    <header className="mb-4 sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-14 items-center px-4">
+    <header className="container mb-4 sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
+          <SidebarTrigger />
+
           <Link
             to="/"
             className="uppercase mr-4 flex items-center space-x-2 lg:mr-6"

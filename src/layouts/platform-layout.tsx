@@ -11,14 +11,16 @@ import { AppSidebar } from "@/components/custom/app-sidebar";
 export default function PlatformLayout() {
   return (
     <div className="flex flex-col min-h-screen">
-      <MainNav />
       <SidebarProvider>
         <AppSidebar />
-        <main className="container max-w-screen-2xl flex-grow">
-          <Outlet />
-        </main>
+        <div className="flex flex-col max-w-screen-2xl flex-grow">
+          <MainNav />
+          <main className="container flex-grow">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
       </SidebarProvider>
-      <Footer />
       <LoginAlertDialog />
     </div>
   );

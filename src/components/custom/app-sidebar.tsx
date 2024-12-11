@@ -38,8 +38,8 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="mt-14">
-      <SidebarContent>
+    <Sidebar>
+      <SidebarContent className="mt-[72px]">
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
