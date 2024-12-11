@@ -7,15 +7,14 @@ import { ProductCategory } from "@/enums/product-category.enum";
 // UI components
 import { Skeleton } from "@/components/ui/skeleton";
 import Error from "@/components/custom/error";
-import { PageHeading } from "@/components/ui/page-heading";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { ProductListSidebar } from "./_components/product-list-sidebar";
 
 // Custom components
+import { ProductsFilter } from "./_components/products-filter";
 import ProductPreview from "./_components/product-preview";
 
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
+import { PageHeading } from "@/components/ui/page-heading";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
@@ -49,25 +48,28 @@ export default function ProductListPage() {
   if (error) return <Error />;
 
   return (
-    <SidebarProvider>
-      <ProductListSidebar />
-      {/* <SidebarTrigger /> */}
-      <div>
-        <PageHeading>Products</PageHeading>
-        <div className="auto-grid">
-          {isLoading
-            ? Array.from({ length: 6 }).map((_, index) => (
-                <ProductPreviewSkeleton key={index} />
-              ))
-            : filteredProducts.map((product) => (
-                <ProductPreview
-                  key={product.id}
-                  product={product}
-                />
-              ))}
+    <div>
+      <PageHeading>Products</PageHeading>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+        <div className="space-y-4 relative">
+          {isLoading ? <ProductsFilterSkeleton /> : <ProductsFilter />}
+        </div>
+        <div className="lg:col-span-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {isLoading
+              ? Array.from({ length: 6 }).map((_, index) => (
+                  <ProductPreviewSkeleton key={index} />
+                ))
+              : filteredProducts.map((product) => (
+                  <ProductPreview
+                    key={product.id}
+                    product={product}
+                  />
+                ))}
+          </div>
         </div>
       </div>
-    </SidebarProvider>
+    </div>
   );
 }
 
