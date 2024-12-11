@@ -14,6 +14,7 @@ import ProductPreview from "./_components/product-preview";
 
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
+import { PageHeading } from "@/components/ui/page-heading";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
@@ -48,7 +49,7 @@ export default function ProductListPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Products</h1>
+      <PageHeading>Products</PageHeading>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
         <div className="space-y-4 relative">
           {isLoading ? <ProductsFilterSkeleton /> : <ProductsFilter />}

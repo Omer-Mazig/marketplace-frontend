@@ -10,6 +10,7 @@ import { UserProfileData } from "@/types/users.types";
 
 // Hooks
 import { useGetUserProfileDataQuery } from "@/hooks/use-get-user-profile-data-query";
+import { PageHeading } from "@/components/ui/page-heading";
 
 // Define a type for the context
 type UserProfileContext = UseQueryResult<UserProfileData, Error>;
@@ -23,7 +24,7 @@ export default function UserProfileLayout() {
 
   return (
     <div className="text-center 3xs:text-start">
-      <h1 className="text-3xl font-bold mb-6">User Profile</h1>
+      <PageHeading>User Profile</PageHeading>
       <ProfileTabLinks />
       <Outlet context={{ data: userProfileData, isLoading, error }} />
     </div>

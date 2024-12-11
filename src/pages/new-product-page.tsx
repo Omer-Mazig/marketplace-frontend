@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AfterCreateProductDialog } from "@/components/custom/after-create-product-dialog";
 import { NewProductForm } from "@/components/custom/new-product-form";
 import { UpgradePlanDialog } from "@/components/custom/upgrade-plan-dialog";
+import { PageHeading } from "@/components/ui/page-heading";
 
 export default function NewProductPage() {
   const [
@@ -20,7 +21,7 @@ export default function NewProductPage() {
 
   return (
     <div className="text-center 3xs:text-start">
-      <h1 className="text-3xl font-bold mb-6">Add New Product</h1>
+      <PageHeading>Add New Product</PageHeading>
       <NewProductForm
         setShouldShowAfterCreateProductDialog={
           setShouldShowAfterCreateProductDialog

@@ -20,6 +20,7 @@ import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 // Providers
 import { useAuth } from "@/providers/auth-provider";
+import { PageHeading } from "@/components/ui/page-heading";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
@@ -33,7 +34,7 @@ export default function ProductDetails() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Product Details</h1>
+      <PageHeading>Product Details</PageHeading>
       <Card>
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
