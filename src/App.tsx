@@ -27,6 +27,9 @@ import NewProductPage from "@/pages/new-product-page";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
+import { useEffect } from "react";
+
+import { io } from "socket.io-client";
 
 const router = createBrowserRouter([
   {
@@ -172,7 +175,14 @@ function AuthRoutes({ children }: { children: React.ReactNode }) {
   return children;
 }
 
+const socket = io("http://localhost:3000");
+
 function App() {
+  useEffect(() => {
+    socket.on("notification", (data) => {
+      console.log("notification", data);
+    });
+  }, []);
   return <RouterProvider router={router} />;
 }
 
