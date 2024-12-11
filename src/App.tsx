@@ -175,14 +175,18 @@ function AuthRoutes({ children }: { children: React.ReactNode }) {
   return children;
 }
 
-const socket = io("http://localhost:3000");
-
 function App() {
-  useEffect(() => {
-    socket.on("notification", (data) => {
-      console.log("notification", data);
-    });
-  }, []);
+  // const { loggedInUser } = useAuth();
+
+  // const socket = io("http://localhost:3000", {
+  //   query: { userId: loggedInUser?.id }, // Pass logged-in user's ID
+  // });
+
+  // useEffect(() => {
+  //   socket.on("notification", (data) => {
+  //     console.log("notification", data);
+  //   });
+  // }, []);
   return <RouterProvider router={router} />;
 }
 
