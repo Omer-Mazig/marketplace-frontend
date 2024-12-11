@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Link } from "react-router-dom";
+import { ProductCategory } from "@/enums/product-category.enum";
 
 // Menu items.
 const items = [
@@ -50,6 +51,22 @@ export function AppSidebar() {
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {Object.values(ProductCategory).map((category) => (
+                <SidebarMenuItem key={category}>
+                  <SidebarMenuButton asChild>
+                    <Link to={`products/category/${category.toLowerCase()}`}>
+                      <span>{category}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

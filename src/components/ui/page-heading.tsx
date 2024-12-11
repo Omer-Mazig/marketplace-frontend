@@ -3,5 +3,5 @@ interface PageHeadingProps {
 }
 
 export const PageHeading = ({ children }: PageHeadingProps) => {
-  return <h1 className="text-3xl font-bold mb-6">{children}</h1>;
+  return <h1 className="text-3xl font-bold mb-6 capitalize">{children}</h1>;
 };

@@ -61,7 +61,11 @@ const router = createBrowserRouter([
         element: <div>Services</div>,
       },
       {
-        path: "products",
+        path: "products", // TODO: temporery
+        element: <Navigate to="/products/category/electronics" />,
+      },
+      {
+        path: "products/category/:category",
         element: <ProductListPage />,
       },
       {

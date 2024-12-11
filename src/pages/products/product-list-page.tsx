@@ -1,8 +1,5 @@
 // Third-party libraries
-import { useSearchParams } from "react-router-dom";
-
-// Enums
-import { ProductCategory } from "@/enums/product-category.enum";
+import { useParams, useSearchParams } from "react-router-dom";
 
 // UI components
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,27 +14,26 @@ import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
-  const { data: products, error, isLoading } = useGetAllProductsQuery();
-
+  const { category } = useParams();
   const [searchParams] = useSearchParams();
+
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useGetAllProductsQuery({ params: category });
 
   // TODO: Filter from the serverside
   const filteredProducts = products
     ? products.filter((product) => {
         const searchTerm = searchParams.get("search") || "";
-        const selectedCategory = searchParams.get("category") || "All";
         const priceRange = [
           Number(searchParams.get("minPrice")) || 0,
           Number(searchParams.get("maxPrice")) || 9999,
         ];
 
-        const isCategoryMatch =
-          selectedCategory === "All" ||
-          product.categories.includes(selectedCategory as ProductCategory);
-
         return (
           product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          isCategoryMatch &&
           product.price >= priceRange[0] &&
           product.price <= priceRange[1]
         );
@@ -48,7 +44,7 @@ export default function ProductListPage() {
 
   return (
     <div>
-      <PageHeading>Products</PageHeading>
+      <PageHeading>{category}</PageHeading>
       <div className="auto-grid">
         {isLoading
           ? Array.from({ length: 6 }).map((_, index) => (
