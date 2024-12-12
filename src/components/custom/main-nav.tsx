@@ -9,6 +9,7 @@ import { UserButton } from "./user-button";
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
 import { SidebarTrigger } from "../ui/sidebar";
+import { Separator } from "../ui/separator";
 
 export function MainNav() {
   const { loggedInUser } = useAuth();

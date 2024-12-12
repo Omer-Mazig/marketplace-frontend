@@ -34,13 +34,13 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
   const navigate = useNavigate();
 
   function goToDetails() {
-    navigate(`${product.id}`);
+    navigate(`/products/${product.id}`);
   }
 
   return (
     <Card
       key={product.id}
-      className="flex flex-col h-full cursor-pointer"
+      className="flex flex-col h-full cursor-pointer max-w-96 hover:shadow-xl"
       onClick={goToDetails}
     >
       <CardHeader>
