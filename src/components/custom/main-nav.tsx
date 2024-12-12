@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 // Custom components
 import { ModeToggle } from "./mode-toggle";
 import { AuthButton } from "./auth-button";
-import { UserButton } from "./user-button";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
 import { SidebarTrigger } from "../ui/sidebar";
-import { Separator } from "../ui/separator";
 
 export function MainNav() {
   const { loggedInUser } = useAuth();
@@ -41,7 +39,8 @@ export function MainNav() {
             </button>
           </div>
           <div className="flex items-center gap-1 ">
-            {loggedInUser ? <UserButton /> : <AuthButton />}
+            {/* {loggedInUser ? <UserButton /> : <AuthButton />} */}
+            {loggedInUser ? null : <AuthButton />}
             <ModeToggle />
           </div>
         </div>
