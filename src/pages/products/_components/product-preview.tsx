@@ -44,7 +44,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
       className="flex flex-col h-full cursor-pointer max-w-96 hover:shadow-xl"
       onClick={goToDetails}
     >
-      <CardHeader>
+      <CardHeader className="p-0">
         <img
           src={
             product.imageURL ||
@@ -56,7 +56,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
           className="w-full h-48 object-cover rounded-t-lg"
         />
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent className="flex-grow pb-4 pt-8 px-4">
         <CardTitle className="mb-2">{product.name}</CardTitle>
         <p className="text-sm text-muted-foreground mb-2">
           {product.description || "Nothing to say about this product"}
