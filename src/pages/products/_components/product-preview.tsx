@@ -1,5 +1,5 @@
 // Third-party libraries
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Custom components
 import { MiniUserRow } from "@/components/custom/mini-user-row";
@@ -32,6 +32,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
   const { loggedInUser } = useAuth();
 
   const navigate = useNavigate();
+  const { category } = useParams();
 
   function goToDetails() {
     navigate(`/products/${product.id}`);
@@ -82,7 +83,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
         {loggedInUser?.id !== product.owner.id ? (
           <AddToWishlistBtn
             product={product}
-            queryKey={[QUERY_KEY_DICT.PRODUCTS]}
+            queryKey={[QUERY_KEY_DICT.PRODUCTS, { category }]}
           />
         ) : (
           "Edit"

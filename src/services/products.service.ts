@@ -5,11 +5,11 @@ import { wait } from "@/lib/utils"; // Utility function, likely for adding delay
 // Product types for type safety
 import { AddProductInput, Product } from "@/types/products.types"; // Type definitions for product data
 
-export async function getAllProducts({ params }: any): Promise<Product[]> {
+export async function getAllProducts({ category }: any): Promise<Product[]> {
   console.log("getting products..."); // just for development
   await wait(); // just for development
 
-  const { data } = await api.get(`/products/category/${params}`);
+  const { data } = await api.get(`/products/category/${category}`);
   return data;
 }
 

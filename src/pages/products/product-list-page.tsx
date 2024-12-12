@@ -21,7 +21,7 @@ export default function ProductListPage() {
     data: products,
     error,
     isLoading,
-  } = useGetAllProductsQuery({ params: category });
+  } = useGetAllProductsQuery({ category });
 
   // TODO: Filter from the serverside
   const filteredProducts = products
