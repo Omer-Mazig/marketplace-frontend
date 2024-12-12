@@ -14,6 +14,12 @@ import { useAuth } from "@/providers/auth-provider";
 
 // Types
 import { Product } from "@/types/products.types";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface AddToWishlistBtnProps {
   product: Product;
@@ -52,22 +58,29 @@ export function AddToWishlistBtn({ product, queryKey }: AddToWishlistBtnProps) {
   }
 
   return (
-    <>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onClick}
-      >
-        {isProductOnUserWishlist ? (
-          <Heart
-            fill="rgb(249, 115, 22)"
-            stroke="rgb(249, 115, 22)"
-            className="w-5 h-5 cursor-pointer transition-colors"
-          />
-        ) : (
-          <Heart className="w-5 h-5 text-gray-400 cursor-pointer transition-colors" />
-        )}
-      </Button>
-    </>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClick}
+          >
+            {isProductOnUserWishlist ? (
+              <Heart
+                fill="rgb(249, 115, 22)"
+                stroke="rgb(249, 115, 22)"
+                className="w-5 h-5 cursor-pointer transition-colors"
+              />
+            ) : (
+              <Heart className="w-5 h-5 text-gray-400 cursor-pointer transition-colors" />
+            )}
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          {isProductOnUserWishlist ? "Remove from wishlist" : "Add to wishlist"}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
