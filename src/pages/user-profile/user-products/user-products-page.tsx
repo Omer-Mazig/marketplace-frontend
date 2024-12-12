@@ -1,5 +1,5 @@
 // Icons
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 
 // Router
 import { Link } from "react-router-dom";
@@ -88,6 +88,16 @@ function ProductItemActions({ product }: { product: Product }) {
         className="sm:opacity-0 group-hover:opacity-100"
       >
         <Trash2 className="w-5 h-5" />
+        <span className="sr-only">Delete product</span>
+      </Button>
+
+      <Button
+        variant="ghost"
+        size="sm"
+        className="sm:opacity-0 group-hover:opacity-100"
+      >
+        <Pencil className="w-5 h-5" />
+        <span className="sr-only">Edit product</span>
       </Button>
     </>
   );
