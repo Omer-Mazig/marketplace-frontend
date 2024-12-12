@@ -6,7 +6,6 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
-  LucideIcon,
   Sparkles,
 } from "lucide-react";
 
@@ -124,15 +123,5 @@ export function UserButton() {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
-}
-
-function MenuItem({ label, icon }: { label: string; icon: LucideIcon }) {
-  const Icon = icon;
-  return (
-    <DropdownMenuItem>
-      <Icon />
-      {label}
-    </DropdownMenuItem>
   );
 }
