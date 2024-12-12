@@ -1,5 +1,5 @@
 // Icons
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 
 // Router
 import { Link } from "react-router-dom";
@@ -13,6 +13,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // Custom components
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
@@ -67,7 +73,10 @@ export default function UserProductsPage() {
             asChild
             className="w-full md:w-auto"
           >
-            <Link to="/new-product">Add New Product </Link>
+            <Link to="/new-product">
+              {" "}
+              <Plus /> Add New Product{" "}
+            </Link>
           </Button>
         </div>
       </CardContent>
@@ -80,25 +89,39 @@ function ProductItemActions({ product }: { product: Product }) {
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => deleteProductMutation.mutate()}
-        disabled={deleteProductMutation.isPending}
-        className="sm:opacity-0 group-hover:opacity-100"
-      >
-        <Trash2 className="w-5 h-5" />
-        <span className="sr-only">Delete product</span>
-      </Button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => deleteProductMutation.mutate()}
+              disabled={deleteProductMutation.isPending}
+              className="sm:opacity-0 group-hover:opacity-100"
+            >
+              <Trash2 className="w-5 h-5" />
+              <span className="sr-only">Delete product</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Delete product</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
-      <Button
-        variant="ghost"
-        size="sm"
-        className="sm:opacity-0 group-hover:opacity-100"
-      >
-        <Pencil className="w-5 h-5" />
-        <span className="sr-only">Edit product</span>
-      </Button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="sm:opacity-0 group-hover:opacity-100"
+            >
+              <Pencil className="w-5 h-5" />
+              <span className="sr-only">Edit product</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Edit product</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </>
   );
 }

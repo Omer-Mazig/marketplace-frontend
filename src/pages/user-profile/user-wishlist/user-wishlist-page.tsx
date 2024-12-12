@@ -7,6 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // Custom components
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
@@ -70,13 +76,20 @@ function WishlistItemActions({ product }: { product: Product }) {
   ]);
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={() => deleteFromWishlistMutation.mutate()}
-      className="sm:opacity-0 group-hover:opacity-100"
-    >
-      <Trash2 className="w-5 h-5" />
-    </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => deleteFromWishlistMutation.mutate()}
+            className="sm:opacity-0 group-hover:opacity-100"
+          >
+            <Trash2 className="w-5 h-5" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Remove from wishlist</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
