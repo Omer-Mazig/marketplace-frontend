@@ -235,7 +235,7 @@ export function NewProductForm({
           disabled={isSubmitting}
           className="w-full md:w-auto"
         >
-          {isSubmitting ? "Submitting..." : "Submit"}
+          {isSubmitting ? "Loading..." : "Add"}
         </Button>
       </form>
     </Form>
