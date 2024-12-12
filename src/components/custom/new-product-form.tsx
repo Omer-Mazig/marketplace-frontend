@@ -33,6 +33,8 @@ import { createProduct } from "@/services/products.service";
 // Types and validations
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
+import { Hint } from "./hint";
+import { HelpCircle } from "lucide-react";
 
 const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
@@ -184,19 +186,22 @@ export function NewProductForm({
             control={form.control}
             name="isNegotiable"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+              <FormItem className="relative flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>Negotiable</FormLabel>
-                  <FormDescription>
-                    Check this if the price is negotiable
-                  </FormDescription>
-                </div>
+                <FormLabel>Negotiable</FormLabel>
+                <Hint
+                  sideOffset={40}
+                  description={`
+            Free Workspace can have up to 5 boards. Upgrade to Premium to create more boards.
+            `}
+                >
+                  <HelpCircle className="absolute right-2 h-[14px] w-[14px]" />
+                </Hint>
               </FormItem>
             )}
           />
