@@ -1,4 +1,11 @@
-import { Calendar, ChevronDown, Home, Inbox, Search } from "lucide-react";
+import {
+  Calendar,
+  ChevronDown,
+  GalleryVerticalEnd,
+  Home,
+  Inbox,
+  Search,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -8,6 +15,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
+  SidebarInput,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -20,6 +28,7 @@ import {
   CollapsibleTrigger,
 } from "../ui/collapsible";
 import { UserButton } from "./user-button";
+import { Label } from "../ui/label";
 
 // Menu items.
 const items = [
@@ -47,8 +56,44 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader>Header</SidebarHeader>
+    <Sidebar collapsible="icon">
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              size="lg"
+              asChild
+            >
+              <a href="#">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <GalleryVerticalEnd className="size-4" />
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-semibold">MarketPlace</span>
+                </div>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <form>
+          <SidebarGroup className="py-0">
+            <SidebarGroupContent className="relative">
+              <Label
+                htmlFor="search"
+                className="sr-only"
+              >
+                Search
+              </Label>
+              <SidebarInput
+                id="search"
+                placeholder="Search the docs..."
+                className="pl-8"
+              />
+              <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </form>
+      </SidebarHeader>
       <SidebarContent className="mt-[72px]s">
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
