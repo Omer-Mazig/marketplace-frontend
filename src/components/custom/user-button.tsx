@@ -27,6 +27,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/providers/auth-provider";
+import { Link } from "react-router-dom";
 
 export function UserButton() {
   const { isMobile } = useSidebar();
@@ -99,17 +100,59 @@ export function UserButton() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="flex gap-2">
-                <BadgeCheck className="w-4 h-4" />
-                Account
+              <DropdownMenuItem
+                asChild
+                className="flex gap-2"
+              >
+                <Link to="/user-profile/info">
+                  <BadgeCheck className="w-4 h-4" />
+                  Info
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex gap-2">
-                <CreditCard className="w-4 h-4" />
-                Billing
+              <DropdownMenuItem
+                asChild
+                className="flex gap-2"
+              >
+                <Link to="/user-profile/settings">
+                  <BadgeCheck className="w-4 h-4" />
+                  Settings
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex gap-2">
-                <Bell className="w-4 h-4" />
-                Notifications
+              <DropdownMenuItem
+                asChild
+                className="flex gap-2"
+              >
+                <Link to="/user-profile/products">
+                  <BadgeCheck className="w-4 h-4" />
+                  Products
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                asChild
+                className="flex gap-2"
+              >
+                <Link to="/user-profile/wishlist">
+                  <BadgeCheck className="w-4 h-4" />
+                  Wishlist
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                asChild
+                className="flex gap-2"
+              >
+                <Link to="#">
+                  <CreditCard className="w-4 h-4" />
+                  Billing
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                asChild
+                className="flex gap-2"
+              >
+                <Link to="#">
+                  <Bell className="w-4 h-4" />
+                  Notifications
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
