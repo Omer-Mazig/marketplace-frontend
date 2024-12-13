@@ -68,9 +68,9 @@ export function AddToWishlistBtn({ product, queryKey }: AddToWishlistBtnProps) {
           >
             {isProductOnUserWishlist ? (
               <Heart
-                fill="rgb(249, 115, 22)"
-                stroke="rgb(249, 115, 22)"
-                className="w-5 h-5 cursor-pointer transition-colors"
+                // fill="rgb(249, 115, 22)"
+                // stroke="rgb(249, 115, 22)"
+                className="w-5 h-5 text-primary cursor-pointer transition-colors"
               />
             ) : (
               <Heart className="w-5 h-5 text-gray-400 cursor-pointer transition-colors" />
