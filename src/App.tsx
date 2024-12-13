@@ -27,6 +27,7 @@ import ProductDetails from "@/pages/products/product-details/product-details-pag
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
+import FeaturedProductsPage from "./pages/products/featured-products/featured-products-page";
 
 const router = createBrowserRouter([
   {
@@ -61,8 +62,8 @@ const router = createBrowserRouter([
         element: <div>Services</div>,
       },
       {
-        path: "products", // TODO: temporery
-        element: <Navigate to="/products/category/electronics" />,
+        path: "products",
+        element: <FeaturedProductsPage />,
       },
       {
         path: "products/category/:category",

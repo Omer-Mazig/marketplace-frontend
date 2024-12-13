@@ -1,9 +1,9 @@
 import {
   Calendar,
   ChevronDown,
-  GalleryVerticalEnd,
   Home,
   Inbox,
+  Package,
   Search,
 } from "lucide-react";
 
@@ -49,9 +49,9 @@ const items = [
     icon: Calendar,
   },
   {
-    title: "Market Place",
+    title: "Products",
     url: "products",
-    icon: Search,
+    icon: Package,
   },
 ];
 
@@ -67,14 +67,14 @@ export function AppSidebar() {
               size="lg"
               asChild
             >
-              <a href="#">
+              <Link to="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEnd className="size-4" />
+                  <Package className="size-4" />
                 </div>
-                <div className="flex flex-col gap-0.5 leading-none">
+                <div className="flex flex-col gap-0.5 leading-none ml-2">
                   <span className="font-semibold">MarketPlace</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

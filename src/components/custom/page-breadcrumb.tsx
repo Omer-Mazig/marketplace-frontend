@@ -43,7 +43,7 @@ export function PageBreadcrumb() {
   const isMobile = useIsMobile();
 
   return (
-    <Breadcrumb className="flex items-center ml-6">
+    <Breadcrumb className="flex items-center ml-1">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href={items[0].href}>{items[0].label}</BreadcrumbLink>
