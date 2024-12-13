@@ -41,7 +41,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
   return (
     <Card
       key={product.id}
-      className="flex flex-col h-full cursor-pointer max-w-96 hover:shadow-xl"
+      className="flex flex-col h-full cursor-pointer max-w-96 hover:shadow-xl hover:outline outline-primary outline-offset-4"
       onClick={goToDetails}
     >
       <CardHeader className="p-0">
