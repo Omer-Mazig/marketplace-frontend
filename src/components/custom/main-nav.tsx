@@ -6,9 +6,17 @@ import { AuthButton } from "./auth-button";
 import { useAuth } from "@/providers/auth-provider";
 import { SidebarTrigger } from "../ui/sidebar";
 import { PageBreadcrumb } from "./page-breadcrumb";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export function MainNav() {
   const { loggedInUser } = useAuth();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
 
   return (
     <header className="container mb-4 sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
