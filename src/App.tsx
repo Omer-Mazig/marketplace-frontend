@@ -21,9 +21,9 @@ import UserInfoPage from "@/pages/user-profile/user-info/user-info-page";
 import UserSettingsPage from "@/pages/user-profile/user-settings/user-settings-page";
 import UserProductsPage from "@/pages/user-profile/user-products/user-products-page";
 import UserWishlistPage from "@/pages/user-profile/user-wishlist/user-wishlist-page";
-import ProductListPage from "@/pages/products/product-list-page";
-import ProductDetails from "@/pages/product-details/product-details-page";
 import NewProductPage from "@/pages/new-product-page";
+import ProductListPage from "@/pages/products/product-list/product-list-page";
+import ProductDetails from "@/pages/products/product-details/product-details-page";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";

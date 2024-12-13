@@ -13,7 +13,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 // Custom components
 import Error from "@/components/custom/error";
 import { MiniUserRow } from "@/components/custom/mini-user-row";
-import { AddToWishlistBtn } from "../products/_components/add-to-wishlist-btn";
 
 // Constants
 import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
@@ -21,6 +20,7 @@ import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 // Providers
 import { useAuth } from "@/providers/auth-provider";
 import { PageHeading } from "@/components/ui/page-heading";
+import { AddToWishlistBtn } from "../_components/add-to-wishlist-btn";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
