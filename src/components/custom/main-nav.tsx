@@ -1,6 +1,3 @@
-// React Router
-import { Link } from "react-router-dom";
-
 // Custom components
 import { ModeToggle } from "./mode-toggle";
 import { AuthButton } from "./auth-button";
@@ -8,6 +5,7 @@ import { AuthButton } from "./auth-button";
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
 import { SidebarTrigger } from "../ui/sidebar";
+import { PageBreadcrumb } from "./page-breadcrumb";
 
 export function MainNav() {
   const { loggedInUser } = useAuth();
@@ -15,15 +13,10 @@ export function MainNav() {
   return (
     <header className="container mb-4 sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
+        <div className="mr-4 flex">
           <SidebarTrigger />
 
-          <Link
-            to="/"
-            className="uppercase mr-4 flex items-center space-x-2 lg:mr-6"
-          >
-            MarketPlace
-          </Link>
+          <PageBreadcrumb />
         </div>
         <div className="flex flex-1 items-center justify-between space-x-6 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
