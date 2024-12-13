@@ -73,8 +73,7 @@ export default function UserProductsPage() {
             asChild
             className="w-full md:w-auto"
           >
-            <Link to="/new-product">
-              {" "}
+            <Link to="/products/new-product">
               <Plus /> Add New Product{" "}
             </Link>
           </Button>

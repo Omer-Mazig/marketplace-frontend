@@ -21,13 +21,13 @@ import UserInfoPage from "@/pages/user-profile/user-info/user-info-page";
 import UserSettingsPage from "@/pages/user-profile/user-settings/user-settings-page";
 import UserProductsPage from "@/pages/user-profile/user-products/user-products-page";
 import UserWishlistPage from "@/pages/user-profile/user-wishlist/user-wishlist-page";
-import NewProductPage from "@/pages/new-product-page";
+import NewProductPage from "@/pages/products/new-product/new-product-page";
 import ProductListPage from "@/pages/products/product-list/product-list-page";
 import ProductDetails from "@/pages/products/product-details/product-details-page";
+import FeaturedProductsPage from "./pages/products/featured-products/featured-products-page";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
-import FeaturedProductsPage from "./pages/products/featured-products/featured-products-page";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "about",
+        path: "/about",
         element: <AboutPage />,
         children: [
           {
@@ -54,27 +54,27 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "contact",
+        path: "/contact",
         element: <div>Contact</div>,
       },
       {
-        path: "services",
+        path: "/services",
         element: <div>Services</div>,
       },
       {
-        path: "products",
+        path: "/products",
         element: <FeaturedProductsPage />,
       },
       {
-        path: "products/category/:category",
+        path: "/products/category/:category",
         element: <ProductListPage />,
       },
       {
-        path: "/products/:productId",
+        path: "/product/:productId",
         element: <ProductDetails />,
       },
       {
-        path: "new-product",
+        path: "/products/new-product",
         element: (
           <ProtectedRoute>
             <NewProductPage />
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "user-profile",
+        path: "/user-profile",
         element: (
           <ProtectedRoute>
             <UserProfileLayout />
@@ -114,7 +114,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "auth",
+    path: "/auth",
     element: (
       <AuthRoutes>
         <AuthLayout />

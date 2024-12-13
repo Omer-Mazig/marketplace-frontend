@@ -35,7 +35,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
   const { category } = useParams();
 
   function goToDetails() {
-    navigate(`/products/${product.id}`);
+    navigate(`/product/${product.id}`);
   }
 
   return (
