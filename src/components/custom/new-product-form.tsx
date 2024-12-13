@@ -196,9 +196,7 @@ export function NewProductForm({
                 <FormLabel>Negotiable</FormLabel>
                 <Hint
                   sideOffset={40}
-                  description={`
-            Free Workspace can have up to 5 boards. Upgrade to Premium to create more boards.
-            `}
+                  description="Check if the price is negotiable."
                 >
                   <HelpCircle className="absolute right-2 h-[14px] w-[14px]" />
                 </Hint>
