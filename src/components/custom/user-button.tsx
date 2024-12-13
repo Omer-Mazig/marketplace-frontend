@@ -1,11 +1,14 @@
 "use client";
 
 import {
-  BadgeCheck,
   Bell,
   ChevronsUpDown,
   CreditCard,
+  Heart,
+  Info,
   LogOut,
+  Package,
+  Settings,
   Sparkles,
 } from "lucide-react";
 
@@ -95,7 +98,7 @@ export function UserButton() {
             <DropdownMenuGroup>
               <DropdownMenuItem className="flex gap-2">
                 <Sparkles className="w-4 h-4" />
-                Upgrade to Pro
+                Upgrade plan
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -105,7 +108,7 @@ export function UserButton() {
                 className="flex gap-2"
               >
                 <Link to="/user-profile/info">
-                  <BadgeCheck className="w-4 h-4" />
+                  <Info className="w-4 h-4" />
                   Info
                 </Link>
               </DropdownMenuItem>
@@ -114,7 +117,7 @@ export function UserButton() {
                 className="flex gap-2"
               >
                 <Link to="/user-profile/settings">
-                  <BadgeCheck className="w-4 h-4" />
+                  <Settings className="w-4 h-4" />
                   Settings
                 </Link>
               </DropdownMenuItem>
@@ -123,7 +126,7 @@ export function UserButton() {
                 className="flex gap-2"
               >
                 <Link to="/user-profile/products">
-                  <BadgeCheck className="w-4 h-4" />
+                  <Package className="w-4 h-4" />
                   Products
                 </Link>
               </DropdownMenuItem>
@@ -132,7 +135,7 @@ export function UserButton() {
                 className="flex gap-2"
               >
                 <Link to="/user-profile/wishlist">
-                  <BadgeCheck className="w-4 h-4" />
+                  <Heart className="w-4 h-4" />
                   Wishlist
                 </Link>
               </DropdownMenuItem>

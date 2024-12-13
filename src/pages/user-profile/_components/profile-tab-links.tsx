@@ -3,12 +3,12 @@ import { NavLink, useLocation } from "react-router-dom";
 
 // Icons
 import {
-  User,
   Settings,
   Package,
   Heart,
   LucideIcon,
   Archive,
+  Info,
 } from "lucide-react";
 
 // UI components
@@ -56,7 +56,7 @@ function ProfileTabLinks() {
         <TabLink
           to="info"
           value="/user-profile/info"
-          Icon={User}
+          Icon={Info}
           label="Info"
         />
         <TabLink
