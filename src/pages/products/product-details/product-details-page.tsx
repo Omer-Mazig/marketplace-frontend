@@ -36,34 +36,22 @@ export default function ProductDetails() {
     <div>
       <PageHeading>Product Details</PageHeading>
       <Card>
-        <CardHeader>
+        <CardHeader className="flex-row justify-between">
           <CardTitle>{product.name}</CardTitle>
+          <p className="text-2xl font-bold text-primary">
+            ${product.price.toFixed(2)}
+          </p>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              {product.imageURL && (
-                <img
-                  className="w-full h-48 object-cover rounded-t-lg"
-                  src={
-                    product.imageURL ||
-                    `https://via.placeholder.com/300x200?text=${encodeURIComponent(
-                      product.name
-                    )}`
-                  }
-                  alt="product image"
-                />
-              )}
-            </div>
             <div className="space-y-4">
               <p className="text-lg">{product.description}</p>
-              <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
               <p>Stock: {product.stock}</p>
               <div className="flex flex-wrap gap-2">
                 {product.categories.map((category) => (
                   <Badge
                     key={category}
-                    variant="secondary"
+                    variant="default"
                   >
                     {category}
                   </Badge>
@@ -88,6 +76,15 @@ export default function ProductDetails() {
                 )}
               </div>
             </div>
+            <div>
+              {
+                <img
+                  className="w-full max-h-[400px] object-cover rounded-t-lg"
+                  src="https://picsum.photos/600/600"
+                  alt="product image"
+                />
+              }
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -104,7 +101,6 @@ function ProductSkeleton() {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6">
-            <Skeleton className="h-[300px] w-full" />
             <div className="space-y-4">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-3/4" />
@@ -123,6 +119,7 @@ function ProductSkeleton() {
                 <Skeleton className="h-4 w-1/3" />
               </div>
             </div>
+            <Skeleton className="h-[300px] w-full" />
           </div>
         </CardContent>
       </Card>

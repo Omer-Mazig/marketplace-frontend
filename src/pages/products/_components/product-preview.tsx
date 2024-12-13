@@ -46,12 +46,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
     >
       <CardHeader className="p-0">
         <img
-          src={
-            product.imageURL ||
-            `https://via.placeholder.com/300x200?text=${encodeURIComponent(
-              product.name
-            )}`
-          }
+          src={"https://picsum.photos/600/600"}
           alt={product.name}
           className="w-full h-48 object-cover rounded-t-lg"
         />
@@ -65,7 +60,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
           {product.categories.map((category) => (
             <Badge
               key={category}
-              variant="secondary"
+              variant="default"
               className="text-xs mb-4"
             >
               {category}
