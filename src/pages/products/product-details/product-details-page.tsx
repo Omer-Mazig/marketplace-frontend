@@ -22,6 +22,7 @@ import {
 } from "../_components/shared-product-components";
 import { ProductProvider } from "../product-provider";
 import { MiniUserRow } from "@/components/shared/mini-user-row";
+import { EditProductButton } from "../_components/edit-product-button";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
@@ -77,7 +78,7 @@ export default function ProductDetails() {
                       ]}
                     />
                   ) : (
-                    "Edit"
+                    <EditProductButton />
                   )}
                 </div>
               </div>

@@ -18,14 +18,8 @@ import {
 } from "../../_components/shared-product-components";
 import { ProductProvider } from "../../product-provider";
 import { MiniUserRow } from "@/components/shared/mini-user-row";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+
+import { EditProductButton } from "../../_components/edit-product-button";
 
 interface ProductPreviewProps {
   product: Product;
@@ -65,20 +59,7 @@ export function ProductPreview({ product }: ProductPreviewProps) {
               queryKey={[QUERY_KEY_DICT.PRODUCTS, { category }]}
             />
           ) : (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                  >
-                    <Pencil className="w-5 h-5" />
-                    <span className="sr-only">Edit product</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Edit product</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <EditProductButton />
           )}
         </CardFooter>
       </Card>

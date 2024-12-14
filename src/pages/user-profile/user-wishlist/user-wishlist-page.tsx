@@ -85,7 +85,7 @@ function WishlistItemActions({ product }: { product: Product }) {
             onClick={() => deleteFromWishlistMutation.mutate()}
             className="sm:opacity-0 group-hover:opacity-100"
           >
-            <Trash2 className="w-5 h-5" />
+            <Trash2 className="w-5 h-5 text-gray-400" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>Remove from wishlist</TooltipContent>

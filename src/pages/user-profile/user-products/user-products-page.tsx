@@ -1,5 +1,5 @@
 // Icons
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 // Router
 import { Link } from "react-router-dom";
@@ -24,6 +24,7 @@ import {
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/shared/error";
 import { GenericItemRow } from "../_components/generic-item-row";
+import { EditProductButton } from "@/pages/products/_components/edit-product-button";
 
 // Hooks
 import { useDeleteProductMutation } from "@/hooks/use-delete-product-mutation";
@@ -87,7 +88,7 @@ function ProductItemActions({ product }: { product: Product }) {
   const deleteProductMutation = useDeleteProductMutation(product);
 
   return (
-    <>
+    <div className="sm:opacity-0 group-hover:opacity-100">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -96,9 +97,8 @@ function ProductItemActions({ product }: { product: Product }) {
               size="sm"
               onClick={() => deleteProductMutation.mutate()}
               disabled={deleteProductMutation.isPending}
-              className="sm:opacity-0 group-hover:opacity-100"
             >
-              <Trash2 className="w-5 h-5" />
+              <Trash2 className="w-5 h-5 text-gray-400" />
               <span className="sr-only">Delete product</span>
             </Button>
           </TooltipTrigger>
@@ -106,21 +106,7 @@ function ProductItemActions({ product }: { product: Product }) {
         </Tooltip>
       </TooltipProvider>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="sm:opacity-0 group-hover:opacity-100"
-            >
-              <Pencil className="w-5 h-5" />
-              <span className="sr-only">Edit product</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Edit product</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </>
+      <EditProductButton />
+    </div>
   );
 }

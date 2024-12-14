@@ -70,10 +70,10 @@ export function AddToWishlistBtn({ product, queryKey }: AddToWishlistBtnProps) {
               <Heart
                 fill="rgb(34, 197, 94)"
                 stroke="rgb(34, 197, 94)"
-                className="w-5 h-5 text-primary cursor-pointer transition-colors"
+                className="w-5 h-5 text-primary"
               />
             ) : (
-              <Heart className="w-5 h-5 text-gray-400 cursor-pointer transition-colors" />
+              <Heart className="w-5 h-5 text-gray-400" />
             )}
           </Button>
         </TooltipTrigger>
