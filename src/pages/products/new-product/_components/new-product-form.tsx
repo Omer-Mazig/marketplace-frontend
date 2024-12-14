@@ -51,6 +51,7 @@ interface NewProductFormProps {
   >;
 }
 
+// TODO: if user close upgrade dialog with out upgrading - redirect to user-product-page
 export function NewProductForm({
   setShouldShowAfterCreateProductDialog,
 }: NewProductFormProps) {

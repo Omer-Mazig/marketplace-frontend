@@ -69,7 +69,7 @@ export default function UserProductsPage() {
         ) : (
           <p>You have no products</p>
         )}
-        <div className="flex items-center mt-4">
+        <div className="flex flex-col md:flex-row items-center gap-4 mt-4">
           <Button
             asChild
             className="w-full md:w-auto"
@@ -78,6 +78,12 @@ export default function UserProductsPage() {
               <Plus /> Add New Product{" "}
             </Link>
           </Button>
+          <p className="text-destructive/75 dark:text-destructive/100 text-xs">
+            You have reached the limit for adding products.{" "}
+            <span className="cursor-pointer underline">
+              Click here to upgrade your plan.
+            </span>
+          </p>
         </div>
       </CardContent>
     </Card>
