@@ -7,10 +7,10 @@ import Error from "@/components/shared/error";
 import { PageHeading } from "@/components/ui/page-heading";
 
 // Custom components
+import { ProductPreview } from "./_components/product-preview";
 
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
-import ProductPreview from "./_components/product-preview";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
