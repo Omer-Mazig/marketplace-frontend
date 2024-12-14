@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 
 // Custom components
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app/app-sidebar";
+import { AppSidebar } from "@/components/app/app-sidebar/app-sidebar";
 import { LoginAlertDialog } from "@/pages/auth/_components/login-alert-dialog";
-import { AppHeader } from "@/components/app/app-header";
-import { AppFooter } from "@/components/app/app-footer";
+import { AppHeader } from "@/components/app/app-header/app-header";
+import { AppFooter } from "@/components/app/app-footer/app-footer";
 
 export default function PlatformLayout() {
   return (

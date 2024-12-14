@@ -1,3 +1,7 @@
+// React router
+import { Link } from "react-router-dom";
+
+// Icons
 import {
   Calendar,
   ChevronDown,
@@ -7,6 +11,13 @@ import {
   Search,
 } from "lucide-react";
 
+// interfaces | types | enums
+import { ProductCategory } from "@/enums/product-category.enum";
+
+// Custom components
+import { UserButton } from "@/components/shared/user-button";
+
+// UI components
 import {
   Sidebar,
   SidebarContent,
@@ -21,15 +32,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
-import { ProductCategory } from "@/enums/product-category.enum";
+
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../ui/collapsible";
-import { UserButton } from "../shared/user-button";
-import { Label } from "../ui/label";
+} from "@/components/ui/collapsible";
+
+import { Label } from "@/components/ui/label";
 
 // Menu items.
 const items = [

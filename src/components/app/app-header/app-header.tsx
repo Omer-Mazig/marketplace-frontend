@@ -1,13 +1,15 @@
+// React hooks
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 // Custom components
-import { ModeToggle } from "../shared/mode-toggle";
-import { AuthButton } from "../shared/auth-button";
+import { ModeToggle } from "@/components/shared/mode-toggle";
+import { AuthButton } from "@/components/shared/auth-button";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
-import { SidebarTrigger } from "../ui/sidebar";
-import { PageBreadcrumb } from "./page-breadcrumb";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { PageBreadcrumb } from "./_components/page-breadcrumb";
 
 export function AppHeader() {
   const { loggedInUser } = useAuth();
