@@ -8,6 +8,7 @@ import { HelpCircle } from "lucide-react";
 
 // Hooks:
 import { useToast } from "@/components/ui/use-toast";
+import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 // Custom enums
 import { ProductCategory } from "@/enums/product-category.enum";
@@ -21,6 +22,7 @@ import { MultiSelect } from "@/components/ui/multi-select";
 
 // Custom components
 import { Hint } from "@/components/shared/hint";
+import { ProductLimitMessage } from "@/components/shared/product-limit-message";
 
 // UI form components
 import {
@@ -38,7 +40,6 @@ import { createProduct } from "@/services/products.service";
 // Types and validations
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
-import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
@@ -236,14 +237,17 @@ export function NewProductForm({
             </FormItem>
           )}
         />
+        <div className="flex items-center gap-4">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full md:w-auto"
+          >
+            {isSubmitting ? "Loading..." : "Add"}
+          </Button>
 
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full md:w-auto"
-        >
-          {isSubmitting ? "Loading..." : "Add"}
-        </Button>
+          <ProductLimitMessage />
+        </div>
       </form>
     </Form>
   );

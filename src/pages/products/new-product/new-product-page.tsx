@@ -16,6 +16,7 @@ export default function NewProductPage() {
   return (
     <div className="text-center 3xs:text-start">
       <PageHeading>Add New Product</PageHeading>
+
       <NewProductForm
         setShouldShowAfterCreateProductDialog={
           setShouldShowAfterCreateProductDialog

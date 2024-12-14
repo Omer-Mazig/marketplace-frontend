@@ -25,6 +25,7 @@ import { UserProductsSkeleton } from "./user-products-page-skeleton";
 import Error from "@/components/shared/error";
 import { GenericItemRow } from "../_components/generic-item-row";
 import { EditProductButton } from "@/pages/products/_components/edit-product-button";
+import { ProductLimitMessage } from "@/components/shared/product-limit-message";
 
 // Hooks
 import { useDeleteProductMutation } from "@/hooks/use-delete-product-mutation";
@@ -34,12 +35,10 @@ import { Product } from "@/types/products.types";
 
 // Contexts
 import { useUserProfileContext } from "../user-profile-layout";
-import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 // TODO: render more info about product: wishlist amount and more
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
-  const { openDialog } = useUpgradePlanDialog();
 
   if (isLoading) return <UserProductsSkeleton />;
   if (error || !userProfileData) {
@@ -47,10 +46,6 @@ export default function UserProductsPage() {
   }
 
   const { products } = userProfileData;
-
-  function openUpgradePlanDialog() {
-    openDialog();
-  }
 
   return (
     <Card>
@@ -84,26 +79,10 @@ export default function UserProductsPage() {
               <Plus /> Add New Product{" "}
             </Link>
           </Button>
-          <TextWarning>
-            You have reached the limit for adding products.{" "}
-            <span
-              onClick={openUpgradePlanDialog}
-              className="cursor-pointer underline"
-            >
-              Click here to upgrade your plan.
-            </span>
-          </TextWarning>
+          <ProductLimitMessage />
         </div>
       </CardContent>
     </Card>
-  );
-}
-
-function TextWarning({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-destructive/75 dark:text-destructive/100 text-xs">
-      {children}
-    </p>
   );
 }
 
