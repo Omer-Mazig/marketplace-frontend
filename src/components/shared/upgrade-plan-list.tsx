@@ -66,7 +66,7 @@ export function UpgradePlanList() {
         {plans.map((plan) => (
           <Card
             key={plan.id}
-            className={`transition-all duration-300 ease-in-out ${
+            className={`flex flex-col transition-all duration-300 ease-in-out ${
               selectedPlan === plan.id
                 ? "border-primary shadow-lg"
                 : "opacity-75 hover:opacity-100"
@@ -78,7 +78,7 @@ export function UpgradePlanList() {
                 {plan.description}
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-grow">
               <p className="text-3xl font-bold text-center my-4">
                 {plan.price}
                 <span className="text-sm font-normal">/month</span>
