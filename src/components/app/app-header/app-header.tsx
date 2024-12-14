@@ -35,7 +35,7 @@ export function AppHeader() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <SidebarTrigger />
+                <SidebarTrigger className="mr-1" />
               </TooltipTrigger>
               <TooltipContent>
                 {state === "expanded" ? "Close sidebar" : "Open sidebar"}
