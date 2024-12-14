@@ -1,5 +1,5 @@
 // Third-party libraries
-import { useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
 // UI components
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,17 +11,23 @@ import { ProductPreview } from "./_components/product-preview";
 
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
+import { useEffect } from "react";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
   const { category } = useParams();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
 
   const {
     data: products,
     error,
     isLoading,
   } = useGetAllProductsQuery({ category });
+
+  useEffect(() => {
+    location.state = category;
+  }, []);
 
   // TODO: Filter from the serverside
   const filteredProducts = products

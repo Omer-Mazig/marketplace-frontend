@@ -25,26 +25,66 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
-const items = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Documentation" },
-  { href: "#", label: "Building Your Application" },
-  { href: "#", label: "Data Fetching" },
-  { label: "Caching and Revalidating" },
-];
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const ITEMS_TO_DISPLAY = 3;
 
+type BreadcrumbItemType = {
+  href: string;
+  label: string;
+};
+
+// TODO: figure out how to do breadcrump
+// try again with context
+function getBreadcrumpItems(key: string) {
+  const dict: Record<string, BreadcrumbItemType[]> = {
+    "/": [{ href: "/", label: "Home" }],
+    "/about": [{ href: "/about", label: "About" }],
+    "/about/team": [
+      { href: "/about", label: "About" },
+      { href: "/about/team", label: "Team" },
+    ],
+    "/about/vision": [
+      { href: "/about", label: "About" },
+      { href: "/about/vision", label: "Vision" },
+    ],
+    "/contact": [{ href: "/contact", label: "Contact" }],
+    "/products": [
+      { href: "/", label: "Home" },
+      { href: "/products", label: "Products" },
+    ],
+    "/products/category": [
+      { href: "/", label: "Home" },
+      { href: "/products", label: "Products" },
+      { href: "/products/category", label: "" },
+    ],
+  };
+
+  return dict[key];
+}
+
 export function PageBreadcrumb() {
+  const [items, setItems] = useState<BreadcrumbItemType[]>([]);
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log("location", location);
+    const items = getBreadcrumpItems(location.pathname);
+    setItems(items);
+  }, [location.pathname]);
+
+  if (!items || !items.length) return null;
+
+  console.log("items", items);
 
   return (
     <Breadcrumb className="flex items-center ml-1">
       <BreadcrumbList>
+        {/* Render the first breadcrumb */}
         <BreadcrumbItem>
           <BreadcrumbLink href={items[0].href}>{items[0].label}</BreadcrumbLink>
         </BreadcrumbItem>
@@ -111,23 +151,21 @@ export function PageBreadcrumb() {
             <BreadcrumbSeparator />
           </>
         ) : null}
-        {items.slice(-ITEMS_TO_DISPLAY + 1).map((item, index) => (
-          <BreadcrumbItem key={index}>
+        {items.slice(1).map((item, index) => (
+          <BreadcrumbItem key={item.href}>
             {item.href ? (
-              <>
-                <BreadcrumbLink
-                  asChild
-                  className="max-w-20 truncate md:max-w-none"
-                >
-                  <Link to={item.href}>{item.label}</Link>
-                </BreadcrumbLink>
-                <BreadcrumbSeparator />
-              </>
+              <BreadcrumbLink
+                asChild
+                className="max-w-20 truncate md:max-w-none"
+              >
+                <Link to={item.href}>{item.label}</Link>
+              </BreadcrumbLink>
             ) : (
               <BreadcrumbPage className="max-w-20 truncate md:max-w-none">
                 {item.label}
               </BreadcrumbPage>
             )}
+            {index < items.length - 2 && <BreadcrumbSeparator />}
           </BreadcrumbItem>
         ))}
       </BreadcrumbList>

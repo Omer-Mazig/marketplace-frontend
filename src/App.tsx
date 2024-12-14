@@ -12,6 +12,8 @@ import AuthLayout from "@/layouts/auth-layout";
 import UserProfileLayout from "@/pages/user-profile/user-profile-layout";
 
 // Custom pages
+import ContactPage from "./pages/contact/contact-page";
+import HomePage from "./pages/contact/home-page";
 import LoginPage from "@/pages/auth/login-page";
 import RegisterPage from "@/pages/auth/register-page";
 import AboutPage from "@/pages/about-page";
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>home</div>,
+        element: <HomePage />,
       },
 
       {
@@ -55,11 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <div>Contact</div>,
-      },
-      {
-        path: "/services",
-        element: <div>Services</div>,
+        element: <ContactPage />,
       },
       {
         path: "/products",
