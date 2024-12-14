@@ -8,7 +8,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export function Footer() {
+export function AppFooter() {
   return (
     <footer className="bg-muted text-muted-foreground py-4 mt-12">
       <div className="container max-w-screen-xl mx-auto px-4">

@@ -16,7 +16,7 @@ import {
 
 // Custom components
 import { UserWishlistSkeleton } from "./user-wishlist-page-skeleton";
-import Error from "@/components/custom/error";
+import Error from "@/components/shared/error";
 import { GenericItemRow } from "../_components/generic-item-row";
 
 // Icons

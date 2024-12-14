@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 
 // UI components
 import { Skeleton } from "@/components/ui/skeleton";
-import Error from "@/components/custom/error";
+import Error from "@/components/shared/error";
 import { PageHeading } from "@/components/ui/page-heading";
 
 // Custom components

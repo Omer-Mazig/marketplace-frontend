@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { UpgradePlanList } from "./upgrade-plan-list";
 
 // Custom features
-import { UpgradePlanList } from "./upgrade-plan-list";
 
 interface UpgradePlanDialogProps {
   isOpen: boolean;

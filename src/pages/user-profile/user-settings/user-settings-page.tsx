@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 // Custom components
-import Error from "@/components/custom/error";
+import Error from "@/components/shared/error";
 import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
 
 // Hooks

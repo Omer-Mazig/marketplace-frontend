@@ -20,7 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { MultiSelect } from "@/components/ui/multi-select";
 
 // Custom components
-import { Hint } from "@/components/custom/hint";
+import { Hint } from "@/components/shared/hint";
 
 // UI form components
 import {

@@ -3,9 +3,9 @@ import { useState } from "react";
 
 // Custom components
 import { AfterCreateProductDialog } from "@/pages/products/_components/after-create-product-dialog";
-import { UpgradePlanDialog } from "@/components/custom/upgrade-plan-dialog";
 import { PageHeading } from "@/components/ui/page-heading";
 import { NewProductForm } from "./_components/new-product-form";
+import { UpgradePlanDialog } from "@/components/shared/upgrade-plan-dialog";
 
 export default function NewProductPage() {
   const [

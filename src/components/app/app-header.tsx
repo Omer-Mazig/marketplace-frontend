@@ -1,6 +1,6 @@
 // Custom components
-import { ModeToggle } from "./mode-toggle";
-import { AuthButton } from "./auth-button";
+import { ModeToggle } from "../shared/mode-toggle";
+import { AuthButton } from "../shared/auth-button";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
@@ -9,7 +9,7 @@ import { PageBreadcrumb } from "./page-breadcrumb";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-export function MainNav() {
+export function AppHeader() {
   const { loggedInUser } = useAuth();
 
   const location = useLocation();

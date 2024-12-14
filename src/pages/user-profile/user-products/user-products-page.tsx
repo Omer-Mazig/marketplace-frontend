@@ -22,7 +22,7 @@ import {
 
 // Custom components
 import { UserProductsSkeleton } from "./user-products-page-skeleton";
-import Error from "@/components/custom/error";
+import Error from "@/components/shared/error";
 import { GenericItemRow } from "../_components/generic-item-row";
 
 // Hooks

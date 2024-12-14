@@ -2,11 +2,11 @@
 import { Outlet } from "react-router-dom";
 
 // Custom components
-import { MainNav } from "@/components/custom/main-nav";
-import { Footer } from "@/components/custom/footer";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/custom/app-sidebar";
+import { AppSidebar } from "@/components/app/app-sidebar";
 import { LoginAlertDialog } from "@/pages/auth/_components/login-alert-dialog";
+import { AppHeader } from "@/components/app/app-header";
+import { AppFooter } from "@/components/app/app-footer";
 
 export default function PlatformLayout() {
   return (
@@ -14,11 +14,11 @@ export default function PlatformLayout() {
       <SidebarProvider>
         <AppSidebar />
         <div className="flex flex-col max-w-screen-2xl flex-grow">
-          <MainNav />
+          <AppHeader />
           <main className="container flex-grow">
             <Outlet />
           </main>
-          <Footer />
+          <AppFooter />
         </div>
       </SidebarProvider>
       <LoginAlertDialog />

@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Custom components
 import { UserInfoSkeleton } from "./user-info-page-skeleton";
-import Error from "@/components/custom/error";
+import Error from "@/components/shared/error";
 
 // Hooks
 import { useUserProfileContext } from "../user-profile-layout";

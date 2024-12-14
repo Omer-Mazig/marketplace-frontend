@@ -28,7 +28,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { UserButton } from "./user-button";
+import { UserButton } from "../shared/user-button";
 import { Label } from "../ui/label";
 
 // Menu items.
