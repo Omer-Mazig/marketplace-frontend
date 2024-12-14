@@ -7,11 +7,17 @@ import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 
 // UI components
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { PageHeading } from "@/components/ui/page-heading";
 
 // Custom components
+import { ProductDetailsSkeleton } from "./_components/product-details-skelaton";
 import Error from "@/components/shared/error";
 import { MiniUserRow } from "@/components/shared/mini-user-row";
 import { AddToWishlistBtn } from "../_components/add-to-wishlist-btn";
@@ -23,71 +29,71 @@ import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 import { useAuth } from "@/providers/auth-provider";
 import { ProductProvider, useProduct } from "./product-provider";
 
-const ProductDetails = () => {
+export default function ProductDetails() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
   const { data: product, error, isLoading } = useGetProductById(productId);
 
-  if (isLoading) return <ProductSkeleton />;
+  if (isLoading) return <ProductDetailsSkeleton />;
   if (error || !product) return <Error />;
 
   return (
     <ProductProvider product={product}>
-      <div>
-        <PageHeading>Product Details</PageHeading>
-        <Card>
-          <ProductDetails.Header />
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <ProductDetails.Info />
-              <ProductDetails.Image />
+      <PageHeading>Product Details</PageHeading>
+      <Card>
+        <CardHeader className="flex-row justify-between">
+          <div>
+            <ProductDetails.Title />
+            <ProductDetails.Description />
+          </div>
+
+          <ProductDetails.Price />
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-6 justify-between">
+              <div className="space-y-4">
+                <ProductDetails.Categories />
+                <ProductDetails.Stock />
+                <ProductDetails.Location />
+                <ProductDetails.NegotiableStatus />
+                <ProductDetails.ViewCount />
+                {/* <ProductDetails.Dates /> */}
+              </div>
+              <ProductDetails.OwnerInfo />
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <ProductDetails.Image />
+          </div>
+        </CardContent>
+      </Card>
     </ProductProvider>
   );
+}
+
+ProductDetails.Title = () => {
+  const product = useProduct();
+  return <CardTitle>{product.name}</CardTitle>;
 };
 
-ProductDetails.Header = () => {
+ProductDetails.Price = () => {
   const product = useProduct();
   return (
-    <CardHeader className="flex-row justify-between">
-      <CardTitle>{product.name}</CardTitle>
-      <p className="text-2xl font-bold text-primary">
-        ${product.price.toFixed(2)}
-      </p>
-    </CardHeader>
+    <p className="text-2xl font-bold text-primary">
+      ${product.price.toFixed(2)}
+    </p>
   );
 };
 
-ProductDetails.Info = () => {
+ProductDetails.Description = () => {
   const product = useProduct();
-  const { loggedInUser } = useAuth();
-
   return (
-    <div className="space-y-4">
-      <p className="text-lg">{product.description}</p>
-      <p>Stock: {product.stock}</p>
-      <ProductDetails.Categories />
-      {product.location && <p>Location: {product.location}</p>}
-      <p>{product.isNegotiable ? "Price is negotiable" : "Fixed price"}</p>
-      <p>Currently views: {product.viewCount}</p>
-      <p>Created: {format(product.createdAt, "PPP")}</p>
-      <p>Last updated: {format(product.updatedAt, "PPP")}</p>
-      <div className="flex items-center justify-between space-x-2">
-        <MiniUserRow user={product.owner} />
-        {loggedInUser?.id !== product.owner.id ? (
-          <AddToWishlistBtn
-            product={product}
-            queryKey={[QUERY_KEY_DICT.PRODUCT, { productId: product.id }]}
-          />
-        ) : (
-          "Edit"
-        )}
-      </div>
-    </div>
+    <CardDescription className="mt-2">{product.description}</CardDescription>
   );
+};
+
+ProductDetails.Stock = () => {
+  const product = useProduct();
+  return <p>Stock: {product.stock}</p>;
 };
 
 ProductDetails.Categories = () => {
@@ -106,6 +112,50 @@ ProductDetails.Categories = () => {
   );
 };
 
+ProductDetails.Location = () => {
+  const product = useProduct();
+  return product.location && <p>Location: {product.location}</p>;
+};
+
+ProductDetails.NegotiableStatus = () => {
+  const product = useProduct();
+  return <p>{product.isNegotiable ? "Price is negotiable" : "Fixed price"}</p>;
+};
+
+ProductDetails.ViewCount = () => {
+  const product = useProduct();
+  return <p>Currently views: {product.viewCount}</p>;
+};
+
+ProductDetails.Dates = () => {
+  const product = useProduct();
+  return (
+    <>
+      <p>Created: {format(product.createdAt, "PPP")}</p>
+      <p>Last updated: {format(product.updatedAt, "PPP")}</p>
+    </>
+  );
+};
+
+ProductDetails.OwnerInfo = () => {
+  const product = useProduct();
+  const { loggedInUser } = useAuth();
+
+  return (
+    <div className="flex items-center justify-between space-x-2">
+      <MiniUserRow user={product.owner} />
+      {loggedInUser?.id !== product.owner.id ? (
+        <AddToWishlistBtn
+          product={product}
+          queryKey={[QUERY_KEY_DICT.PRODUCT, { productId: product.id }]}
+        />
+      ) : (
+        "Edit"
+      )}
+    </div>
+  );
+};
+
 ProductDetails.Image = () => {
   const product = useProduct();
   return (
@@ -118,40 +168,3 @@ ProductDetails.Image = () => {
     </div>
   );
 };
-
-export default ProductDetails;
-
-function ProductSkeleton() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <Card>
-        <CardHeader>
-          <Skeleton className="h-8 w-2/3" />
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-6 w-1/4" />
-              <div className="flex flex-wrap gap-2">
-                <Skeleton className="h-6 w-20" />
-                <Skeleton className="h-6 w-20" />
-              </div>
-              <Skeleton className="h-4 w-1/2" />
-              <Skeleton className="h-4 w-1/3" />
-              <Skeleton className="h-4 w-1/4" />
-              <Skeleton className="h-4 w-2/3" />
-              <Skeleton className="h-4 w-2/3" />
-              <div className="flex items-center space-x-2">
-                <Skeleton className="h-12 w-12 rounded-full" />
-                <Skeleton className="h-4 w-1/3" />
-              </div>
-            </div>
-            <Skeleton className="h-[300px] w-full" />
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
