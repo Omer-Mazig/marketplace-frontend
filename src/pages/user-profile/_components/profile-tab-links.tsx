@@ -33,8 +33,14 @@ function TabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
       >
         {({ isActive }) => (
           <>
-            <Icon className={`h-5 w-5 md:hidden ${isActive ? "" : ""}`} />
-            <span className="sr-only md:not-sr-only md:mt-1 text-xs">
+            <Icon
+              className={`h-5 w-5 md:hidden ${isActive ? "text-primary" : ""}`}
+            />
+            <span
+              className={`sr-only md:not-sr-only md:mt-1 text-xs ${
+                isActive ? "text-primary" : ""
+              }`}
+            >
               {label}
             </span>
           </>
