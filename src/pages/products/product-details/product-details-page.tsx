@@ -41,7 +41,7 @@ export default function ProductDetails() {
             <ProductImage />
           </div>
           <div className="flex flex-col">
-            <CardHeader className="flex-row justify-between space-y-0">
+            <CardHeader className="flex-row justify-between gap-3 space-y-0">
               <div>
                 <ProductTitle />
                 <ProductDescription />

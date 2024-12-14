@@ -15,7 +15,6 @@ import {
   ProductDescription,
   ProductCategories,
   ProductPrice,
-  ProductLocation,
 } from "../../_components/shared-product-components";
 import { ProductProvider } from "../../product-provider";
 import { MiniUserRow } from "@/components/shared/mini-user-row";
@@ -39,16 +38,15 @@ export function ProductPreview({ product }: ProductPreviewProps) {
         className="flex flex-col h-full cursor-pointer max-w-96 overflow-hidden hover:shadow-xl hover:outline outline-primary outline-offset-4"
         onClick={goToDetails}
       >
-        <CardHeader className="p-0">
-          <div className="max-h-[200px]">
-            <ProductImage />
-          </div>
-        </CardHeader>
-        <CardContent className="flex-grow pb-4 pt-8 px-4">
+        <div className="max-h-[200px]">
+          <ProductImage />
+        </div>
+        <CardHeader>
           <ProductTitle />
           <ProductDescription />
+        </CardHeader>
+        <CardContent className="flex-grow pb-4 pt-8 px-4 space-y-3 flex flex-col justify-end">
           <ProductCategories />
-          <ProductLocation />
           <MiniUserRow user={product.owner} />
         </CardContent>
         <CardFooter className="flex justify-between items-center">
