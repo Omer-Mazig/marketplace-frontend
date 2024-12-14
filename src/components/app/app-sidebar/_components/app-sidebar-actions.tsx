@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Plus, Sparkles } from "lucide-react";
+import { LogIn, Plus, Sparkles } from "lucide-react";
 
 export function AppSidebarActions() {
   const { loggedInUser } = useAuth();
@@ -25,7 +25,7 @@ export function AppSidebarActions() {
               asChild
               tooltip="Upgrade plan"
             >
-              {loggedInUser?.userTier !== "platinum" ? (
+              {loggedInUser && loggedInUser.userTier !== "platinum" ? (
                 <button>
                   <Sparkles className="w-4 h-4" />
                   Upgrade plan
@@ -34,14 +34,25 @@ export function AppSidebarActions() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              tooltip="Add product"
-            >
-              <Link to="/products/new-product">
-                <Plus /> Add product
-              </Link>
-            </SidebarMenuButton>
+            {loggedInUser ? (
+              <SidebarMenuButton
+                asChild
+                tooltip="Add product"
+              >
+                <Link to="/products/new-product">
+                  <Plus className="w-4 h-4" /> Add product
+                </Link>
+              </SidebarMenuButton>
+            ) : (
+              <SidebarMenuButton
+                asChild
+                tooltip="Login"
+              >
+                <Link to="/auth/login">
+                  <LogIn className="w-4 h-4" /> Login
+                </Link>
+              </SidebarMenuButton>
+            )}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
