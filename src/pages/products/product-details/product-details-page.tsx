@@ -23,7 +23,6 @@ import {
   ProductLocation,
   ProductNegotiableStatus,
   ProductViewCount,
-  ProductDates,
 } from "../_components/shared-product-components";
 import { ProductProvider } from "../product-provider";
 import { MiniUserRow } from "@/components/shared/mini-user-row";

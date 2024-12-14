@@ -17,7 +17,6 @@ import {
   ProductPrice,
 } from "../../_components/shared-product-components";
 import { ProductProvider } from "../../product-provider";
-import { MiniUserRow } from "@/components/shared/mini-user-row";
 
 import { EditProductButton } from "../../_components/edit-product-button";
 
