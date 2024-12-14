@@ -34,10 +34,12 @@ import { Product } from "@/types/products.types";
 
 // Contexts
 import { useUserProfileContext } from "../user-profile-layout";
+import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 // TODO: render more info about product: wishlist amount and more
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
+  const { openDialog } = useUpgradePlanDialog();
 
   if (isLoading) return <UserProductsSkeleton />;
   if (error || !userProfileData) {
@@ -45,6 +47,10 @@ export default function UserProductsPage() {
   }
 
   const { products } = userProfileData;
+
+  function openUpgradePlanDialog() {
+    openDialog();
+  }
 
   return (
     <Card>
@@ -78,15 +84,26 @@ export default function UserProductsPage() {
               <Plus /> Add New Product{" "}
             </Link>
           </Button>
-          <p className="text-destructive/75 dark:text-destructive/100 text-xs">
+          <TextWarning>
             You have reached the limit for adding products.{" "}
-            <span className="cursor-pointer underline">
+            <span
+              onClick={openUpgradePlanDialog}
+              className="cursor-pointer underline"
+            >
               Click here to upgrade your plan.
             </span>
-          </p>
+          </TextWarning>
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function TextWarning({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-destructive/75 dark:text-destructive/100 text-xs">
+      {children}
+    </p>
   );
 }
 
