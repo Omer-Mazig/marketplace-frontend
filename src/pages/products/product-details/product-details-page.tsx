@@ -59,7 +59,7 @@ export default function ProductDetails() {
             <CardContent className="grow flex flex-col gap-8">
               <div className="space-y-4 grow flex flex-col">
                 <ProductDetails.Categories />
-                <div className="rounded-lg py-4 px-6 grow">
+                <div className="rounded-lg py-4 px-6  grow">
                   <h4 className="font-bold mb-4">Info:</h4>
                   <ProductDetails.Stock />
                   <Separator className="my-4" />
@@ -75,7 +75,20 @@ export default function ProductDetails() {
                   <ProductDetails.Dates />
                 )}
 
-                <ProductDetails.OwnerInfo />
+                <div className="flex items-center justify-between space-x-2">
+                  <MiniUserRow user={product.owner} />
+                  {loggedInUser?.id !== product.owner.id ? (
+                    <AddToWishlistBtn
+                      product={product}
+                      queryKey={[
+                        QUERY_KEY_DICT.PRODUCT,
+                        { productId: product.id },
+                      ]}
+                    />
+                  ) : (
+                    "Edit"
+                  )}
+                </div>
               </div>
             </CardContent>
           </div>
@@ -150,25 +163,6 @@ ProductDetails.Dates = () => {
     <div>
       <p>Created: {format(product.createdAt, "PPP")}</p>
       <p>Last updated: {format(product.updatedAt, "PPP")}</p>
-    </div>
-  );
-};
-
-ProductDetails.OwnerInfo = () => {
-  const product = useProduct();
-  const { loggedInUser } = useAuth();
-
-  return (
-    <div className="flex items-center justify-between space-x-2">
-      <MiniUserRow user={product.owner} />
-      {loggedInUser?.id !== product.owner.id ? (
-        <AddToWishlistBtn
-          product={product}
-          queryKey={[QUERY_KEY_DICT.PRODUCT, { productId: product.id }]}
-        />
-      ) : (
-        "Edit"
-      )}
     </div>
   );
 };
