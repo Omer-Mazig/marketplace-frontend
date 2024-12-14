@@ -40,18 +40,18 @@ export default function ProductDetails() {
   return (
     <ProductProvider product={product}>
       <PageHeading>Product Details</PageHeading>
-      <Card>
-        <CardHeader className="flex-row justify-between">
-          <div>
-            <ProductDetails.Title />
-            <ProductDetails.Description />
-          </div>
-
-          <ProductDetails.Price />
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-6 justify-between">
+      <Card className="overflow-hidden">
+        <div className="grid md:grid-cols-2">
+          <ProductDetails.Image />
+          <div className="flex flex-col">
+            <CardHeader className="flex-row justify-between">
+              <div>
+                <ProductDetails.Title />
+                <ProductDetails.Description />
+              </div>
+              <ProductDetails.Price />
+            </CardHeader>
+            <CardContent className="grow flex flex-col justify-between gap-8">
               <div className="space-y-4">
                 <ProductDetails.Categories />
                 <ProductDetails.Stock />
@@ -61,10 +61,9 @@ export default function ProductDetails() {
                 {/* <ProductDetails.Dates /> */}
               </div>
               <ProductDetails.OwnerInfo />
-            </div>
-            <ProductDetails.Image />
+            </CardContent>
           </div>
-        </CardContent>
+        </div>
       </Card>
     </ProductProvider>
   );
@@ -161,7 +160,7 @@ ProductDetails.Image = () => {
   return (
     <div>
       <img
-        className="w-full max-h-[400px] object-cover rounded-t-lg"
+        className="w-full max-h-[600px] object-cover"
         src={product.imageURL}
         alt="product image"
       />
