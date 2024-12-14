@@ -95,6 +95,8 @@ function ProductItemActions({ product }: { product: Product }) {
 
   return (
     <div className="sm:opacity-0 group-hover:opacity-100">
+      <EditProductButton />
+
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -111,8 +113,6 @@ function ProductItemActions({ product }: { product: Product }) {
           <TooltipContent>Delete product</TooltipContent>
         </Tooltip>
       </TooltipProvider>
-
-      <EditProductButton />
     </div>
   );
 }

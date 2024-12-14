@@ -30,7 +30,7 @@ export function GenericItemRow({
         {children}
 
         <Badge
-          variant="secondary"
+          variant="default"
           className="justify-center"
         >
           ${price.toFixed(2)}
