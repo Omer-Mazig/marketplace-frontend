@@ -47,7 +47,7 @@ export function ProductPreview({ product }: ProductPreviewProps) {
           <ProductTitle />
           <ProductDescription />
         </CardHeader>
-        <CardContent className="flex-grow pb-4 pt-8 px-4 space-y-3 flex flex-col justify-end">
+        <CardContent className="flex-grow space-y-3 flex flex-col justify-end">
           <ProductCategories />
           <MiniUserRow user={product.owner} />
         </CardContent>
