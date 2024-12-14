@@ -7,6 +7,7 @@ import { PageHeading } from "@/components/ui/page-heading";
 import { NewProductForm } from "./_components/new-product-form";
 import { UpgradePlanDialog } from "@/components/shared/upgrade-plan-dialog";
 
+// TODO: add skelaton
 export default function NewProductPage() {
   const [
     shouldShowafterCreateProductDialog,
