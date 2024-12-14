@@ -94,13 +94,17 @@ export function UserButton() {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem className="flex gap-2">
-                <Sparkles className="w-4 h-4" />
-                Upgrade plan
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
+            {loggedInUser.userTier !== "platinum" ? (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem className="flex gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    Upgrade plan
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </>
+            ) : null}
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem

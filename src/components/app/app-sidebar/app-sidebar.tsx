@@ -2,17 +2,7 @@
 import { Link } from "react-router-dom";
 
 // Icons
-import {
-  Calendar,
-  ChevronDown,
-  Home,
-  Inbox,
-  Package,
-  Search,
-} from "lucide-react";
-
-// interfaces | types | enums
-import { ProductCategory } from "@/enums/product-category.enum";
+import { Package, Search } from "lucide-react";
 
 // Custom components
 import { UserButton } from "@/components/shared/user-button";
@@ -24,7 +14,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarInput,
   SidebarMenu,
@@ -33,37 +22,10 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-
 import { Label } from "@/components/ui/label";
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Contact",
-    url: "contact",
-    icon: Inbox,
-  },
-  {
-    title: "Services",
-    url: "services",
-    icon: Calendar,
-  },
-  {
-    title: "Products",
-    url: "products",
-    icon: Package,
-  },
-];
+import { AppSidebarMainNavigation } from "./_components/app-sidebar-main-navigation";
+import { AppSidebarActions } from "./_components/app-sidebar-actions";
+import { AppSidebarProductCategories } from "./_components/app-sidebar-product-categories";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -109,55 +71,11 @@ export function AppSidebar() {
           </form>
         ) : null}
       </SidebarHeader>
-      <SidebarContent className="mt-[72px]s">
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <Collapsible
-          defaultOpen
-          open={state !== "collapsed"}
-          className="group/collapsible"
-        >
-          <SidebarGroup>
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger>
-                Categories
-                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {Object.values(ProductCategory).map((category) => (
-                    <SidebarMenuItem key={category}>
-                      <SidebarMenuButton asChild>
-                        <Link
-                          to={`products/category/${category.toLowerCase()}`}
-                        >
-                          <span>{category}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </SidebarGroup>
-        </Collapsible>
+      <SidebarContent className="mt-[72px]">
+        <AppSidebarMainNavigation />
+        <AppSidebarActions />
+
+        {state !== "collapsed" && <AppSidebarProductCategories />}
       </SidebarContent>
       <SidebarFooter>
         <UserButton />
