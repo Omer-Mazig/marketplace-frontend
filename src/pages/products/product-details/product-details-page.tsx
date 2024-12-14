@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { PageHeading } from "@/components/ui/page-heading";
 import { ProductDetailsSkeleton } from "./_components/product-details-skelaton";
 import Error from "@/components/shared/error";
@@ -49,7 +54,9 @@ export default function ProductDetails() {
               </div>
               <ProductPrice />
             </CardHeader>
+
             <Separator className="mb-6" />
+
             <CardContent className="grow flex flex-col gap-8">
               <div className="space-y-4 grow flex flex-col">
                 <ProductCategories />
@@ -64,25 +71,19 @@ export default function ProductDetails() {
                   <ProductViewCount />
                 </div>
               </div>
-              <div className="space-y-4">
-                {loggedInUser?.id === product.owner.id && <ProductDates />}
-
-                <div className="flex items-center justify-between space-x-2">
-                  <MiniUserRow user={product.owner} />
-                  {loggedInUser?.id !== product.owner.id ? (
-                    <AddToWishlistBtn
-                      product={product}
-                      queryKey={[
-                        QUERY_KEY_DICT.PRODUCT,
-                        { productId: product.id },
-                      ]}
-                    />
-                  ) : (
-                    <EditProductButton />
-                  )}
-                </div>
-              </div>
             </CardContent>
+
+            <CardFooter className="flex items-center justify-between space-x-2">
+              <MiniUserRow user={product.owner} />
+              {loggedInUser?.id !== product.owner.id ? (
+                <AddToWishlistBtn
+                  product={product}
+                  queryKey={[QUERY_KEY_DICT.PRODUCT, { productId: product.id }]}
+                />
+              ) : (
+                <EditProductButton />
+              )}
+            </CardFooter>
           </div>
         </div>
       </Card>
