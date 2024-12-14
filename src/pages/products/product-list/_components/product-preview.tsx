@@ -49,7 +49,6 @@ export function ProductPreview({ product }: ProductPreviewProps) {
         </CardHeader>
         <CardContent className="flex-grow space-y-3 flex flex-col justify-end">
           <ProductCategories />
-          <MiniUserRow user={product.owner} />
         </CardContent>
         <CardFooter className="flex justify-between items-center min-h-16">
           <ProductPrice />
