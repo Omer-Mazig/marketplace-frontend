@@ -30,6 +30,7 @@ import { useAuth } from "@/providers/auth-provider";
 import { ProductProvider, useProduct } from "./product-provider";
 import { Separator } from "@/components/ui/separator";
 
+// TODO: change to naming to Product.Image so we can reuse it in product preview
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
