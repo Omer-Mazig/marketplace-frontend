@@ -58,7 +58,7 @@ export default function ProductDetails() {
             <CardContent className="grow flex flex-col gap-8">
               <div className="space-y-4 grow flex flex-col">
                 <ProductDetails.Categories />
-                <div className=" rounded-lg py-4 px-6 grow">
+                <div className="rounded-lg py-4 px-6 grow">
                   <h4 className="font-bold mb-4">Info:</h4>
                   <ProductDetails.Stock />
                   <Separator className="my-4" />
