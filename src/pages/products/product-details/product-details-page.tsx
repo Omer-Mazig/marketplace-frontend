@@ -28,11 +28,14 @@ import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 // Providers
 import { useAuth } from "@/providers/auth-provider";
 import { ProductProvider, useProduct } from "./product-provider";
+import { Separator } from "@/components/ui/separator";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
   const { data: product, error, isLoading } = useGetProductById(productId);
+
+  const { loggedInUser } = useAuth();
 
   if (isLoading) return <ProductDetailsSkeleton />;
   if (error || !product) return <Error />;
@@ -51,16 +54,28 @@ export default function ProductDetails() {
               </div>
               <ProductDetails.Price />
             </CardHeader>
-            <CardContent className="grow flex flex-col justify-between gap-8">
-              <div className="space-y-4">
+            <Separator className="mb-6" />
+            <CardContent className="grow flex flex-col gap-8">
+              <div className="space-y-4 grow flex flex-col">
                 <ProductDetails.Categories />
-                <ProductDetails.Stock />
-                <ProductDetails.Location />
-                <ProductDetails.NegotiableStatus />
-                <ProductDetails.ViewCount />
-                {/* <ProductDetails.Dates /> */}
+                <div className=" rounded-lg py-4 px-6 grow">
+                  <h4 className="font-bold mb-4">Info:</h4>
+                  <ProductDetails.Stock />
+                  <Separator className="my-4" />
+                  <ProductDetails.Location />
+                  <Separator className="my-4" />
+                  <ProductDetails.NegotiableStatus />
+                  <Separator className="my-4" />
+                  <ProductDetails.ViewCount />
+                </div>
               </div>
-              <ProductDetails.OwnerInfo />
+              <div className="space-y-4">
+                {loggedInUser?.id === product.owner.id && (
+                  <ProductDetails.Dates />
+                )}
+
+                <ProductDetails.OwnerInfo />
+              </div>
             </CardContent>
           </div>
         </div>
@@ -86,7 +101,9 @@ ProductDetails.Price = () => {
 ProductDetails.Description = () => {
   const product = useProduct();
   return (
-    <CardDescription className="mt-2">{product.description}</CardDescription>
+    <CardDescription className="mt-2 italic">
+      {product.description}
+    </CardDescription>
   );
 };
 
@@ -129,10 +146,10 @@ ProductDetails.ViewCount = () => {
 ProductDetails.Dates = () => {
   const product = useProduct();
   return (
-    <>
+    <div>
       <p>Created: {format(product.createdAt, "PPP")}</p>
       <p>Last updated: {format(product.updatedAt, "PPP")}</p>
-    </>
+    </div>
   );
 };
 
