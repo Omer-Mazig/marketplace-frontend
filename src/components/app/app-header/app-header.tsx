@@ -11,11 +11,17 @@ import { PageBreadcrumb } from "./_components/page-breadcrumb";
 import { useAuth } from "@/providers/auth-provider";
 
 // UI components
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function AppHeader() {
   const { loggedInUser } = useAuth();
-
+  const { state } = useSidebar();
   const location = useLocation();
 
   useEffect(() => {
@@ -26,7 +32,16 @@ export function AppHeader() {
     <header className="container mb-4 sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center">
         <div className="mr-4 flex">
-          <SidebarTrigger />
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <SidebarTrigger />
+              </TooltipTrigger>
+              <TooltipContent>
+                {state === "expanded" ? "Close sidebar" : "Open sidebar"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
           <PageBreadcrumb />
         </div>
         <div className="flex flex-1 items-center justify-between space-x-6 md:justify-end">
