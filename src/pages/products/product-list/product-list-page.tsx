@@ -10,7 +10,7 @@ import { PageHeading } from "@/components/ui/page-heading";
 
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
-import ProductPreview from "../_components/product-preview";
+import ProductPreview from "./_components/product-preview";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {

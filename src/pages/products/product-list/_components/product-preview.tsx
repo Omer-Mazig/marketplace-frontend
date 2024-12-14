@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 // Custom components
 import { MiniUserRow } from "@/components/custom/mini-user-row";
-import { AddToWishlistBtn } from "./add-to-wishlist-btn";
+import { AddToWishlistBtn } from "@/pages/products/_components/add-to-wishlist-btn";
 
 // UI components
 import { Badge } from "@/components/ui/badge";

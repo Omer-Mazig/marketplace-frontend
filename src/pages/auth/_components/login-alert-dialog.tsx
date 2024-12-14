@@ -1,4 +1,5 @@
 // UI components
+import { LoginForm } from "@/pages/auth/_components/login-form";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +9,6 @@ import {
 } from "@/components/ui/dialog";
 
 // Custom components
-import { LoginForm } from "./login-form";
 
 // Custom hooks
 import { useAuth } from "@/providers/auth-provider";

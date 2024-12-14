@@ -10,9 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { LoginForm } from "@/pages/auth/_components/login-form";
 
 // Custom components
-import { LoginForm } from "@/components/custom/login-form";
 
 export default function LoginPage() {
   return (

@@ -12,8 +12,8 @@ import AuthLayout from "@/layouts/auth-layout";
 import UserProfileLayout from "@/pages/user-profile/user-profile-layout";
 
 // Custom pages
-import LoginPage from "@/pages/login-page";
-import RegisterPage from "@/pages/register-page";
+import LoginPage from "@/pages/auth/login-page";
+import RegisterPage from "@/pages/auth/register-page";
 import AboutPage from "@/pages/about-page";
 import TeamPage from "@/pages/vision-page";
 import VisionPage from "@/pages/team-page";

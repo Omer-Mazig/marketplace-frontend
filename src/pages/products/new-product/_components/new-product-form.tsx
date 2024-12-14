@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+// Icons
+import { HelpCircle } from "lucide-react";
+
 // Hooks:
 import { useToast } from "@/components/ui/use-toast";
 
@@ -15,6 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { MultiSelect } from "@/components/ui/multi-select";
+
+// Custom components
+import { Hint } from "@/components/custom/hint";
 
 // UI form components
 import {
@@ -32,8 +38,6 @@ import { createProduct } from "@/services/products.service";
 // Types and validations
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
-import { Hint } from "./hint";
-import { HelpCircle } from "lucide-react";
 
 const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
