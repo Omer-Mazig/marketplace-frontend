@@ -45,7 +45,7 @@ export default function UserWishlistPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your Wishlist</CardTitle>
+        <CardTitle>Your Wishlist ({userProfileData.wishlist.length})</CardTitle>
         <CardDescription>Products you're interested in.</CardDescription>
       </CardHeader>
       <CardContent>

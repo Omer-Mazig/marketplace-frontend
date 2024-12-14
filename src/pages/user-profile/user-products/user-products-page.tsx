@@ -49,7 +49,7 @@ export default function UserProductsPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your Products</CardTitle>
+        <CardTitle>Your Products ({products.length})</CardTitle>
         <CardDescription>Manage the products you've listed.</CardDescription>
       </CardHeader>
       <CardContent>
