@@ -80,7 +80,7 @@ export default function ProductDetails() {
               {
                 <img
                   className="w-full max-h-[400px] object-cover rounded-t-lg"
-                  src="https://picsum.photos/600/600"
+                  src={product.imageURL}
                   alt="product image"
                 />
               }

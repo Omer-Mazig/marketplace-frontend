@@ -46,7 +46,7 @@ export default function ProductPreview({ product }: ProductPreviewProps) {
     >
       <CardHeader className="p-0">
         <img
-          src={"https://picsum.photos/600/600"}
+          src={product.imageURL}
           alt={product.name}
           className="w-full h-48 object-cover rounded-t-lg"
         />
