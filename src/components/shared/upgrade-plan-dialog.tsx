@@ -1,4 +1,3 @@
-// UI components
 import {
   Dialog,
   DialogContent,
@@ -7,20 +6,21 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { UpgradePlanList } from "./upgrade-plan-list";
+import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
-// Custom features
+export function UpgradePlanDialog() {
+  const { isOpen, closeDialog } = useUpgradePlanDialog();
 
-interface UpgradePlanDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+  function onOpenChange(_isOpen: boolean) {
+    closeDialog();
+  }
 
-export function UpgradePlanDialog({ isOpen, onClose }: UpgradePlanDialogProps) {
   return (
     <Dialog
       open={isOpen}
-      onOpenChange={onClose}
+      onOpenChange={onOpenChange}
     >
       <DialogContent className="sm:max-w-[425px] md:max-w-2xl lg:max-w-4xl h-[80vh] p-0 flex flex-col overflow-hidden">
         <DialogHeader className="p-6 pb-4 flex-shrink-0">

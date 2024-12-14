@@ -38,6 +38,7 @@ import { createProduct } from "@/services/products.service";
 // Types and validations
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
+import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
@@ -48,17 +49,16 @@ interface NewProductFormProps {
   setShouldShowAfterCreateProductDialog?: React.Dispatch<
     React.SetStateAction<boolean>
   >;
-  setShouldShowUpgradePlanDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function NewProductForm({
   setShouldShowAfterCreateProductDialog,
-  setShouldShowUpgradePlanDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const { toast } = useToast();
+  const { openDialog } = useUpgradePlanDialog();
 
   const form = useForm<AddProductFormValues>({
     resolver: zodResolver(addProductFormSchema),
@@ -84,7 +84,7 @@ export function NewProductForm({
       console.log(error);
 
       if (error.response.data.redirectToUpgradePlan) {
-        return setShouldShowUpgradePlanDialog(true);
+        return openDialog();
       }
 
       toast({

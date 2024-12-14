@@ -17,6 +17,7 @@ import "./index.css";
 
 // Main app component
 import App from "./App.tsx";
+import { UpgradePlanDialogProvider } from "./providers/upgrade-plan-dialog-provider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
-          <App />
+          <UpgradePlanDialogProvider>
+            <App />
+          </UpgradePlanDialogProvider>
           <Toaster />
         </AuthProvider>
       </ThemeProvider>

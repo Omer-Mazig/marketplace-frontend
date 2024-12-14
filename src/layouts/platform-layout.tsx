@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/app/app-sidebar/app-sidebar";
 import { LoginAlertDialog } from "@/pages/auth/_components/login-alert-dialog";
 import { AppHeader } from "@/components/app/app-header/app-header";
 import { AppFooter } from "@/components/app/app-footer/app-footer";
+import { UpgradePlanDialog } from "@/components/shared/upgrade-plan-dialog";
 
 export default function PlatformLayout() {
   return (
@@ -22,6 +23,7 @@ export default function PlatformLayout() {
         </div>
       </SidebarProvider>
       <LoginAlertDialog />
+      <UpgradePlanDialog />
     </div>
   );
 }

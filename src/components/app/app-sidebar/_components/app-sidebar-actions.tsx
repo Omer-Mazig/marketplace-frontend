@@ -11,9 +11,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { LogIn, Plus, Sparkles } from "lucide-react";
+import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 export function AppSidebarActions() {
   const { loggedInUser } = useAuth();
+  const { openDialog } = useUpgradePlanDialog();
 
   return (
     <SidebarGroup>
@@ -24,6 +26,7 @@ export function AppSidebarActions() {
             <SidebarMenuButton
               asChild
               tooltip="Upgrade plan"
+              onClick={openDialog}
             >
               {loggedInUser && loggedInUser.userTier !== "platinum" ? (
                 <button>

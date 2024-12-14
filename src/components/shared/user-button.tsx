@@ -31,10 +31,12 @@ import {
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/providers/auth-provider";
 import { Link } from "react-router-dom";
+import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 export function UserButton() {
   const { isMobile } = useSidebar();
   const { loggedInUser, logout } = useAuth();
+  const { openDialog } = useUpgradePlanDialog();
 
   if (!loggedInUser) return null;
 
@@ -99,7 +101,10 @@ export function UserButton() {
               <>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="flex gap-2">
+                  <DropdownMenuItem
+                    onClick={openDialog}
+                    className="flex gap-2"
+                  >
                     <Sparkles className="w-4 h-4" />
                     Upgrade plan
                   </DropdownMenuItem>
