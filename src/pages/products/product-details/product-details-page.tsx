@@ -48,7 +48,7 @@ export default function ProductDetails() {
         <div className="grid md:grid-cols-2">
           <ProductDetails.Image />
           <div className="flex flex-col">
-            <CardHeader className="flex-row justify-between">
+            <CardHeader className="flex-row justify-between space-y-0">
               <div>
                 <ProductDetails.Title />
                 <ProductDetails.Description />
@@ -93,7 +93,7 @@ ProductDetails.Title = () => {
 ProductDetails.Price = () => {
   const product = useProduct();
   return (
-    <p className="text-2xl font-bold text-primary">
+    <p className="text-2xl font-bold text-primary flex items-center">
       ${product.price.toFixed(2)}
     </p>
   );
