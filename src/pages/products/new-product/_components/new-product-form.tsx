@@ -60,7 +60,7 @@ export function NewProductForm({
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const { toast } = useToast();
-  const { openDialog } = useUpgradePlanDialog();
+  const { openDialog: openUpgradeDialog } = useUpgradePlanDialog();
 
   const form = useForm<AddProductFormValues>({
     resolver: zodResolver(addProductFormSchema),
@@ -86,7 +86,7 @@ export function NewProductForm({
       console.log(error);
 
       if (error.response.data.redirectToUpgradePlan) {
-        return openDialog();
+        return openUpgradeDialog();
       }
 
       toast({

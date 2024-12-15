@@ -37,7 +37,6 @@ import { Product } from "@/types/products.types";
 import { useUserProfileContext } from "../user-profile-layout";
 import { isReachedProductLimit } from "@/lib/utils";
 
-// TODO: render more info about product: wishlist amount and more
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
 
