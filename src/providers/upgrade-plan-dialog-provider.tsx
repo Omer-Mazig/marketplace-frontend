@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 interface UpgradePlanDialogContextType {
-  isOpen: boolean;
+  open: boolean;
+  setIsOpen: (isOpen: boolean) => void;
   openDialog: () => void;
   closeDialog: () => void;
   toggle: () => void;
@@ -16,15 +17,16 @@ export function UpgradePlanDialogProvider({
 }: {
   children: ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const openDialog = () => setIsOpen(true);
-  const closeDialog = () => setIsOpen(false);
-  const toggle = () => setIsOpen((prev) => !prev);
+  const setIsOpen = (isOpen: boolean) => setOpen(isOpen);
+  const openDialog = () => setOpen(true);
+  const closeDialog = () => setOpen(false);
+  const toggle = () => setOpen((prev) => !prev);
 
   return (
     <UpgradePlanDialogContext.Provider
-      value={{ isOpen, openDialog, closeDialog, toggle }}
+      value={{ open, setIsOpen, openDialog, closeDialog, toggle }}
     >
       {children}
     </UpgradePlanDialogContext.Provider>

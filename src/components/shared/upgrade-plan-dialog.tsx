@@ -11,15 +11,15 @@ import { UpgradePlanList } from "./upgrade-plan-list";
 import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
 
 export function UpgradePlanDialog() {
-  const { isOpen, closeDialog } = useUpgradePlanDialog();
+  const { open, setIsOpen } = useUpgradePlanDialog();
 
-  function onOpenChange(_isOpen: boolean) {
-    closeDialog();
+  function onOpenChange(isOpen: boolean) {
+    setIsOpen(isOpen);
   }
 
   return (
     <Dialog
-      open={isOpen}
+      open={open}
       onOpenChange={onOpenChange}
     >
       <DialogContent className="sm:max-w-[425px] md:max-w-2xl lg:max-w-4xl h-[80vh] p-0 flex flex-col overflow-hidden">

@@ -102,11 +102,13 @@ export function UserButton() {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem
-                    onClick={openDialog}
+                    asChild
                     className="flex gap-2"
                   >
-                    <Sparkles className="w-4 h-4" />
-                    Upgrade plan
+                    <span onClick={openDialog}>
+                      <Sparkles className="w-4 h-4" />
+                      Upgrade plan
+                    </span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </>
