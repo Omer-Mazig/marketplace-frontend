@@ -7,6 +7,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarSeparator,
   useSidebar,
 } from "@/components/ui/sidebar";
 
@@ -28,7 +29,9 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <AppSidebarMainNavigation />
+        <SidebarSeparator />
         <AppSidebarActions />
+        <SidebarSeparator />
         {state !== "collapsed" && <AppSidebarProductCategories />}
       </SidebarContent>
       <SidebarFooter>

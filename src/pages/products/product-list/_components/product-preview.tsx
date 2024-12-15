@@ -19,6 +19,7 @@ import {
 import { ProductProvider } from "../../product-provider";
 
 import { EditProductButton } from "../../_components/edit-product-button";
+import { Separator } from "@/components/ui/separator";
 
 interface ProductPreviewProps {
   product: Product;
@@ -49,6 +50,7 @@ export function ProductPreview({ product }: ProductPreviewProps) {
         <CardContent className="flex-grow space-y-3 flex flex-col justify-end">
           <ProductCategories />
         </CardContent>
+        <Separator className="my-6" />
         <CardFooter className="flex justify-between items-center min-h-16">
           <ProductPrice />
           {loggedInUser?.id !== product.owner.id ? (

@@ -29,7 +29,7 @@ function TabLink({ to, value, Icon, label }: ProfileTabLinkProps) {
     >
       <NavLink
         to={to}
-        className="flex flex-col items-center"
+        className="flex flex-col items-center cursor-pointer"
       >
         {({ isActive }) => (
           <>
