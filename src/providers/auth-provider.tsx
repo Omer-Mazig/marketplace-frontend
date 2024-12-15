@@ -8,21 +8,19 @@ import {
 } from "@/types/auth.typs";
 
 // Constants
-import {
-  ACCESS_TOKEN_STORAGE_KEY,
-  USER_TIERS_OPTIONS,
-} from "@/constants/auth.constant";
+import { ACCESS_TOKEN_STORAGE_KEY } from "@/constants/auth.constant";
 
 // Utilities and API
 import api from "@/lib/api";
 import { wait } from "@/lib/utils";
+import { UserTierOptionType } from "@/types/users.types";
 
 export interface LoggedInUser {
   id: number;
   email: string;
   firstName: string;
   lastName: string;
-  userTier: (typeof USER_TIERS_OPTIONS)[number];
+  userTier: UserTierOptionType;
   imageUrl?: string;
   createdAt: Date;
   updatedAt: Date;

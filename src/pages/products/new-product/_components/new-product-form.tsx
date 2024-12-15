@@ -246,7 +246,8 @@ export function NewProductForm({
             {isSubmitting ? "Loading..." : "Add"}
           </Button>
 
-          <ProductLimitMessage />
+          {/* Figure out how to show this message */}
+          {false && <ProductLimitMessage />}
         </div>
       </form>
     </Form>

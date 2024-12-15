@@ -35,6 +35,7 @@ import { Product } from "@/types/products.types";
 
 // Contexts
 import { useUserProfileContext } from "../user-profile-layout";
+import { isReachedProductLimit } from "@/lib/utils";
 
 // TODO: render more info about product: wishlist amount and more
 export default function UserProductsPage() {
@@ -44,8 +45,7 @@ export default function UserProductsPage() {
   if (error || !userProfileData) {
     return <Error />;
   }
-
-  const { products } = userProfileData;
+  const { products, userTier } = userProfileData;
 
   return (
     <Card>
@@ -79,7 +79,9 @@ export default function UserProductsPage() {
               <Plus /> Add New Product{" "}
             </Link>
           </Button>
-          <ProductLimitMessage />
+          {isReachedProductLimit(userTier, products.length) ? (
+            <ProductLimitMessage />
+          ) : null}
         </div>
       </CardContent>
     </Card>
