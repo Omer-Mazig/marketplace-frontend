@@ -35,7 +35,7 @@ export function AfterCreateProductDialog({
             asChild
             variant="secondary"
           >
-            <Link to="/user-profile/products">Back to profile</Link>
+            <Link to="/platform/user-profile/products">Back to profile</Link>
           </Button>
           <Button onClick={() => setShouldShowAfterCreateProductDialog(false)}>
             Add another product
