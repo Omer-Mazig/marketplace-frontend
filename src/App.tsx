@@ -13,12 +13,12 @@ import UserProfileLayout from "@/pages/user-profile/user-profile-layout";
 
 // Custom pages
 import ContactPage from "./pages/contact/contact-page";
-import HomePage from "./pages/contact/home-page";
+import HomePage from "./pages/home/home-page";
 import LoginPage from "@/pages/auth/login-page";
 import RegisterPage from "@/pages/auth/register-page";
-import AboutPage from "@/pages/about-page";
-import TeamPage from "@/pages/vision-page";
-import VisionPage from "@/pages/team-page";
+import AboutPage from "@/pages/about/about-page";
+import VisionPage from "@/pages/about/vision-page";
+import TeamPage from "@/pages/about/team-page";
 import UserInfoPage from "@/pages/user-profile/user-info/user-info-page";
 import UserSettingsPage from "@/pages/user-profile/user-settings/user-settings-page";
 import UserProductsPage from "@/pages/user-profile/user-products/user-products-page";

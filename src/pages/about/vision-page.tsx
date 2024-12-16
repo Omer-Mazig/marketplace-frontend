@@ -1,17 +1,15 @@
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { useEffect } from "react";
 
-function ContactPage() {
+export default function VisionPage() {
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
   useEffect(() => {
     setBreadcrumpItems([
       { href: "/", label: "Home" },
-      { href: "/contact", label: "Contact" },
+      { href: "/about", label: "About" },
+      { href: "/about/vision", label: "Vision" },
     ]);
   }, []);
-
-  return <div>Contact</div>;
+  return <div>VisionPage</div>;
 }
-
-export default ContactPage;

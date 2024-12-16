@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import {
   Card,
@@ -36,10 +36,14 @@ export default function ProductDetails() {
   const productId = parseInt(_productId || "");
   const { data: product, error, isLoading } = useGetProductById(productId);
   const { loggedInUser } = useAuth();
+  const location = useLocation();
   const setBreadcrumpItems = useSetBreadcrumpItems();
+
+  console.log(location);
 
   useEffect(() => {
     if (!product) return;
+
     setBreadcrumpItems([
       { href: "/", label: "Home" },
       { href: "/products", label: "Products" },

@@ -33,7 +33,10 @@ export default function ProductListPage() {
     setBreadcrumpItems([
       { href: "/", label: "Home" },
       { href: "/products", label: "Products" },
-      { href: `/products/category/${category}`, label: capitalize(category) },
+      {
+        href: `/products/category/${category.toLocaleLowerCase()}`,
+        label: capitalize(category),
+      },
     ]);
   }, [category]);
 
