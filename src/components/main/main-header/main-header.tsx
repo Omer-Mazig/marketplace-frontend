@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, User, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/providers/auth-provider";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserDropDownContent } from "@/components/shared/user-dropdown-content";
+import { MobileUserMenu } from "./_components/mobile-user-menu";
 
 export function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,20 +78,20 @@ export function MainHeader() {
             {loggedInUser ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Avatar className="h-10 w-10 rounded-full">
+                  <Avatar className="h-10 w-10">
                     <AvatarImage
                       src={loggedInUser.imageUrl}
                       alt={loggedInUser.firstName}
                     />
-                    <AvatarFallback className="rounded-lg">
-                      {avatarFallbackText}
-                    </AvatarFallback>
+                    <AvatarFallback>{avatarFallbackText}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <UserDropDownContent sideOffset={30} />
               </DropdownMenu>
             ) : (
-              <Button>Login</Button>
+              <Button asChild>
+                <Link to="/auth/login"> Login</Link>
+              </Button>
             )}
           </div>
 
@@ -110,58 +111,6 @@ export function MainHeader() {
       {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              to="/categories"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Categories
-            </Link>
-            <Link
-              to="/deals"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Deals
-            </Link>
-            <Link
-              to="/sell"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Sell
-            </Link>
-          </div>
-          <div className="pt-4 pb-3 border-t border-gray-200">
-            <div className="flex items-center px-5">
-              <div className="flex-shrink-0">
-                <User className="h-6 w-6 text-gray-400" />
-              </div>
-              <div className="ml-3">
-                <div className="text-base font-medium text-gray-800">
-                  User Account
-                </div>
-                <div className="text-sm font-medium text-gray-500">
-                  user@example.com
-                </div>
-              </div>
-            </div>
-            <div className="mt-3 px-2 space-y-1">
-              <Link
-                to="/account"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-              >
-                Your Account
-              </Link>
-              <Link
-                to="/cart"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-              >
-                Shopping Cart
-              </Link>
-              <Button className="w-full text-left px-3 py-2 rounded-md text-base font-medium">
-                Login
-              </Button>
-            </div>
-          </div>
           <div className="px-4 py-2">
             <div className="relative">
               <Input
@@ -174,6 +123,38 @@ export function MainHeader() {
               </div>
             </div>
           </div>
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <Link
+              to="/categories"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Categories
+            </Link>
+            <Link
+              to="/plans"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Plans
+            </Link>
+            <Link
+              to="/sell"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Sell
+            </Link>
+          </div>
+          {loggedInUser ? (
+            <MobileUserMenu />
+          ) : (
+            <div className="my-3 px-2 space-y-1">
+              <Button
+                asChild
+                className="w-full text-left px-3 py-2 rounded-md text-base font-medium"
+              >
+                <Link to="/auth/login"> Login</Link>
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </header>
