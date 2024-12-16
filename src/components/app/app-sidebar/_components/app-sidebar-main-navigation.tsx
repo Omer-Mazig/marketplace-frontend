@@ -7,8 +7,11 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { Home, Inbox, Info, Package } from "lucide-react";
+import { Home, Inbox, Info, Package, Telescope, Users } from "lucide-react";
 
 // Menu items.
 const items = [
@@ -29,13 +32,13 @@ const items = [
     subItems: [
       {
         title: "Team",
-        url: "team",
-        icon: Info,
+        url: "/about/team",
+        icon: Users,
       },
       {
         title: "Vision",
-        url: "vision",
-        icon: Info,
+        url: "/about/vision",
+        icon: Telescope,
       },
     ],
   },
@@ -63,6 +66,19 @@ export function AppSidebarMainNavigation() {
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>
+              {item.subItems?.length &&
+                item.subItems.map((subItem) => (
+                  <SidebarMenuSub>
+                    <SidebarMenuSubItem key={subItem.title}>
+                      <SidebarMenuSubButton asChild>
+                        <Link to={subItem.url}>
+                          <subItem.icon />
+                          <span>{subItem.title}</span>
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  </SidebarMenuSub>
+                ))}
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
