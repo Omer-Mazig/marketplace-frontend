@@ -46,7 +46,7 @@ export default function UserWishlistPage() {
   useEffect(() => {
     setBreadcrumpItems([
       { href: "/platform/user-profile", label: "Profile" },
-      { href: "/platform/user-profile/products", label: "Products" },
+      { href: "/platform/user-profile/wishlist", label: "Wishlist" },
     ]);
   }, []);
 

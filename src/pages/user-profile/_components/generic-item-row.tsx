@@ -21,7 +21,7 @@ export function GenericItemRow({
   return (
     <li className="text-center 3xs:text-start flex flex-col sm:flex-row justify-between 3xs:items-start sm:items-center border-b pb-2 group">
       <Link
-        to={`/product/${id}`}
+        to={`/platform/product/${id}`}
         className="mb-2 sm:mb-0 hover:text-primary"
       >
         {name}
