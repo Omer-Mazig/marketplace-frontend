@@ -1,41 +1,67 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
 
-type BreadcrumbItem = {
-  href?: string;
+// Define types for the breadcrump items and context values
+type BreadcrumpItem = {
+  href: string;
   label: string;
 };
+type SetBreadcrumpItems = (items: BreadcrumpItem[]) => void;
 
-type BreadcrumbContextType = {
-  items: BreadcrumbItem[];
-  setBreadcrumbItems: (items: BreadcrumbItem[]) => void;
-};
-
-const BreadcrumbContext = createContext<BreadcrumbContextType | undefined>(
+// Create the contexts
+const BreadcrumpItemsContext = createContext<BreadcrumpItem[] | undefined>(
+  undefined
+);
+const BreadcrumpSetItemsContext = createContext<SetBreadcrumpItems | undefined>(
   undefined
 );
 
-export function BreadcrumbProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [items, setItems] = useState<BreadcrumbItem[]>([]);
+// Provider component
+interface BreadcrumpProviderProps {
+  children: ReactNode;
+}
 
-  const setBreadcrumbItems = useCallback((newItems: BreadcrumbItem[]) => {
-    setItems(newItems);
+export const BreadcrumpProvider: React.FC<BreadcrumpProviderProps> = ({
+  children,
+}) => {
+  const [items, setItemsState] = useState<BreadcrumpItem[]>([]);
+
+  // Memoize the setter function
+  const setItems = useCallback<SetBreadcrumpItems>((newItems) => {
+    setItemsState(newItems);
   }, []);
 
   return (
-    <BreadcrumbContext.Provider value={{ items, setBreadcrumbItems }}>
-      {children}
-    </BreadcrumbContext.Provider>
+    <BreadcrumpItemsContext.Provider value={items}>
+      <BreadcrumpSetItemsContext.Provider value={setItems}>
+        {children}
+      </BreadcrumpSetItemsContext.Provider>
+    </BreadcrumpItemsContext.Provider>
   );
-}
+};
 
-export function useBreadcrumb() {
-  const context = useContext(BreadcrumbContext);
-  if (!context) {
-    throw new Error("useBreadcrumb must be used within a BreadcrumbProvider");
+// Custom hooks for consuming the contexts with error handling
+export const useBreadcrumpItems = (): BreadcrumpItem[] => {
+  const context = useContext(BreadcrumpItemsContext);
+  if (context === undefined) {
+    throw new Error(
+      "useBreadcrumpItems must be used within a BreadcrumpProvider"
+    );
   }
   return context;
-}
+};
+
+export const useSetBreadcrumpItems = (): SetBreadcrumpItems => {
+  const context = useContext(BreadcrumpSetItemsContext);
+  if (context === undefined) {
+    throw new Error(
+      "useSetBreadcrumpItems must be used within a BreadcrumpProvider"
+    );
+  }
+  return context;
+};

@@ -25,7 +25,7 @@ export function AppHeader() {
         <div className="mr-4 flex">
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <SidebarTrigger className="mr-1" />
               </TooltipTrigger>
               <TooltipContent>
@@ -33,12 +33,11 @@ export function AppHeader() {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          {/* <PageBreadcrumb /> */}
+          <PageBreadcrumb />
         </div>
         <div className="flex flex-1 items-center justify-between space-x-6 md:justify-end">
           {/* <AppSearchButton /> */}
           <div className="flex items-center gap-1 ">
-            {/* {loggedInUser ? <UserButton /> : <AuthButton />} */}
             {loggedInUser ? null : <AuthButton />}
             <ModeToggle />
           </div>

@@ -1,5 +1,5 @@
 // Third-party libraries
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 // UI components
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,12 +12,15 @@ import { ProductPreview } from "./_components/product-preview";
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
 import { useEffect } from "react";
+import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
+import { capitalize } from "@/lib/utils";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
   const { category } = useParams();
   const [searchParams] = useSearchParams();
-  const location = useLocation();
+
+  const setBreadcrumpItems = useSetBreadcrumpItems();
 
   const {
     data: products,
@@ -26,8 +29,13 @@ export default function ProductListPage() {
   } = useGetAllProductsQuery({ category });
 
   useEffect(() => {
-    location.state = category;
-  }, []);
+    if (category === undefined) return;
+    setBreadcrumpItems([
+      { href: "/", label: "Home" },
+      { href: "/products", label: "Products" },
+      { href: `/products/category/${category}`, label: capitalize(category) },
+    ]);
+  }, [category]);
 
   // TODO: Filter from the serverside
   const filteredProducts = products

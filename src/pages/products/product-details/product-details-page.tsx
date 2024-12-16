@@ -27,12 +27,32 @@ import {
 import { ProductProvider } from "../product-provider";
 import { MiniUserRow } from "@/components/shared/mini-user-row";
 import { EditProductButton } from "../_components/edit-product-button";
+import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
+import { useEffect } from "react";
+import { capitalize } from "@/lib/utils";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
   const { data: product, error, isLoading } = useGetProductById(productId);
   const { loggedInUser } = useAuth();
+  const setBreadcrumpItems = useSetBreadcrumpItems();
+
+  useEffect(() => {
+    if (!product) return;
+    setBreadcrumpItems([
+      { href: "/", label: "Home" },
+      { href: "/products", label: "Products" },
+      {
+        href: `/products/category/${product.categories[0]}`,
+        label: capitalize(product.categories[0]),
+      },
+      {
+        href: `/product/${product.id}`,
+        label: product.name,
+      },
+    ]);
+  }, [product]);
 
   if (isLoading) return <ProductDetailsSkeleton />;
   if (error || !product) return <Error />;

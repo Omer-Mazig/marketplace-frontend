@@ -47,10 +47,10 @@ export function ProductPreview({ product }: ProductPreviewProps) {
           <ProductTitle />
           <ProductDescription />
         </CardHeader>
-        <CardContent className="flex-grow space-y-3 flex flex-col justify-end">
+        <CardContent className="flex-grow pb-0 space-y-3 flex flex-col justify-end">
           <ProductCategories />
         </CardContent>
-        <Separator className="my-6" />
+        <Separator className="mt-6 mb-3" />
         <CardFooter className="flex justify-between items-center min-h-16">
           <ProductPrice />
           {loggedInUser?.id !== product.owner.id ? (

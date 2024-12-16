@@ -24,3 +24,8 @@ export function isReachedProductLimit(
   if (tier === "gold" && productAmount >= USER_GOLD_PRODUCT_LIMIT) return true;
   return false;
 }
+
+export function capitalize(input: string): string {
+  if (!input) return input;
+  return input.charAt(0).toUpperCase() + input.slice(1);
+}

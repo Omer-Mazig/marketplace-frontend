@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -25,149 +27,129 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-
-const ITEMS_TO_DISPLAY = 3;
-
-type BreadcrumbItemType = {
-  href: string;
-  label: string;
-};
-
-// TODO: figure out how to do breadcrump
-// try again with context
-function getBreadcrumpItems(key: string) {
-  const dict: Record<string, BreadcrumbItemType[]> = {
-    "/": [{ href: "/", label: "Home" }],
-    "/about": [{ href: "/about", label: "About" }],
-    "/about/team": [
-      { href: "/about", label: "About" },
-      { href: "/about/team", label: "Team" },
-    ],
-    "/about/vision": [
-      { href: "/about", label: "About" },
-      { href: "/about/vision", label: "Vision" },
-    ],
-    "/contact": [{ href: "/contact", label: "Contact" }],
-    "/products": [
-      { href: "/", label: "Home" },
-      { href: "/products", label: "Products" },
-    ],
-    "/products/category": [
-      { href: "/", label: "Home" },
-      { href: "/products", label: "Products" },
-      { href: "/products/category", label: "" },
-    ],
-  };
-
-  return dict[key];
-}
+import { useBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export function PageBreadcrumb() {
-  const [items, setItems] = useState<BreadcrumbItemType[]>([]);
+  const items = useBreadcrumpItems();
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
 
-  const location = useLocation();
+  if (!items || items.length === 0) return null;
 
-  useEffect(() => {
-    console.log("location", location);
-    const items = getBreadcrumpItems(location.pathname);
-    setItems(items);
-  }, [location.pathname]);
+  const renderBreadcrumbItem = (
+    item: { href?: string; label: string },
+    isLast: boolean
+  ) => (
+    <BreadcrumbItem key={item.href || item.label}>
+      {!isLast ? (
+        <BreadcrumbLink
+          asChild
+          className="max-w-20 truncate md:max-w-none"
+        >
+          <Link to={item.href || "#"}>{item.label}</Link>
+        </BreadcrumbLink>
+      ) : (
+        <BreadcrumbPage className="max-w-20 truncate md:max-w-none">
+          {item.label}
+        </BreadcrumbPage>
+      )}
+      {!isLast && <BreadcrumbSeparator />}
+    </BreadcrumbItem>
+  );
 
-  if (!items || !items.length) return null;
+  const renderDropdownOrDrawer = () => {
+    const middleItems = items.slice(1, -2);
+    if (middleItems.length === 0) return null;
 
-  console.log("items", items);
+    const content = (
+      <>
+        {middleItems.map((item, index) => (
+          <Link
+            key={index}
+            to={item.href || "#"}
+            className="block px-4 py-2 text-sm"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </>
+    );
+
+    if (isMobile) {
+      return (
+        <Drawer
+          open={open}
+          onOpenChange={setOpen}
+        >
+          <DrawerTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Show more breadcrumbs"
+            >
+              <BreadcrumbEllipsis className="h-4 w-4" />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader className="text-left">
+              <DrawerTitle>Navigate to</DrawerTitle>
+              <DrawerDescription>
+                Select a page to navigate to.
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="px-4 py-2">{content}</div>
+            <DrawerFooter>
+              <DrawerClose asChild>
+                <Button variant="outline">Close</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      );
+    }
+
+    return (
+      <DropdownMenu
+        open={open}
+        onOpenChange={setOpen}
+      >
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Show more breadcrumbs"
+          >
+            <BreadcrumbEllipsis className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          {middleItems.map((item, index) => (
+            <DropdownMenuItem
+              key={index}
+              asChild
+            >
+              <Link to={item.href || "#"}>{item.label}</Link>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   return (
     <Breadcrumb className="flex items-center ml-1">
       <BreadcrumbList>
-        {/* Render the first breadcrumb */}
-        <BreadcrumbItem>
-          <BreadcrumbLink href={items[0].href}>{items[0].label}</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        {items.length > ITEMS_TO_DISPLAY ? (
+        {renderBreadcrumbItem(items[0], items.length === 1)}
+        {items.length > 3 && (
           <>
-            <BreadcrumbItem>
-              {!isMobile ? (
-                <DropdownMenu
-                  open={open}
-                  onOpenChange={setOpen}
-                >
-                  <DropdownMenuTrigger
-                    className="flex items-center gap-1"
-                    aria-label="Toggle menu"
-                  >
-                    <BreadcrumbEllipsis className="h-4 w-4" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    {items.slice(1, -2).map((item, index) => (
-                      <DropdownMenuItem key={index}>
-                        <Link to={item.href ? item.href : "#"}>
-                          {item.label}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Drawer
-                  open={open}
-                  onOpenChange={setOpen}
-                >
-                  <DrawerTrigger aria-label="Toggle Menu">
-                    <BreadcrumbEllipsis className="h-4 w-4" />
-                  </DrawerTrigger>
-                  <DrawerContent>
-                    <DrawerHeader className="text-left">
-                      <DrawerTitle>Navigate to</DrawerTitle>
-                      <DrawerDescription>
-                        Select a page to navigate to.
-                      </DrawerDescription>
-                    </DrawerHeader>
-                    <div className="grid gap-1 px-4">
-                      {items.slice(1, -2).map((item, index) => (
-                        <Link
-                          key={index}
-                          to={item.href ? item.href : "#"}
-                          className="py-1 text-sm"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                    <DrawerFooter className="pt-4">
-                      <DrawerClose asChild>
-                        <Button variant="outline">Close</Button>
-                      </DrawerClose>
-                    </DrawerFooter>
-                  </DrawerContent>
-                </Drawer>
-              )}
-            </BreadcrumbItem>
+            {renderDropdownOrDrawer()}
             <BreadcrumbSeparator />
           </>
-        ) : null}
-        {items.slice(1).map((item, index) => (
-          <BreadcrumbItem key={item.href}>
-            {item.href ? (
-              <BreadcrumbLink
-                asChild
-                className="max-w-20 truncate md:max-w-none"
-              >
-                <Link to={item.href}>{item.label}</Link>
-              </BreadcrumbLink>
-            ) : (
-              <BreadcrumbPage className="max-w-20 truncate md:max-w-none">
-                {item.label}
-              </BreadcrumbPage>
-            )}
-            {index < items.length - 2 && <BreadcrumbSeparator />}
-          </BreadcrumbItem>
-        ))}
+        )}
+        {items.length > 2 &&
+          renderBreadcrumbItem(items[items.length - 2], false)}
+        {items.length > 1 &&
+          renderBreadcrumbItem(items[items.length - 1], true)}
       </BreadcrumbList>
     </Breadcrumb>
   );

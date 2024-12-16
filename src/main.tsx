@@ -18,6 +18,7 @@ import "./index.css";
 
 // Main app component
 import App from "./App.tsx";
+import { BreadcrumpProvider } from "./providers/breadcrump-provider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +28,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ThemeProvider>
         <AuthProvider>
           <UpgradePlanDialogProvider>
-            <App />
+            <BreadcrumpProvider>
+              <App />
+            </BreadcrumpProvider>
           </UpgradePlanDialogProvider>
           <Toaster />
         </AuthProvider>
