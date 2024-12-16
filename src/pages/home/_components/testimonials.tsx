@@ -3,21 +3,18 @@ import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 const testimonials = [
   {
     name: "Sarah L.",
-    role: "Buyer",
     content:
       "I love the variety of products on MarketPalace. It's my go-to place for unique gifts!",
     avatar: "/placeholder.svg?height=100&width=100",
   },
   {
     name: "John D.",
-    role: "Seller",
     content:
       "As a small business owner, MarketPalace has been a game-changer for reaching new customers.",
     avatar: "/placeholder.svg?height=100&width=100",
   },
   {
     name: "Emily R.",
-    role: "Buyer",
     content:
       "The wishlist feature is fantastic! It helps me keep track of all the items I want to buy.",
     avatar: "/placeholder.svg?height=100&width=100",
@@ -55,7 +52,7 @@ export function Testimonials() {
                 />
                 <div>
                   <h3 className="font-semibold">{testimonial.name}</h3>
-                  <p className="text-gray-600 text-sm">{testimonial.role}</p>
+                  <p className="text-gray-600 text-sm">Enter rate here...</p>
                 </div>
               </div>
               <p className="text-gray-700">{testimonial.content}</p>

@@ -41,7 +41,7 @@ import { useUserProfileContext } from "../user-profile-layout";
 import { isReachedProductLimit } from "@/lib/utils";
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
-// TODO: breadcrump should dynmicly show route based on where user get in prodcut detail
+// TODO: breadcrump should dynmicly show route based on where user get in prodcut details
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
 

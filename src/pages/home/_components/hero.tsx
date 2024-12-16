@@ -17,12 +17,13 @@ export function Hero() {
             asChild
             size="lg"
           >
-            <Link to="/products">Explore Products</Link>
+            <Link to="platform/products">Explore Products</Link>
           </Button>
           <Button
             asChild
             variant="outline"
             size="lg"
+            className="text-black"
           >
             <Link to="/sell">Start Selling</Link>
           </Button>
