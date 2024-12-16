@@ -30,49 +30,49 @@ import FeaturedProductsPage from "./pages/products/featured-products/featured-pr
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
+import MainLayout from "./layouts/main-layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PlatformLayout />,
+    element: <MainLayout />,
     children: [
       {
         index: true,
         element: <HomePage />,
       },
-
       {
-        path: "/about",
+        path: "about",
         element: <AboutPage />,
         children: [
-          {
-            path: "team",
-            element: <TeamPage />,
-          },
-          {
-            path: "vision",
-            element: <VisionPage />,
-          },
+          { path: "team", element: <TeamPage /> },
+          { path: "vision", element: <VisionPage /> },
         ],
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <ContactPage />,
       },
+    ],
+  },
+  {
+    path: "/platform",
+    element: <PlatformLayout />,
+    children: [
       {
-        path: "/products",
+        path: "products",
         element: <FeaturedProductsPage />,
       },
       {
-        path: "/products/category/:category",
+        path: "products/category/:category",
         element: <ProductListPage />,
       },
       {
-        path: "/product/:productId",
+        path: "product/:productId",
         element: <ProductDetails />,
       },
       {
-        path: "/products/new-product",
+        path: "products/new-product",
         element: (
           <ProtectedRoute>
             <NewProductPage />
@@ -80,33 +80,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/user-profile",
+        path: "user-profile",
         element: (
           <ProtectedRoute>
             <UserProfileLayout />
           </ProtectedRoute>
         ),
         children: [
-          {
-            index: true, // user-profile - navigate to info
-            element: <Navigate to="info" />,
-          },
-          {
-            path: "info", // changed to relative path
-            element: <UserInfoPage />,
-          },
-          {
-            path: "settings", // changed to relative path
-            element: <UserSettingsPage />,
-          },
-          {
-            path: "products", // changed to relative path
-            element: <UserProductsPage />,
-          },
-          {
-            path: "wishlist", // changed to relative path
-            element: <UserWishlistPage />,
-          },
+          { index: true, element: <Navigate to="info" /> },
+          { path: "info", element: <UserInfoPage /> },
+          { path: "settings", element: <UserSettingsPage /> },
+          { path: "products", element: <UserProductsPage /> },
+          { path: "wishlist", element: <UserWishlistPage /> },
         ],
       },
     ],
@@ -119,19 +104,11 @@ const router = createBrowserRouter([
       </AuthRoutes>
     ),
     children: [
-      {
-        path: "login",
-
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
-      },
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
     ],
   },
 ]);
-
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { loggedInUser } = useAuth();
   const location = useLocation();
