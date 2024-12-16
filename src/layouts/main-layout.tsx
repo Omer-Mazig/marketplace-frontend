@@ -1,9 +1,10 @@
+import { MainHeader } from "@/components/main/main-header/main-header";
 import { Outlet } from "react-router-dom";
 
 function MainLayout() {
   return (
     <div>
-      <header>Main Layout Header</header>
+      <MainHeader />
       <main>
         <Outlet />
       </main>
