@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // UI components
 import {
   Card,
@@ -33,9 +36,20 @@ import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 // Providers
 import { useUserProfileContext } from "../user-profile-layout";
+import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export default function UserWishlistPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
+
+  const setBreadcrumpItems = useSetBreadcrumpItems();
+
+  useEffect(() => {
+    setBreadcrumpItems([
+      { href: "/", label: "Home" },
+      { href: "/user-profile", label: "Profile" },
+      { href: "/user-profile/products", label: "Products" },
+    ]);
+  }, []);
 
   if (isLoading) return <UserWishlistSkeleton />;
   if (error || !userProfileData) {

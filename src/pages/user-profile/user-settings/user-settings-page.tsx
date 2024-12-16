@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // UI components
 import {
   Card,
@@ -17,9 +20,20 @@ import { UserSettingsSkeleton } from "./user-settings-page-skeleton";
 
 // Hooks
 import { useUserProfileContext } from "../user-profile-layout";
+import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export default function UserSettingsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
+
+  const setBreadcrumpItems = useSetBreadcrumpItems();
+
+  useEffect(() => {
+    setBreadcrumpItems([
+      { href: "/", label: "Home" },
+      { href: "/user-profile", label: "Profile" },
+      { href: "/user-profile/settings", label: "Settings" },
+    ]);
+  }, []);
 
   if (isLoading) return <UserSettingsSkeleton />;
   if (error || !userProfileData) {

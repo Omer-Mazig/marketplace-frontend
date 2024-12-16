@@ -88,7 +88,7 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            index: true, // for /user-profile - navigate to info
+            index: true, // user-profile - navigate to info
             element: <Navigate to="info" />,
           },
           {

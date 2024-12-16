@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // Icons
 import { Plus, Trash2 } from "lucide-react";
 
@@ -36,9 +39,20 @@ import { Product } from "@/types/products.types";
 // Contexts
 import { useUserProfileContext } from "../user-profile-layout";
 import { isReachedProductLimit } from "@/lib/utils";
+import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export default function UserProductsPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
+
+  const setBreadcrumpItems = useSetBreadcrumpItems();
+
+  useEffect(() => {
+    setBreadcrumpItems([
+      { href: "/", label: "Home" },
+      { href: "/user-profile", label: "Profile" },
+      { href: "/user-profile/products", label: "Products" },
+    ]);
+  }, []);
 
   if (isLoading) return <UserProductsSkeleton />;
   if (error || !userProfileData) {

@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // UI components
 import {
   Card,
@@ -18,9 +21,19 @@ import Error from "@/components/shared/error";
 
 // Hooks
 import { useUserProfileContext } from "../user-profile-layout";
+import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export default function UserInfoPage() {
   const { data: userProfileData, isLoading, error } = useUserProfileContext();
+  const setBreadcrumpItems = useSetBreadcrumpItems();
+
+  useEffect(() => {
+    setBreadcrumpItems([
+      { href: "/", label: "Home" },
+      { href: "/user-profile", label: "Profile" },
+      { href: "/user-profile/info", label: "Info" },
+    ]);
+  }, []);
 
   if (isLoading) return <UserInfoSkeleton />;
   if (error || !userProfileData) {
