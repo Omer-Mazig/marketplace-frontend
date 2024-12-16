@@ -13,9 +13,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/providers/auth-provider";
-import { UserDropDownContent } from "./user-dropdown-content";
+import { UserDropDownContent } from "../../../shared/user-dropdown-content";
 
-export function UserButton() {
+export function AppSidebarUserButton() {
   const { isMobile } = useSidebar();
   const { loggedInUser } = useAuth();
 

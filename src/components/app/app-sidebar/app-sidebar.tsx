@@ -1,5 +1,5 @@
 // Custom components
-import { UserButton } from "@/components/shared/user-button";
+import { AppSidebarUserButton } from "@/components/app/app-sidebar/_components/app-sidebar-user-button";
 
 // UI components
 import {
@@ -35,7 +35,7 @@ export function AppSidebar() {
         {state !== "collapsed" && <AppSidebarProductCategories />}
       </SidebarContent>
       <SidebarFooter>
-        <UserButton />
+        <AppSidebarUserButton />
       </SidebarFooter>
     </Sidebar>
   );
