@@ -42,7 +42,7 @@ export function AppSidebarActions() {
                 asChild
                 tooltip="Add product"
               >
-                <Link to="/products/new-product">
+                <Link to="/platform/products/new-product">
                   <Plus className="w-4 h-4" /> Add product
                 </Link>
               </SidebarMenuButton>

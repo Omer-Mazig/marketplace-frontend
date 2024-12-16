@@ -45,14 +45,13 @@ export default function ProductDetails() {
     if (!product) return;
 
     setBreadcrumpItems([
-      { href: "/", label: "Home" },
-      { href: "/products", label: "Products" },
+      { href: "/platform/products", label: "Products" },
       {
-        href: `/products/category/${product.categories[0]}`,
+        href: `/platform/products/category/${product.categories[0]}`,
         label: capitalize(product.categories[0]),
       },
       {
-        href: `/product/${product.id}`,
+        href: `/platform/product/${product.id}`,
         label: product.name,
       },
     ]);

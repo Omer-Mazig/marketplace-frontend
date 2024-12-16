@@ -31,10 +31,9 @@ export default function ProductListPage() {
   useEffect(() => {
     if (category === undefined) return;
     setBreadcrumpItems([
-      { href: "/", label: "Home" },
-      { href: "/products", label: "Products" },
+      { href: "/platform/products", label: "Products" },
       {
-        href: `/products/category/${category.toLocaleLowerCase()}`,
+        href: `/platform/products/category/${category.toLocaleLowerCase()}`,
         label: capitalize(category),
       },
     ]);

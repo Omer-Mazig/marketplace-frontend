@@ -119,7 +119,7 @@ export function UserButton() {
                 asChild
                 className="flex gap-2"
               >
-                <Link to="/user-profile/info">
+                <Link to="/platform/user-profile/info">
                   <Info className="w-4 h-4" />
                   Info
                 </Link>
@@ -128,7 +128,7 @@ export function UserButton() {
                 asChild
                 className="flex gap-2"
               >
-                <Link to="/user-profile/settings">
+                <Link to="/platform/user-profile/settings">
                   <Settings className="w-4 h-4" />
                   Settings
                 </Link>
@@ -137,7 +137,7 @@ export function UserButton() {
                 asChild
                 className="flex gap-2"
               >
-                <Link to="/user-profile/products">
+                <Link to="/platform/user-profile/products">
                   <Package className="w-4 h-4" />
                   Products
                 </Link>
@@ -146,7 +146,7 @@ export function UserButton() {
                 asChild
                 className="flex gap-2"
               >
-                <Link to="/user-profile/wishlist">
+                <Link to="/platform/user-profile/wishlist">
                   <Heart className="w-4 h-4" />
                   Wishlist
                 </Link>

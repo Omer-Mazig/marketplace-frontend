@@ -29,9 +29,8 @@ export default function UserInfoPage() {
 
   useEffect(() => {
     setBreadcrumpItems([
-      { href: "/", label: "Home" },
-      { href: "/user-profile", label: "Profile" },
-      { href: "/user-profile/info", label: "Info" },
+      { href: "/platform/user-profile", label: "Profile" },
+      { href: "/platform/user-profile/info", label: "Info" },
     ]);
   }, []);
 

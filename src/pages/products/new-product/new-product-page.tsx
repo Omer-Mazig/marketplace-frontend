@@ -20,10 +20,9 @@ export default function NewProductPage() {
 
   useEffect(() => {
     setBreadcrumpItems([
-      { href: "/", label: "Home" },
-      { href: "/user-profile", label: "Profile" },
-      { href: "/user-profile/products", label: "Products" },
-      { href: "/products/new-product", label: "New Product" },
+      { href: "/platform/user-profile", label: "Profile" },
+      { href: "/platform/user-profile/products", label: "Products" },
+      { href: "/platform/products/new-product", label: "New Product" },
     ]);
   }, []);
 

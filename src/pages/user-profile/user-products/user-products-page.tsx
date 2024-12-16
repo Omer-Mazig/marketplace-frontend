@@ -48,9 +48,8 @@ export default function UserProductsPage() {
 
   useEffect(() => {
     setBreadcrumpItems([
-      { href: "/", label: "Home" },
-      { href: "/user-profile", label: "Profile" },
-      { href: "/user-profile/products", label: "Products" },
+      { href: "/platform/user-profile", label: "Profile" },
+      { href: "/platform/user-profile/products", label: "Products" },
     ]);
   }, []);
 
@@ -88,7 +87,7 @@ export default function UserProductsPage() {
             asChild
             className="w-full md:w-auto"
           >
-            <Link to="/products/new-product">
+            <Link to="/platform/products/new-product">
               <Plus /> Add New Product{" "}
             </Link>
           </Button>

@@ -29,9 +29,8 @@ export default function UserSettingsPage() {
 
   useEffect(() => {
     setBreadcrumpItems([
-      { href: "/", label: "Home" },
-      { href: "/user-profile", label: "Profile" },
-      { href: "/user-profile/settings", label: "Settings" },
+      { href: "/platform/user-profile", label: "Profile" },
+      { href: "/platform/user-profile/settings", label: "Settings" },
     ]);
   }, []);
 
