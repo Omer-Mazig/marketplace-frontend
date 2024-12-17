@@ -14,6 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { AppSearchButton } from "@/components/shared/app-search-button";
 
 export function AppHeader() {
   const { loggedInUser } = useAuth();
@@ -36,9 +37,12 @@ export function AppHeader() {
           <PageBreadcrumb />
         </div>
         <div className="flex flex-1 items-center justify-between space-x-6 md:justify-end">
-          {/* <AppSearchButton /> */}
+          <AppSearchButton />
           <div className="flex items-center gap-1 ">
-            {loggedInUser ? null : <AuthButton />}
+            {/* undefined is initial state. null it no loggedInUser */}
+            {loggedInUser === undefined || loggedInUser !== null ? null : (
+              <AuthButton />
+            )}
             <ModeToggle />
           </div>
         </div>

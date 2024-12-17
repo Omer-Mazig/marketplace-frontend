@@ -20,15 +20,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/providers/auth-provider";
 import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
+import { cn } from "@/lib/utils";
 
 export function UserDropDownContent({
   sideOffset = 4,
   align = "end",
   isMobile = false,
+  className,
 }: {
   sideOffset?: number | undefined;
   align?: "end" | "center" | "start" | undefined;
   isMobile?: boolean;
+  className?: string;
 }) {
   const { loggedInUser, logout } = useAuth();
   const { openDialog } = useUpgradePlanDialog();
@@ -39,7 +42,10 @@ export function UserDropDownContent({
     loggedInUser.lastName[0].toUpperCase();
   return (
     <DropdownMenuContent
-      className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+      className={cn(
+        "w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg",
+        className
+      )}
       side={isMobile ? "bottom" : "right"}
       align={align}
       sideOffset={sideOffset}

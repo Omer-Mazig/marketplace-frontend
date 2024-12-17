@@ -1,5 +1,5 @@
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { Search, ShoppingCart, Truck } from "lucide-react";
+import { Phone, Search, Truck } from "lucide-react";
 
 const steps = [
   {
@@ -8,9 +8,9 @@ const steps = [
     description: "Explore our wide range of unique products",
   },
   {
-    icon: ShoppingCart,
-    title: "Purchase",
-    description: "Add items to your cart and checkout securely",
+    icon: Phone,
+    title: "Connect",
+    description: "Connect with the seller and close a deal",
   },
   {
     icon: Truck,
