@@ -12,6 +12,7 @@ export function DesktopNav() {
       {links.map((link) => {
         return (
           <Link
+            key={link.to}
             to={link.to}
             className="text-gray-600 hover:text-gray-900"
           >
