@@ -8,10 +8,9 @@ import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-// TODO: align footer to the rest of the page (width)
 export function AppFooter() {
   return (
-    <footer className="bg-sidebar text-muted-foreground py-4 mt-12">
+    <footer className="container bg-sidebar text-muted-foreground py-4 mt-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="mb-8 md:mb-0">
