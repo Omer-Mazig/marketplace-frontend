@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUser = async () => {
     try {
+      await wait(); // just for development
       const response = await api.get("/users/active");
       setLoggedInUser(response.data);
     } catch (error: any) {

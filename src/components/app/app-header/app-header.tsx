@@ -40,9 +40,9 @@ export function AppHeader() {
           <AppSearchButton />
           <div className="flex items-center gap-1 ">
             {/* undefined is initial state. null it no loggedInUser */}
-            {loggedInUser === undefined || loggedInUser !== null ? null : (
+            {loggedInUser === undefined ? null : loggedInUser === null ? (
               <AuthButton />
-            )}
+            ) : null}
             <ModeToggle />
           </div>
         </div>
