@@ -56,7 +56,7 @@ export function AppSidebarMainNavigation() {
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
+            <SidebarMenuItem key={item.url}>
               <SidebarMenuButton
                 tooltip={item.title}
                 asChild
@@ -68,7 +68,7 @@ export function AppSidebarMainNavigation() {
               </SidebarMenuButton>
               {item.subItems?.length &&
                 item.subItems.map((subItem) => (
-                  <SidebarMenuSub>
+                  <SidebarMenuSub key={subItem.url}>
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
                         <Link to={subItem.url}>
