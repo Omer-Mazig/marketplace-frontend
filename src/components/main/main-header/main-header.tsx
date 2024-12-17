@@ -6,7 +6,7 @@ import { MobileHamburger } from "./_components/mobile/mobile-hamburger";
 import { MobileMainMenu } from "./_components/mobile/mobile-main-menu";
 
 export const MainHeaderLinks = [
-  { label: "Categories", to: "/categories" },
+  { label: "Products", to: "/platform/products" },
   { label: "Plans", to: "/plans" },
   { label: "Sell", to: "/sell" },
 ];
