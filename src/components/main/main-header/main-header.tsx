@@ -5,6 +5,12 @@ import { DesktopUserDropdown } from "./_components/desktop/desktop-user-dropdown
 import { MobileHamburger } from "./_components/mobile/mobile-hamburger";
 import { MobileMainMenu } from "./_components/mobile/mobile-main-menu";
 
+export const MainHeaderLinks = [
+  { label: "Categories", to: "/categories" },
+  { label: "Plans", to: "/plans" },
+  { label: "Sell", to: "/sell" },
+];
+
 export function MainHeader() {
   // this state control the mobile AND the desktop menus
   const [isMenuOpen, setIsMenuOpen] = useState(false);

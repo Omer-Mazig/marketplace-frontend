@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
-
-const links = [
-  { label: "Categories", to: "/categories" },
-  { label: "Plans", to: "/plans" },
-  { label: "Sell", to: "/sell" },
-];
+import { MainHeaderLinks } from "../../main-header";
 
 export function DesktopNav() {
   return (
     <nav className="flex space-x-4">
-      {links.map((link) => {
+      {MainHeaderLinks.map((link) => {
         return (
           <Link
             key={link.to}

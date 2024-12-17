@@ -2,12 +2,7 @@ import { Link } from "react-router-dom";
 import { MobileUserMenu } from "./mobile-user-menu";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth-provider";
-
-const links = [
-  { label: "Categories", to: "/categories" },
-  { label: "Plans", to: "/plans" },
-  { label: "Sell", to: "/sell" },
-];
+import { MainHeaderLinks } from "../../main-header";
 
 export function MobileMainMenu() {
   const { loggedInUser } = useAuth();
@@ -15,7 +10,7 @@ export function MobileMainMenu() {
   return (
     <div className="md:hidden">
       <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        {links.map((link) => {
+        {MainHeaderLinks.map((link) => {
           return (
             <Link
               key={link.to}
