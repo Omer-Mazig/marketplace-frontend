@@ -19,7 +19,7 @@ const plans = [
   {
     id: "standard",
     name: "Standard",
-    price: "$9.99",
+    price: "$0.00",
     description: "Perfect for individuals and small teams",
     features: [
       { name: "Up to 5 users", included: true },
@@ -32,7 +32,7 @@ const plans = [
   {
     id: "gold",
     name: "Gold",
-    price: "$29.99",
+    price: "$9.99",
     description: "Ideal for growing businesses",
     features: [
       { name: "Up to 20 users", included: true },
@@ -45,7 +45,7 @@ const plans = [
   {
     id: "platinum",
     name: "Platinum",
-    price: "$99.99",
+    price: "$39.99",
     description: "For enterprises seeking premium features",
     features: [
       { name: "Unlimited users", included: true },
