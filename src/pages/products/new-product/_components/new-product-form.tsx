@@ -43,6 +43,7 @@ import { createProduct } from "@/services/products.service";
 import { AddProductFormValues } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
 import Error from "@/components/shared/error";
+import { NewProductFormSkeleton } from "./new-product-form-skeleton";
 
 const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
@@ -113,7 +114,7 @@ export function NewProductForm({
   }
 
   if (productId) {
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <NewProductFormSkeleton />;
     if (error || !product) return <Error />;
   }
 
