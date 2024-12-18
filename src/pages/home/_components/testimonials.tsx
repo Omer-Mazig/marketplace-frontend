@@ -29,7 +29,7 @@ export function Testimonials() {
       ref={ref}
       className="py-20 bg-gray-100"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12">
           What Our Users Say
         </h2>

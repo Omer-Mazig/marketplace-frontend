@@ -27,7 +27,7 @@ export function HowItWorks() {
       ref={ref}
       className="py-20"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12">How It Works</h2>
         <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-8">
           {steps.map((step, index) => (
