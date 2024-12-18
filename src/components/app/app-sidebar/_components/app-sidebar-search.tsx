@@ -3,11 +3,16 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarInput,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 import { Search } from "lucide-react";
 
 export function AppSidebarSearch() {
+  const { state } = useSidebar();
+
+  if (state === "collapsed") return null;
+
   return (
     <form>
       <SidebarGroup className="py-0">

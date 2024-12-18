@@ -7,33 +7,18 @@ import { PageBreadcrumb } from "./_components/page-breadcrumb";
 import { useAuth } from "@/providers/auth-provider";
 
 // UI components
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { AppSearchButton } from "@/components/shared/app-search-button";
+import { AppSidebarTrigger } from "./_components/app-sidebar-trigger";
 
 export function AppHeader() {
   const { loggedInUser } = useAuth();
-  const { state } = useSidebar();
 
   return (
     <header className="container mb-4 sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center">
         <div className="mr-4 flex">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <SidebarTrigger className="mr-1" />
-              </TooltipTrigger>
-              <TooltipContent>
-                {state === "expanded" ? "Close sidebar" : "Open sidebar"}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <AppSidebarTrigger />
           <PageBreadcrumb />
         </div>
         <div className="flex flex-1 items-center justify-between space-x-6 md:justify-end">

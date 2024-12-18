@@ -8,8 +8,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-// Custom components
-
 // Custom hooks
 import { useAuth } from "@/providers/auth-provider";
 
@@ -21,7 +19,6 @@ export function LoginAlertDialog() {
   } = useAuth();
 
   function onOpenChange(isOpen: boolean) {
-    console.log(isOpen);
     setShouldShowLoginAlertDialog(isOpen);
   }
 

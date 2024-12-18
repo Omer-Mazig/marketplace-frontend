@@ -18,7 +18,9 @@ export function MiniUserRow({ user }: MiniUserRowProps) {
           src={user.imageUrl || ""}
           alt={user.email}
         />
-        <AvatarFallback>{user.email[0].toUpperCase()}</AvatarFallback>
+        <AvatarFallback>
+          {user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()}
+        </AvatarFallback>
       </Avatar>
       <div>
         <div className="text-sm font-semibold">

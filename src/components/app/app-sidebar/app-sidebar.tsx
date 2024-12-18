@@ -8,7 +8,6 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarSeparator,
-  useSidebar,
 } from "@/components/ui/sidebar";
 
 // Sidebar components
@@ -19,20 +18,18 @@ import { AppSidebarSearch } from "./_components/app-sidebar-search";
 import { AppSidebarLogo } from "./_components/app-sidebar-logo";
 
 export function AppSidebar() {
-  const { state } = useSidebar();
-
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <AppSidebarLogo />
-        {state === "expanded" ? <AppSidebarSearch /> : null}
+        <AppSidebarSearch />
       </SidebarHeader>
       <SidebarContent>
         <AppSidebarMainNavigation />
         <SidebarSeparator />
         <AppSidebarActions />
         <SidebarSeparator />
-        {state !== "collapsed" && <AppSidebarProductCategories />}
+        <AppSidebarProductCategories />
       </SidebarContent>
       <SidebarFooter>
         <AppSidebarUserButton />

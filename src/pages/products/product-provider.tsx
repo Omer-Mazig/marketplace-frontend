@@ -1,7 +1,20 @@
 import { Product } from "@/types/products.types";
 import React, { createContext, useContext } from "react";
 
+interface ProductProviderProps {
+  product: Product;
+  children: React.ReactNode;
+}
+
 const ProductContext = createContext<Product | null>(null);
+
+export function ProductProvider({ product, children }: ProductProviderProps) {
+  return (
+    <ProductContext.Provider value={product}>
+      {children}
+    </ProductContext.Provider>
+  );
+}
 
 export function useProduct() {
   const context = useContext(ProductContext);
@@ -9,18 +22,4 @@ export function useProduct() {
     throw new Error("useProduct must be used within a ProductProvider");
   }
   return context;
-}
-
-export function ProductProvider({
-  product,
-  children,
-}: {
-  product: Product;
-  children: React.ReactNode;
-}) {
-  return (
-    <ProductContext.Provider value={product}>
-      {children}
-    </ProductContext.Provider>
-  );
 }

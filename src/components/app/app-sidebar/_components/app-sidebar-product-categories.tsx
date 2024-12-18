@@ -17,9 +17,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 export function AppSidebarProductCategories() {
+  const { state } = useSidebar();
+
+  // TODO: return fropdown that render th category list outside the collapsed sidebar
+  if (state === "collapsed") return null;
+
   return (
     <Collapsible
       defaultOpen

@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useContext,
   useState,
@@ -26,9 +26,7 @@ interface BreadcrumpProviderProps {
   children: ReactNode;
 }
 
-export const BreadcrumpProvider: React.FC<BreadcrumpProviderProps> = ({
-  children,
-}) => {
+export function BreadcrumpProvider({ children }: BreadcrumpProviderProps) {
   const [items, setItemsState] = useState<BreadcrumpItem[]>([]);
 
   // Memoize the setter function
@@ -43,7 +41,7 @@ export const BreadcrumpProvider: React.FC<BreadcrumpProviderProps> = ({
       </BreadcrumpSetItemsContext.Provider>
     </BreadcrumpItemsContext.Provider>
   );
-};
+}
 
 // Custom hooks for consuming the contexts with error handling
 export const useBreadcrumpItems = (): BreadcrumpItem[] => {

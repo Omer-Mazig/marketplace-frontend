@@ -58,7 +58,6 @@ export default function RegisterPage() {
 
   async function onSubmit(values: RegisterFormValues) {
     const { confirmPassword, ...valuesToSubmit } = values;
-    console.log("values", values);
 
     try {
       setIsPending(true);
