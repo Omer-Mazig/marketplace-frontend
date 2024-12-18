@@ -100,7 +100,7 @@ export default function ProductDetails() {
                   queryKey={[QUERY_KEY_DICT.PRODUCT, { productId: product.id }]}
                 />
               ) : (
-                <EditProductButton productId={productId} />
+                <EditProductButton productId={product.id} />
               )}
             </CardFooter>
           </div>
