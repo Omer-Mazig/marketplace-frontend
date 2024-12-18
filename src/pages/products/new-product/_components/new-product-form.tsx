@@ -1,7 +1,6 @@
 // React and React Hook Form
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // Icons
@@ -10,7 +9,6 @@ import { HelpCircle } from "lucide-react";
 // Hooks:
 import { useToast } from "@/components/ui/use-toast";
 import { useUpgradePlanDialog } from "@/providers/upgrade-plan-dialog-provider";
-import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 
 // Custom enums
 import { ProductCategory } from "@/enums/product-category.enum";
@@ -40,10 +38,8 @@ import {
 import { createProduct } from "@/services/products.service";
 
 // Types and validations
-import { AddProductFormValues } from "@/types/products.types";
+import { AddProductFormValues, Product } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
-import Error from "@/components/shared/error";
-import { NewProductFormSkeleton } from "./new-product-form-skeleton";
 
 const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
   label: value,
@@ -51,7 +47,7 @@ const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
 }));
 
 interface NewProductFormProps {
-  isEditMode?: boolean;
+  product?: Product;
   setShouldShowAfterCreateProductDialog?: React.Dispatch<
     React.SetStateAction<boolean>
   >;
@@ -59,18 +55,13 @@ interface NewProductFormProps {
 
 // TODO: if user close upgrade dialog with out upgrading - redirect to user-product-page
 export function NewProductForm({
-  isEditMode = false,
+  product,
   setShouldShowAfterCreateProductDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { openDialog: openUpgradeDialog } = useUpgradePlanDialog();
   const { toast } = useToast();
-
-  const { productId: _productId } = useParams();
-  const productId = parseInt(_productId || "");
-
-  const { data: product, error, isLoading } = useGetProductById(productId);
 
   const form = useForm<AddProductFormValues>({
     resolver: zodResolver(addProductFormSchema),
@@ -113,11 +104,6 @@ export function NewProductForm({
 
     setSelectedCategories([]);
     form.reset();
-  }
-
-  if (isEditMode) {
-    if (isLoading) return <NewProductFormSkeleton />;
-    if (error || !product) return <Error />;
   }
 
   return (
