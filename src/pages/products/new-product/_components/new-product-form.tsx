@@ -50,6 +50,7 @@ interface NewProductFormProps {
 }
 
 // TODO: if user close upgrade dialog with out upgrading - redirect to user-product-page
+// TODO: Error for categories
 export function NewProductForm({
   product,
   setShouldShowAfterCreateProductDialog,
