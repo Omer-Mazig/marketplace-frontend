@@ -51,6 +51,7 @@ const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
 }));
 
 interface NewProductFormProps {
+  isEditMode?: boolean;
   setShouldShowAfterCreateProductDialog?: React.Dispatch<
     React.SetStateAction<boolean>
   >;
@@ -58,6 +59,7 @@ interface NewProductFormProps {
 
 // TODO: if user close upgrade dialog with out upgrading - redirect to user-product-page
 export function NewProductForm({
+  isEditMode = false,
   setShouldShowAfterCreateProductDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -113,7 +115,7 @@ export function NewProductForm({
     form.reset();
   }
 
-  if (productId) {
+  if (isEditMode) {
     if (isLoading) return <NewProductFormSkeleton />;
     if (error || !product) return <Error />;
   }

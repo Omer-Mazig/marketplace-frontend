@@ -24,7 +24,7 @@ export default function EditProductPage() {
     <div className="text-center 3xs:text-start">
       <PageHeading>Edit Product</PageHeading>
 
-      <NewProductForm />
+      <NewProductForm isEditMode />
     </div>
   );
 }
