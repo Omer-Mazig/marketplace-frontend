@@ -8,6 +8,6 @@ export const addProductFormSchema = z.object({
     .number()
     .int()
     .positive({ message: "Stock must be a positive integer" }),
-  location: z.string().optional(),
+  location: z.string().min(1, { message: "Location is required" }),
   isNegotiable: z.boolean(),
 });

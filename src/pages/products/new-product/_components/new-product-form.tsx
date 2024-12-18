@@ -40,11 +40,7 @@ import { createProduct } from "@/services/products.service";
 // Types and validations
 import { AddProductFormValues, Product } from "@/types/products.types";
 import { addProductFormSchema } from "@/validations/product.validations";
-
-const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
-  label: value,
-  value: value,
-}));
+import { useNavigate } from "react-router-dom";
 
 interface NewProductFormProps {
   product?: Product;
@@ -59,23 +55,39 @@ export function NewProductForm({
   setShouldShowAfterCreateProductDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    product?.categories || []
+  );
   const { openDialog: openUpgradeDialog } = useUpgradePlanDialog();
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  let submitButtonText: string;
+
+  if (isSubmitting) {
+    submitButtonText = "Loading...";
+  } else {
+    submitButtonText = product ? "Edit" : "Add";
+  }
+
+  const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
+    label: value,
+    value: value,
+  }));
 
   const form = useForm<AddProductFormValues>({
     resolver: zodResolver(addProductFormSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      price: 0,
-      stock: 0,
-      location: "",
-      isNegotiable: false,
+      name: product?.name || "",
+      description: product?.description || "",
+      price: product?.price || 0,
+      stock: product?.stock || 0,
+      location: product?.location || "",
+      isNegotiable: product?.isNegotiable || false,
     },
   });
 
-  async function onSubmit(values: AddProductFormValues) {
+  async function create(values: AddProductFormValues) {
     setIsSubmitting(true);
 
     try {
@@ -83,9 +95,9 @@ export function NewProductForm({
         ...values,
         categories: selectedCategories as unknown as ProductCategory,
       });
+      setShouldShowAfterCreateProductDialog &&
+        setShouldShowAfterCreateProductDialog(true);
     } catch (error: any) {
-      console.log(error);
-
       if (error.response.data.redirectToUpgradePlan) {
         return openUpgradeDialog();
       }
@@ -99,11 +111,31 @@ export function NewProductForm({
       setIsSubmitting(false);
     }
 
-    setShouldShowAfterCreateProductDialog &&
-      setShouldShowAfterCreateProductDialog(true);
-
     setSelectedCategories([]);
     form.reset();
+  }
+
+  async function edit(values: AddProductFormValues) {
+    setIsSubmitting(true);
+
+    try {
+      console.log("values", values);
+
+      navigate("/platform/user-profile/products");
+    } catch (error: any) {
+      toast({
+        title: "An error occurred",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  async function onSubmit(values: AddProductFormValues) {
+    if (!product) create(values);
+    else edit(values);
   }
 
   return (
@@ -244,7 +276,7 @@ export function NewProductForm({
             disabled={isSubmitting}
             className="w-full md:w-auto"
           >
-            {isSubmitting ? "Loading..." : "Add"}
+            {submitButtonText}
           </Button>
 
           {/* Figure out how to show this message */}
