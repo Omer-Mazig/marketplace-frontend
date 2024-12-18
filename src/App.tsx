@@ -31,6 +31,7 @@ import FeaturedProductsPage from "./pages/products/featured-products/featured-pr
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
 import MainLayout from "./layouts/main-layout";
+import EditProductPage from "./pages/products/edit-product/edit-product-page";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <NewProductPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "products/edit-product",
+        element: (
+          <ProtectedRoute>
+            <EditProductPage />
           </ProtectedRoute>
         ),
       },

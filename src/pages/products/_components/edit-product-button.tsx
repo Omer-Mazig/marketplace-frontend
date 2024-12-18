@@ -18,7 +18,7 @@ export function EditProductButton() {
             variant="ghost"
             size="sm"
           >
-            <Link to="#">
+            <Link to="/platform/products/edit-product">
               <Pencil className="w-5 h-5 text-gray-400" />
               <span className="sr-only">Edit product</span>
             </Link>

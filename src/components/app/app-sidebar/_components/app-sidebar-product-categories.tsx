@@ -23,7 +23,7 @@ import {
 export function AppSidebarProductCategories() {
   const { state } = useSidebar();
 
-  // TODO: return fropdown that render th category list outside the collapsed sidebar
+  // TODO: return dropdown that render th category list outside the collapsed sidebar
   if (state === "collapsed") return null;
 
   return (
