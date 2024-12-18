@@ -47,6 +47,7 @@ const categories = Object.entries(ProductCategory).map(([_key, value]) => ({
 }));
 
 interface NewProductFormProps {
+  productId?: string;
   setShouldShowAfterCreateProductDialog?: React.Dispatch<
     React.SetStateAction<boolean>
   >;
@@ -54,6 +55,7 @@ interface NewProductFormProps {
 
 // TODO: if user close upgrade dialog with out upgrading - redirect to user-product-page
 export function NewProductForm({
+  productId,
   setShouldShowAfterCreateProductDialog,
 }: NewProductFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);

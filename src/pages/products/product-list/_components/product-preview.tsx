@@ -59,7 +59,7 @@ export function ProductPreview({ product }: ProductPreviewProps) {
               queryKey={[QUERY_KEY_DICT.PRODUCTS, { category }]}
             />
           ) : (
-            <EditProductButton />
+            <EditProductButton productId={product.id} />
           )}
         </CardFooter>
       </Card>

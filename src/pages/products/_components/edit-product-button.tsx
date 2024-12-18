@@ -8,7 +8,11 @@ import {
 import { Pencil } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export function EditProductButton() {
+interface EditProductButtonProps {
+  productId: number;
+}
+
+export function EditProductButton({ productId }: EditProductButtonProps) {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -19,7 +23,7 @@ export function EditProductButton() {
             size="sm"
             onClick={(e) => e.stopPropagation()}
           >
-            <Link to="/platform/products/edit-product">
+            <Link to={`/platform/product/${productId}/edit-product`}>
               <Pencil className="w-5 h-5 text-gray-400" />
               <span className="sr-only">Edit product</span>
             </Link>

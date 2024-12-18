@@ -7,10 +7,14 @@ import { NewProductForm } from "../new-product/_components/new-product-form";
 
 // Providers
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
+import { useParams } from "react-router-dom";
 
 // TODO: add skelaton
 export default function EditProductPage() {
   const setBreadcrumpItems = useSetBreadcrumpItems();
+  const { productId } = useParams();
+
+  console.log("productId", productId);
 
   useEffect(() => {
     setBreadcrumpItems([
@@ -24,7 +28,7 @@ export default function EditProductPage() {
     <div className="text-center 3xs:text-start">
       <PageHeading>Edit Product</PageHeading>
 
-      <NewProductForm />
+      <NewProductForm productId={productId} />
     </div>
   );
 }

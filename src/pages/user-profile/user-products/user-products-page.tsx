@@ -106,7 +106,7 @@ function ProductItemActions({ product }: { product: Product }) {
 
   return (
     <div className="sm:opacity-0 group-hover:opacity-100">
-      <EditProductButton />
+      <EditProductButton productId={product.id} />
 
       <TooltipProvider>
         <Tooltip>

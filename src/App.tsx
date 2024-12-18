@@ -73,6 +73,14 @@ const router = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
+        path: "product/:productId/edit-product",
+        element: (
+          <ProtectedRoute>
+            <EditProductPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "products/new-product",
         element: (
           <ProtectedRoute>
@@ -80,14 +88,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      {
-        path: "products/edit-product",
-        element: (
-          <ProtectedRoute>
-            <EditProductPage />
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "user-profile",
         element: (
