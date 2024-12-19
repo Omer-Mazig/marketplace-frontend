@@ -1,0 +1,27 @@
+// Icons
+import { AlertCircle } from "lucide-react";
+
+// UI components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface ErrorProps {
+  message?: string;
+}
+
+export default function ErrorNotFound({
+  message = "An error occurred. Please try again later.",
+}: ErrorProps) {
+  return (
+    <Card className="w-full max-w-3xl mx-auto">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-destructive">
+          <AlertCircle className="h-5 w-5" />
+          Not Found
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p>{message}</p>
+      </CardContent>
+    </Card>
+  );
+}

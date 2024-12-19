@@ -55,7 +55,11 @@ export default function ProductDetails() {
   }, [product]);
 
   if (isLoading) return <ProductDetailsSkeleton />;
-  if (error || !product) return <Error />;
+
+  if (error || !product) {
+    console.log(error);
+    return <Error />;
+  }
 
   return (
     <ProductProvider product={product}>

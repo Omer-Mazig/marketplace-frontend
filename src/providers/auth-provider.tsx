@@ -12,7 +12,6 @@ import { ACCESS_TOKEN_STORAGE_KEY } from "@/constants/auth.constant";
 
 // Utilities and API
 import api from "@/lib/api";
-import { wait } from "@/lib/utils";
 import { UserTierOptionType } from "@/types/users.types";
 
 export interface LoggedInUser {
@@ -62,7 +61,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function fetchUser() {
     try {
-      await wait(); // just for development
       const response = await api.get("/users/active");
       setLoggedInUser(response.data);
     } catch (error: any) {
@@ -88,7 +86,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function login(cred: LoginCredentials) {
     try {
-      await wait();
       const response = await api.post("/auth/sign-in", cred);
       const accessToken = response.data.accessToken;
       setAccessToken(accessToken); // Store token directly

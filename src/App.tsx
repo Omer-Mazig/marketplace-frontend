@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 // Custom layouts
+import MainLayout from "./layouts/main-layout";
 import PlatformLayout from "@/layouts/platform-layout";
 import AuthLayout from "@/layouts/auth-layout";
 import UserProfileLayout from "@/pages/user-profile/user-profile-layout";
@@ -27,11 +28,10 @@ import NewProductPage from "@/pages/products/new-product/new-product-page";
 import ProductListPage from "@/pages/products/product-list/product-list-page";
 import ProductDetails from "@/pages/products/product-details/product-details-page";
 import FeaturedProductsPage from "./pages/products/featured-products/featured-products-page";
+import EditProductPage from "./pages/products/edit-product/edit-product-page";
 
 // Custom providers
 import { useAuth } from "@/providers/auth-provider";
-import MainLayout from "./layouts/main-layout";
-import EditProductPage from "./pages/products/edit-product/edit-product-page";
 
 const router = createBrowserRouter([
   {
