@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 
 // Icons
-import { Plus, Trash2 } from "lucide-react";
+import { LoaderCircle, Plus, Trash2 } from "lucide-react";
 
 // Router
 import { Link } from "react-router-dom";
@@ -43,7 +43,12 @@ import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 // TODO: breadcrump should dynmicly show route based on where user get in prodcut details
 export default function UserProductsPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileContext();
+  const {
+    data: userProfileData,
+    isLoading,
+    error,
+    isFetching,
+  } = useUserProfileContext();
 
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
@@ -63,21 +68,32 @@ export default function UserProductsPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your Products ({products.length})</CardTitle>
+        <CardTitle className="flex items-center gap-1">
+          {"Your Products"}
+          {isFetching ? (
+            <LoaderCircle className="w-8 h-8 animate-spin" />
+          ) : (
+            <span>({products.length})</span>
+          )}
+        </CardTitle>
         <CardDescription>Manage the products you've listed.</CardDescription>
       </CardHeader>
       <CardContent>
         {products.length ? (
           <ul className="space-y-4">
             {products.map((product) => (
-              <GenericItemRow
+              <div
                 key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
+                className="relative"
               >
-                <ProductItemActions product={product} />
-              </GenericItemRow>
+                <GenericItemRow
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                >
+                  <ProductItemActions product={product} />
+                </GenericItemRow>
+              </div>
             ))}
           </ul>
         ) : (
