@@ -1,5 +1,5 @@
 // Third-party libraries
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // UI components
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,7 +18,6 @@ import { capitalize } from "@/lib/utils";
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
   const { category } = useParams();
-  const [searchParams] = useSearchParams();
 
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
@@ -26,6 +25,7 @@ export default function ProductListPage() {
     data: products,
     error,
     isLoading,
+    isFetching,
   } = useGetAllProductsQuery({ category });
 
   useEffect(() => {
@@ -39,52 +39,33 @@ export default function ProductListPage() {
     ]);
   }, [category]);
 
-  // TODO: Filter from the serverside
-  const filteredProducts = products
-    ? products.filter((product) => {
-        const searchTerm = searchParams.get("search") || "";
-        const priceRange = [
-          Number(searchParams.get("minPrice")) || 0,
-          Number(searchParams.get("maxPrice")) || 9999,
-        ];
+  if (products && products.length === 0 && isFetching) {
+    console.log("render skelaton for products");
+  }
 
-        return (
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          product.price >= priceRange[0] &&
-          product.price <= priceRange[1]
-        );
-      })
-    : [];
-
-  if (error) return <Error />;
+  if (!isLoading) {
+    if (error || !products) return <Error />;
+  }
 
   return (
     <div>
       <PageHeading>{category}</PageHeading>
       <div className="auto-grid">
-        {isLoading
-          ? Array.from({ length: 6 }).map((_, index) => (
-              <ProductPreviewSkeleton key={index} />
-            ))
-          : filteredProducts.map((product) => (
-              <ProductPreview
-                key={product.id}
-                product={product}
-              />
-            ))}
+        {isLoading || !products ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <ProductPreviewSkeleton key={index} />
+          ))
+        ) : products.length ? (
+          products.map((product) => (
+            <ProductPreview
+              key={product.id}
+              product={product}
+            />
+          ))
+        ) : (
+          <p>No Products</p>
+        )}
       </div>
-    </div>
-  );
-}
-
-export function ProductsFilterSkeleton() {
-  return (
-    <div className="space-y-4">
-      <Skeleton className="h-8 w-full" />
-      <Skeleton className="h-4 w-3/4" />
-      <Skeleton className="h-4 w-1/2" />
-      <Skeleton className="h-4 w-2/3" />
-      <Skeleton className="h-8 w-full" />
     </div>
   );
 }
