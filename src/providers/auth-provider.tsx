@@ -39,7 +39,7 @@ type RegisterCredentials = Omit<RegisterFormValues, "confirmPassword">;
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loggedInUser, setLoggedInUser] = useState<
     LoggedInUser | null | undefined
   >(undefined);
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [accessToken]);
 
-  const fetchUser = async () => {
+  async function fetchUser() {
     try {
       await wait(); // just for development
       const response = await api.get("/users/active");
@@ -76,17 +76,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         console.error("Error fetching user data:", error);
       }
     }
-  };
+  }
 
-  const logout = async () => {
+  async function logout() {
     await api.post("/auth/sign-out");
     setAccessToken(null);
     setLoggedInUser(null);
     setShouldShowLoginAlertDialog(false); // wierd behivior with login dialog
     localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
-  };
+  }
 
-  const login = async (cred: LoginCredentials) => {
+  async function login(cred: LoginCredentials) {
     try {
       await wait();
       const response = await api.post("/auth/sign-in", cred);
@@ -96,16 +96,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.error("Error logging in:", error);
       throw error;
     }
-  };
+  }
 
-  const register = async (cred: RegisterCredentials) => {
+  async function register(cred: RegisterCredentials) {
     try {
       await api.post("/users", cred);
     } catch (error) {
       console.error("Error registering:", error);
       throw error;
     }
-  };
+  }
 
   return (
     <AuthContext.Provider
@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export function useAuth() {
   const context = useContext(AuthContext);

@@ -32,3 +32,13 @@ export async function createProduct(input: AddProductInput): Promise<Product> {
   const { data } = await api.post(`/products`, input);
   return data;
 }
+
+export async function editProduct(
+  input: AddProductInput,
+  productId: number
+): Promise<Product> {
+  await wait(1500); // just for development
+
+  const { data } = await api.patch(`/products/${productId}`, input);
+  return data;
+}

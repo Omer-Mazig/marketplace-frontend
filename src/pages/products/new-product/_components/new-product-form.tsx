@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/form";
 
 // Custom services
-import { createProduct } from "@/services/products.service";
+import { createProduct, editProduct } from "@/services/products.service";
 
 // Types and validations
 import { AddProductFormValues, Product } from "@/types/products.types";
@@ -120,7 +120,13 @@ export function NewProductForm({
     setIsSubmitting(true);
 
     try {
-      console.log("values", values);
+      await editProduct(
+        {
+          ...values,
+          categories: selectedCategories as unknown as ProductCategory,
+        },
+        product?.id as number
+      );
 
       navigate("/platform/user-profile/products");
     } catch (error: any) {
@@ -225,19 +231,22 @@ export function NewProductForm({
             control={form.control}
             name="isNegotiable"
             render={({ field }) => (
-              <FormItem className="relative flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormLabel>Negotiable</FormLabel>
+              <FormItem className="relative flex flex-row items-center justify-between space-x-3 space-y-0 rounded-md border p-2">
+                <div className="flex items-center gap-2">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormLabel className="cursor-pointer">Negotiable</FormLabel>
+                </div>
+
                 <Hint
-                  sideOffset={40}
+                  sideOffset={10}
                   description="Check if the price is negotiable."
                 >
-                  <HelpCircle className="absolute right-2 h-[14px] w-[14px]" />
+                  <HelpCircle className="h-[14px] w-[14px]" />
                 </Hint>
               </FormItem>
             )}
@@ -251,6 +260,7 @@ export function NewProductForm({
               placeholder="Select categories"
               variant="inverted"
               maxCount={3}
+              className="h-full"
             />
           </div>
         </div>

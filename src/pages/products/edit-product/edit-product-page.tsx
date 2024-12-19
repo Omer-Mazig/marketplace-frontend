@@ -11,6 +11,7 @@ import { NewProductFormSkeleton } from "../new-product/_components/new-product-f
 // Providers
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
+import { TextWarning } from "@/components/shared/text-warning";
 
 // TODO: add skelaton
 export default function EditProductPage() {
@@ -29,14 +30,27 @@ export default function EditProductPage() {
     ]);
   }, []);
 
-  if (isLoading) return <NewProductFormSkeleton />;
-  if (error || !product) return <Error />;
+  if (!isLoading) {
+    if (error || !product) return <Error />;
+  }
 
   return (
     <div className="text-center 3xs:text-start">
-      <PageHeading>Edit Product</PageHeading>
+      <PageHeading
+        subTitle={
+          <TextWarning className="mt-1">
+            Note: users that interested in this product will be notify.
+          </TextWarning>
+        }
+      >
+        Edit Product
+      </PageHeading>
 
-      <NewProductForm product={product} />
+      {isLoading ? (
+        <NewProductFormSkeleton />
+      ) : (
+        <NewProductForm product={product} />
+      )}
     </div>
   );
 }
