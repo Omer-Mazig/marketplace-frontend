@@ -30,11 +30,17 @@ import { EditProductButton } from "../_components/edit-product-button";
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { useEffect } from "react";
 import { capitalize } from "@/lib/utils";
+import { FetchInBackgroundLoader } from "@/components/shared/fetch-in-backgound-loader";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
-  const { data: product, error, isLoading } = useGetProductById(productId);
+  const {
+    data: product,
+    error,
+    isLoading,
+    isFetching,
+  } = useGetProductById(productId);
   const { loggedInUser } = useAuth();
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
@@ -106,6 +112,7 @@ export default function ProductDetails() {
           </div>
         </div>
       </Card>
+      {isFetching && <FetchInBackgroundLoader />}
     </ProductProvider>
   );
 }

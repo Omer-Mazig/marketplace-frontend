@@ -20,7 +20,7 @@ export default function PlatformLayout() {
           <AppSidebar />
           <div className="flex flex-col max-w-screen-2xl flex-grow">
             <AppHeader />
-            <main className="container flex-grow">
+            <main className="container flex-grow relative">
               <Outlet />
             </main>
             <AppFooter />

@@ -1,6 +1,6 @@
 import { Product } from "@/types/products.types";
 import { ProductPreview } from "./product-preview";
-import { LoaderCircle } from "lucide-react";
+import { FetchInBackgroundLoader } from "@/components/shared/fetch-in-backgound-loader";
 
 interface ProductListContainerProps {
   isLoading: boolean;
@@ -16,21 +16,17 @@ export function ProductListContainer({
     <>
       {products.length ? (
         products.map((product) => (
-          <div className="relative max-w-96">
+          <div
+            className={`relative max-w-96 ${
+              isFetching ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
             <ProductPreview
               key={product.id}
               product={product}
             />
 
-            <div
-              className={`absolute inset-0 bg-black ${
-                isFetching ? "opacity-40" : "opacity-0"
-              }`}
-            >
-              <div className="w-full h-full flex justify-center items-center">
-                <LoaderCircle className="w-16 h-16 animate-spin" />
-              </div>
-            </div>
+            {isFetching && <FetchInBackgroundLoader />}
           </div>
         ))
       ) : (
