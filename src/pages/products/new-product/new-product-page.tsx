@@ -9,7 +9,6 @@ import { NewProductForm } from "./_components/new-product-form";
 // Providers
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
-// TODO: add skelaton
 export default function NewProductPage() {
   const [
     shouldShowafterCreateProductDialog,

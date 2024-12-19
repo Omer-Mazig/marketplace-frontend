@@ -13,7 +13,6 @@ import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { TextWarning } from "@/components/shared/text-warning";
 
-// TODO: add skelaton
 export default function EditProductPage() {
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
