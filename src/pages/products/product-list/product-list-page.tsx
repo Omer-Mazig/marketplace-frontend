@@ -13,6 +13,8 @@ import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { capitalize } from "@/lib/utils";
 import { ProductListContainer } from "./_components/product-list-container";
 
+const PRODUCT_PREVIEW_SKELETON_LENGTH = 6;
+
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
   const { category } = useParams();
@@ -37,22 +39,16 @@ export default function ProductListPage() {
     ]);
   }, [category]);
 
-  if (products && products.length === 0 && isFetching) {
-    console.log("render skelaton for products");
-  }
-
-  if (!isLoading) {
-    if (error || !products) return <Error />;
-  }
+  if (error) return <Error />;
 
   return (
     <div>
       <PageHeading>{category}</PageHeading>
       <div className="auto-grid">
         {isLoading || !products ? (
-          Array.from({ length: 6 }).map((_, index) => (
-            <ProductPreviewSkeleton key={index} />
-          ))
+          Array.from({ length: PRODUCT_PREVIEW_SKELETON_LENGTH }).map(
+            (_, index) => <ProductPreviewSkeleton key={index} />
+          )
         ) : (
           <ProductListContainer
             isLoading={isLoading}
