@@ -6,14 +6,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Error from "@/components/shared/error";
 import { PageHeading } from "@/components/ui/page-heading";
 
-// Custom components
-import { ProductPreview } from "./_components/product-preview";
-
 // Hooks
 import { useGetAllProductsQuery } from "@/hooks/use-get-all-products-query";
 import { useEffect } from "react";
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { capitalize } from "@/lib/utils";
+import { ProductListContainer } from "./_components/product-list-container";
 
 // TODO: Implement infinite scroll
 export default function ProductListPage() {
@@ -55,22 +53,18 @@ export default function ProductListPage() {
           Array.from({ length: 6 }).map((_, index) => (
             <ProductPreviewSkeleton key={index} />
           ))
-        ) : products.length ? (
-          products.map((product) => (
-            <ProductPreview
-              key={product.id}
-              product={product}
-            />
-          ))
         ) : (
-          <p>No Products</p>
+          <ProductListContainer
+            isLoading={isLoading}
+            products={products}
+          />
         )}
       </div>
     </div>
   );
 }
 
-export function ProductPreviewSkeleton() {
+function ProductPreviewSkeleton() {
   return (
     <div className="space-y-3">
       <Skeleton className="h-40 w-full" />
