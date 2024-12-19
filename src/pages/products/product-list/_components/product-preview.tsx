@@ -37,7 +37,7 @@ export function ProductPreview({ product }: ProductPreviewProps) {
   return (
     <ProductProvider product={product}>
       <Card
-        className="flex flex-col h-full cursor-pointer max-w-96 overflow-hidden hover:shadow-xl hover:outline outline-primary outline-offset-2"
+        className="flex flex-col h-full cursor-pointer overflow-hidden hover:shadow-xl hover:outline outline-primary outline-offset-2"
         onClick={goToDetails}
       >
         <div className="max-h-[200px]">

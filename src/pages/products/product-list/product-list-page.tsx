@@ -52,6 +52,7 @@ export default function ProductListPage() {
         ) : (
           <ProductListContainer
             isLoading={isLoading}
+            isFetching={isFetching}
             products={products}
           />
         )}
