@@ -34,7 +34,7 @@ export function useDeleteProductMutation(product: Product) {
       });
       // for UX improvment:
       // if a product is removed it sholld not be cached
-      // seems like it also handle the navigation history...
+      // TODO: fix wierd navigatin, seems like it also handle the navigation history but not intuitivly
       queryClient.removeQueries({
         queryKey: [QUERY_KEY_DICT.PRODUCT, { productId: product.id }],
       });
