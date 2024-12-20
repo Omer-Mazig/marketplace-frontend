@@ -82,6 +82,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setLoggedInUser(null);
     setShouldShowLoginAlertDialog(false); // wierd behivior with login dialog
     localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
+    window.location.reload(); // for removing all cache (react-query)
   }
 
   async function login(cred: LoginCredentials) {

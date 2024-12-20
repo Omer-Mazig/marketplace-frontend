@@ -44,7 +44,7 @@ export function useDeleteProductMutation(product: Product) {
       return { previousData };
     },
 
-    onError: (err, _variables, context) => {
+    onError: (err, _variables) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
       });

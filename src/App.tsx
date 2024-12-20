@@ -75,26 +75,26 @@ const router = createBrowserRouter([
       {
         path: "product/:productId/edit-product",
         element: (
-          <ProtectedRoute>
+          <RequireAuthRoutes>
             <EditProductPage />
-          </ProtectedRoute>
+          </RequireAuthRoutes>
         ),
       },
       {
         path: "products/new-product",
         element: (
-          <ProtectedRoute>
+          <RequireAuthRoutes>
             <NewProductPage />
-          </ProtectedRoute>
+          </RequireAuthRoutes>
         ),
       },
 
       {
         path: "user-profile",
         element: (
-          <ProtectedRoute>
+          <RequireAuthRoutes>
             <UserProfileLayout />
-          </ProtectedRoute>
+          </RequireAuthRoutes>
         ),
         children: [
           { index: true, element: <Navigate to="info" /> },
@@ -109,9 +109,9 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: (
-      <AuthRoutes>
+      <NotAuthenticatedRoutes>
         <AuthLayout />
-      </AuthRoutes>
+      </NotAuthenticatedRoutes>
     ),
     children: [
       { path: "login", element: <LoginPage /> },
@@ -119,7 +119,29 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
+
+function NotAuthenticatedRoutes({ children }: { children: React.ReactNode }) {
+  const { loggedInUser } = useAuth();
+  const location = useLocation();
+
+  if (loggedInUser === undefined) {
+    return null;
+  }
+
+  // if the user is logged in, redirect to the previous route or home ("/")
+  if (loggedInUser) {
+    return (
+      <Navigate
+        to={location.state?.from?.pathname || "/"}
+        replace
+      />
+    );
+  }
+
+  return children;
+}
+
+function RequireAuthRoutes({ children }: { children: React.ReactNode }) {
   const { loggedInUser } = useAuth();
   const location = useLocation();
 
@@ -133,27 +155,6 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
       <Navigate
         to="/auth/login"
         state={{ from: location }}
-        replace
-      />
-    );
-  }
-
-  return children;
-}
-
-function AuthRoutes({ children }: { children: React.ReactNode }) {
-  const { loggedInUser } = useAuth();
-  const location = useLocation();
-
-  if (loggedInUser === undefined) {
-    return null;
-  }
-
-  // if the user is logged in, redirect to the previous route or home ("/")
-  if (loggedInUser) {
-    return (
-      <Navigate
-        to={location.state?.from?.pathname || "/"}
         replace
       />
     );
