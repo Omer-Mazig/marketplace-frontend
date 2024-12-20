@@ -45,15 +45,14 @@ export function useDeleteProductMutation(product: Product) {
     },
 
     onError: (err, _variables, context) => {
-      queryClient.setQueryData(
-        [QUERY_KEY_DICT.USER_PROFILE_DATA],
-        context?.previousData
-      );
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
+      });
 
       toast({
         variant: "destructive",
         title: err?.message || "Something went wrong.",
-        description: `There was a problem removing from your wishlist. Please try again later.`,
+        description: `There was a problem removing this product. Please try again later.`,
       });
     },
 

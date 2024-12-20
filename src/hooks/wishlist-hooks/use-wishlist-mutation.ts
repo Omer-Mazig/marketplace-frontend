@@ -50,8 +50,9 @@ export function useWishlistMutation({
     },
 
     onError: (err, _variables, context) => {
-      // Rollback to the previous state
-      queryClient.setQueryData(queryKey, context?.previousData);
+      queryClient.invalidateQueries({
+        queryKey: queryKey,
+      });
 
       toast({
         variant: "destructive",
