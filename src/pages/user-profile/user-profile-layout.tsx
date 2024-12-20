@@ -16,17 +16,13 @@ import { PageHeading } from "@/components/ui/page-heading";
 type UserProfileContext = UseQueryResult<UserProfileData, Error>;
 
 export default function UserProfileLayout() {
-  const {
-    data: userProfileData,
-    isLoading,
-    error,
-  } = useGetUserProfileDataQuery();
+  const query = useGetUserProfileDataQuery();
 
   return (
     <div className="text-center 3xs:text-start">
       <PageHeading>User Profile</PageHeading>
       <ProfileTabLinks />
-      <Outlet context={{ data: userProfileData, isLoading, error }} />
+      <Outlet context={query} />
     </div>
   );
 }

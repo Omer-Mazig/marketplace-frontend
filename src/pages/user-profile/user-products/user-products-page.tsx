@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 
 // Icons
-import { LoaderCircle, Plus, Trash2 } from "lucide-react";
+import { Loader, Plus, Trash2 } from "lucide-react";
 
 // Router
 import { Link } from "react-router-dom";
@@ -68,12 +68,12 @@ export default function UserProductsPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-1">
-          {"Your Products"}
+        <CardTitle className="flex items-center">
+          Your Products{" "}
           {isFetching ? (
-            <LoaderCircle className="w-8 h-8 animate-spin" />
+            <Loader className="w-6 h-6 ml-2 animate-spin" />
           ) : (
-            <span>({products.length})</span>
+            "(" + products.length + ")"
           )}
         </CardTitle>
         <CardDescription>Manage the products you've listed.</CardDescription>

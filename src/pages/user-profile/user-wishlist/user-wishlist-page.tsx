@@ -23,7 +23,7 @@ import Error from "@/components/shared/error";
 import { GenericItemRow } from "../_components/generic-item-row";
 
 // Icons
-import { Trash2 } from "lucide-react";
+import { Loader, Trash2 } from "lucide-react";
 
 // Types
 import { Product } from "@/types/products.types";
@@ -39,7 +39,12 @@ import { useUserProfileContext } from "../user-profile-layout";
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export default function UserWishlistPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileContext();
+  const {
+    data: userProfileData,
+    isLoading,
+    error,
+    isFetching,
+  } = useUserProfileContext();
 
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
@@ -58,7 +63,14 @@ export default function UserWishlistPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your Wishlist ({userProfileData.wishlist.length})</CardTitle>
+        <CardTitle className="flex items-center">
+          Your Wishlist{" "}
+          {isFetching ? (
+            <Loader className="w-6 h-6 ml-2 animate-spin" />
+          ) : (
+            "(" + userProfileData.wishlist.length + ")"
+          )}
+        </CardTitle>
         <CardDescription>Products you're interested in.</CardDescription>
       </CardHeader>
       <CardContent>
