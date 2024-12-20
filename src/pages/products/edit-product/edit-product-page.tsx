@@ -1,6 +1,6 @@
 // Third-party libraries
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 // Custom components
 import { PageHeading } from "@/components/ui/page-heading";
@@ -12,9 +12,11 @@ import { NewProductFormSkeleton } from "../new-product/_components/new-product-f
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { TextWarning } from "@/components/shared/text-warning";
+import { useAuth } from "@/providers/auth-provider";
 
 // TODO: no need for refetching?
 export default function EditProductPage() {
+  const { loggedInUser } = useAuth();
   const setBreadcrumpItems = useSetBreadcrumpItems();
 
   const { productId: _productId } = useParams();
@@ -36,6 +38,8 @@ export default function EditProductPage() {
 
   if (!isLoading) {
     if (error || !product) return <Error />;
+    if (product.owner.id !== loggedInUser?.id)
+      return <Navigate to={`/platform/product/${product.id}`} />;
   }
 
   return (
