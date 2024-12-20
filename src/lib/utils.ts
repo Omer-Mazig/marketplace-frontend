@@ -19,13 +19,21 @@ export function isReachedProductLimit(
   tier: UserTierOptionType,
   productAmount: number
 ) {
-  if (tier === "standard" && productAmount >= USER_STANDARD_PRODUCT_LIMIT)
-    return true;
-  if (tier === "gold" && productAmount >= USER_GOLD_PRODUCT_LIMIT) return true;
-  return false;
+  switch (tier) {
+    case "standard":
+      return productAmount >= USER_STANDARD_PRODUCT_LIMIT;
+    case "gold":
+      return productAmount >= USER_GOLD_PRODUCT_LIMIT;
+    case "platinum":
+      return false;
+    default:
+      const _unreachable: never = tier;
+      console.log("tier", _unreachable);
+      throw new Error("Wrong tier");
+  }
 }
 
-export function capitalize(input: string): string {
+export function capitalize(input: string) {
   if (!input) return input;
   return input.charAt(0).toUpperCase() + input.slice(1);
 }
