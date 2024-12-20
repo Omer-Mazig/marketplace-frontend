@@ -17,14 +17,12 @@ export function ProductListContainer({
       {products.length ? (
         products.map((product) => (
           <div
+            key={product.id}
             className={`relative max-w-96 ${
               isFetching ? "cursor-not-allowed" : "cursor-pointer"
             }`}
           >
-            <ProductPreview
-              key={product.id}
-              product={product}
-            />
+            <ProductPreview product={product} />
 
             {isFetching && <FetchInBackgroundCardLoader />}
           </div>
