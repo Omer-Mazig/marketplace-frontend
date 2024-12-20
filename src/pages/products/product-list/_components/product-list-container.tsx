@@ -1,6 +1,6 @@
 import { Product } from "@/types/products.types";
 import { ProductPreview } from "./product-preview";
-import { FetchInBackgroundLoader } from "@/components/shared/fetch-in-backgound-loader";
+import { FetchInBackgroundCardLoader } from "@/components/shared/fetch-in-backgound-card-loader";
 
 interface ProductListContainerProps {
   isLoading: boolean;
@@ -26,7 +26,7 @@ export function ProductListContainer({
               product={product}
             />
 
-            {isFetching && <FetchInBackgroundLoader />}
+            {isFetching && <FetchInBackgroundCardLoader />}
           </div>
         ))
       ) : (

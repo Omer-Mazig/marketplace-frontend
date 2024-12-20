@@ -1,6 +1,6 @@
 import { LoaderCircle } from "lucide-react";
 
-export function FetchInBackgroundLoader() {
+export function FetchInBackgroundCardLoader() {
   return (
     <div
       className={`absolute inset-0 bg-white opacity-20 dark:bg-black dark:opacity-20`}
