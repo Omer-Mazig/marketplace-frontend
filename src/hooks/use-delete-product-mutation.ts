@@ -12,6 +12,7 @@ import { QUERY_KEY_DICT } from "@/constants/query-keys.constant";
 
 // Types
 import { Product } from "@/types/products.types";
+import { UserProfileData } from "@/types/users.types";
 
 export function useDeleteProductMutation(product: Product) {
   const queryClient = useQueryClient();
@@ -20,7 +21,35 @@ export function useDeleteProductMutation(product: Product) {
   return useMutation({
     mutationFn: () => deleteProduct(product.id),
 
-    onError: (err) => {
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
+      });
+
+      const previousData = queryClient.getQueryData([
+        QUERY_KEY_DICT.USER_PROFILE_DATA,
+      ]);
+
+      queryClient.setQueryData<UserProfileData>(
+        [QUERY_KEY_DICT.USER_PROFILE_DATA],
+        (data) => {
+          if (!data) return;
+          return {
+            ...data,
+            products: data.products.filter((p) => p.id !== product.id),
+          };
+        }
+      );
+
+      return { previousData };
+    },
+
+    onError: (err, _variables, context) => {
+      queryClient.setQueryData(
+        [QUERY_KEY_DICT.USER_PROFILE_DATA],
+        context?.previousData
+      );
+
       toast({
         variant: "destructive",
         title: err?.message || "Something went wrong.",
@@ -39,12 +68,6 @@ export function useDeleteProductMutation(product: Product) {
         queryKey: [QUERY_KEY_DICT.PRODUCT, { productId: product.id }],
       });
       queryClient.clear;
-    },
-
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
-      });
     },
   });
 }
