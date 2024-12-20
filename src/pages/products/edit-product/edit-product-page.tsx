@@ -20,7 +20,11 @@ export default function EditProductPage() {
   const { productId: _productId } = useParams();
   const productId = parseInt(_productId || "");
 
-  const { data: product, error, isLoading } = useGetProductById(productId);
+  const {
+    data: product,
+    error,
+    isLoading,
+  } = useGetProductById(productId, false);
 
   useEffect(() => {
     setBreadcrumpItems([

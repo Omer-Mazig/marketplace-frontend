@@ -32,6 +32,13 @@ export function useDeleteProductMutation(product: Product) {
       toast({
         description: `${product.name} was removed from your products.`,
       });
+      // for UX improvment:
+      // if a product is removed it sholld not be cached
+      // seems like it also handle the navigation history...
+      queryClient.removeQueries({
+        queryKey: [QUERY_KEY_DICT.PRODUCT, { productId: product.id }],
+      });
+      queryClient.clear;
     },
 
     onSettled: () => {

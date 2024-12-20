@@ -65,8 +65,6 @@ export default function UserProductsPage() {
   }
   const { products, userTier } = userProfileData;
 
-  console.log("isFetching", isFetching);
-
   return (
     <Card>
       <CardHeader>
