@@ -41,6 +41,7 @@ export default function ProductDetails() {
     isLoading,
     isFetching,
   } = useGetProductById(productId);
+
   const { loggedInUser } = useAuth();
   const setBreadcrumpItems = useSetBreadcrumpItems();
 

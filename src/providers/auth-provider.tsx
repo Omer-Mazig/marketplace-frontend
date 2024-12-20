@@ -62,6 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function fetchUser() {
     try {
       const response = await api.get("/users/active");
+      console.log("fetchUser...");
       setLoggedInUser(response.data);
     } catch (error: any) {
       if (error.response?.status === 401) {

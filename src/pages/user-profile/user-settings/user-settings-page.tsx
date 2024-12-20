@@ -23,7 +23,12 @@ import { useUserProfileContext } from "../user-profile-layout";
 import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 
 export default function UserSettingsPage() {
-  const { data: userProfileData, isLoading, error } = useUserProfileContext();
+  const {
+    data: userProfileData,
+    isLoading,
+    error,
+    isFetching: _isFetching, // for prevent infinate loader in other pages that use this value
+  } = useUserProfileContext();
 
   const setBreadcrumpItems = useSetBreadcrumpItems();
 

@@ -11,6 +11,5 @@ export function useGetUserProfileDataQuery() {
   return useQuery({
     queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
     queryFn: getUserProfileData,
-    // staleTime: 5 * 1000, 👈 consider added staleTime to reduce api calls
   });
 }
