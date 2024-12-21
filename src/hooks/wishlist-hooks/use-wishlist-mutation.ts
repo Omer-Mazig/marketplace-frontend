@@ -49,7 +49,7 @@ export function useWishlistMutation({
       return { previousData };
     },
 
-    onError: (err, _variables) => {
+    onError: (err) => {
       queryClient.invalidateQueries({
         queryKey: queryKey,
       });

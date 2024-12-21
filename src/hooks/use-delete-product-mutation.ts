@@ -44,7 +44,7 @@ export function useDeleteProductMutation(product: Product) {
       return { previousData };
     },
 
-    onError: (err, _variables) => {
+    onError: (err) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_DICT.USER_PROFILE_DATA],
       });
@@ -66,7 +66,6 @@ export function useDeleteProductMutation(product: Product) {
       queryClient.removeQueries({
         queryKey: [QUERY_KEY_DICT.PRODUCT, { productId: product.id }],
       });
-      queryClient.clear;
     },
   });
 }
