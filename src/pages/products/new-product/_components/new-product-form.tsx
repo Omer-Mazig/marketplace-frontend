@@ -51,6 +51,8 @@ interface NewProductFormProps {
 
 // TODO: if user close upgrade dialog with out upgrading - redirect to user-product-page
 // TODO: Error for categories
+// TODO: disable edit button if fields are not changed (edit mode)
+// TODO: confirm the user if he tring to leave the page while change has been made (add & edit)
 export function NewProductForm({
   product,
   setShouldShowAfterCreateProductDialog,

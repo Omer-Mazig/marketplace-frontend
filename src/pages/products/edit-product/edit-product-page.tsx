@@ -14,7 +14,6 @@ import { useGetProductById } from "@/hooks/use-get-product-by-id-query";
 import { TextWarning } from "@/components/shared/text-warning";
 import { useAuth } from "@/providers/auth-provider";
 
-// TODO: no need for refetching?
 export default function EditProductPage() {
   const { loggedInUser } = useAuth();
   const setBreadcrumpItems = useSetBreadcrumpItems();

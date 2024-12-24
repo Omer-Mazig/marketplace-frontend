@@ -15,7 +15,6 @@ import { PageHeading } from "@/components/ui/page-heading";
 // Define a type for the context
 type UserProfileContext = UseQueryResult<UserProfileData, Error>;
 
-//TODO: fix bug related to 'isFetching'. infinate spinner withn moving between children pages
 export default function UserProfileLayout() {
   const query = useGetUserProfileDataQuery();
 

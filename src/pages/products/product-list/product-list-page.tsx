@@ -15,7 +15,7 @@ import { ProductListContainer } from "./_components/product-list-container";
 
 const PRODUCT_PREVIEW_SKELETON_LENGTH = 6;
 
-// TODO: Implement infinite scroll
+// TODO: Implement pagination
 export default function ProductListPage() {
   const { category } = useParams();
 

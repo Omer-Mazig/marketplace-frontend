@@ -18,7 +18,7 @@ export function ProductListContainer({
         products.map((product) => (
           <div
             key={product.id}
-            className={`relative max-w-96 ${
+            className={`relative ${
               isFetching ? "cursor-not-allowed" : "cursor-pointer"
             }`}
           >
