@@ -7,16 +7,28 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import api from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 import { Bell } from "lucide-react";
 
-const nottifications = [
-  { id: 1, label: "baba" },
-  { id: 2, label: "baba" },
-  { id: 3, label: "baba" },
-  { id: 3, label: "baba" },
-];
-
+async function getNotifications() {
+  const { data } = await api.get("/notifications");
+  return data;
+}
 export function NotificationsButton() {
+  const {
+    data: notifications,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["notifications"],
+    queryFn: getNotifications,
+  });
+
+  if (isLoading) return <div>loading...</div>;
+
+  console.log(notifications);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -32,8 +44,8 @@ export function NotificationsButton() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {nottifications.map((n) => {
-          return <DropdownMenuItem key={n.id}>{n.label}</DropdownMenuItem>;
+        {notifications.map((n: any) => {
+          return <DropdownMenuItem key={n.id}>{n.message}</DropdownMenuItem>;
         })}
       </DropdownMenuContent>
     </DropdownMenu>
