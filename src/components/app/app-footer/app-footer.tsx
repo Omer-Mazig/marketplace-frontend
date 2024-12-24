@@ -8,6 +8,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+// TODO: fix bg color (see large screen size)
 export function AppFooter() {
   return (
     <footer className="container mx-auto bg-sidebar text-muted-foreground py-4 mt-12">
