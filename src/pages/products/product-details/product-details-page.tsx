@@ -31,6 +31,8 @@ import { useSetBreadcrumpItems } from "@/providers/breadcrump-provider";
 import { useEffect } from "react";
 import { capitalize } from "@/lib/utils";
 import { FetchInBackgroundCardLoader } from "@/components/shared/fetch-in-backgound-card-loader";
+import { NotFoundError } from "@/types/errors";
+import NotFound from "@/components/shared/not-found";
 
 export default function ProductDetails() {
   const { productId: _productId } = useParams();
@@ -62,7 +64,16 @@ export default function ProductDetails() {
   }, [product]);
 
   if (isLoading) return <ProductDetailsSkeleton />;
-  if (error || !product) return <Error />;
+
+  // Check the error type
+  if (error) {
+    if (error instanceof NotFoundError) {
+      return <NotFound />; // Show the NotFound component
+    }
+    return <Error />; // Show generic error component for other errors
+  }
+
+  if (!product) return <Error />;
 
   return (
     <ProductProvider product={product}>
