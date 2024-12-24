@@ -10,6 +10,8 @@ export function ProductDetailsSkeleton() {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6">
+            <Skeleton className="h-[300px] w-full" />
+
             <div className="space-y-4">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-3/4" />
@@ -28,7 +30,6 @@ export function ProductDetailsSkeleton() {
                 <Skeleton className="h-4 w-1/3" />
               </div>
             </div>
-            <Skeleton className="h-[300px] w-full" />
           </div>
         </CardContent>
       </Card>
