@@ -10,6 +10,7 @@ import { useAuth } from "@/providers/auth-provider";
 
 import { AppSearchButton } from "@/components/shared/app-search-button";
 import { AppSidebarTrigger } from "./_components/app-sidebar-trigger";
+import { NotificationsButton } from "@/components/shared/notifications-button";
 
 export function AppHeader() {
   const { loggedInUser } = useAuth();
@@ -27,7 +28,9 @@ export function AppHeader() {
             {/* undefined is initial state. null it no loggedInUser */}
             {loggedInUser === undefined ? null : loggedInUser === null ? (
               <AuthButton />
-            ) : null}
+            ) : (
+              <NotificationsButton />
+            )}
             <ModeToggle />
           </div>
         </div>
