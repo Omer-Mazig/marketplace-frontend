@@ -1,4 +1,3 @@
-// Third-party libraries
 import {
   USER_GOLD_PRODUCT_LIMIT,
   USER_STANDARD_PRODUCT_LIMIT,

@@ -25,7 +25,7 @@ export function Hero() {
             size="lg"
             className="text-black"
           >
-            <Link to="/sell">Start Selling</Link>
+            <Link to="/platform/products/new-product">Start Selling</Link>
           </Button>
         </div>
       </div>

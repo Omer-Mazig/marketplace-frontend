@@ -164,7 +164,11 @@ function RequireAuthRoutes({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <div className="font-mono">
+      <RouterProvider router={router} />;
+    </div>
+  );
 }
 
 export default App;
