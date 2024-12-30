@@ -65,12 +65,11 @@ export default function ProductDetails() {
 
   if (isLoading) return <ProductDetailsSkeleton />;
 
-  // Check the error type
   if (error) {
     if (error instanceof NotFoundError) {
-      return <NotFound />; // Show the NotFound component
+      return <NotFound />;
     }
-    return <Error />; // Show generic error component for other errors
+    return <Error />;
   }
 
   if (!product) return <Error />;
